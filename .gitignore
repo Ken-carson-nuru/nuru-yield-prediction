@@ -1,0 +1,9 @@
+__pycache__
+*.pyc
+.env
+.envrc
+data/raw/*
+data/processed/*
+data/features/*
+mlruns/
+feature_repo/
