@@ -1,6 +1,6 @@
 # Nuru Yield Prediction – Full MLOps System
 
-This is a production-ready, end-to-end MLOps architecture for yield prediction using:
+MLOps architecture for yield prediction using:
 - Satellite NDVI/vegetation indices
 - Weather data
 - Crop metadata

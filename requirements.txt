@@ -9,9 +9,32 @@ lightgbm
 catboost
 mlflow
 feast
-boto3
 minio
-apache-airflow
 rasterio
 shapely
 python-dotenv
+pydantic-settings
+
+# API & Requests
+requests
+tenacity
+
+# Storage
+boto3
+s3fs
+pyarrow
+
+# Logging
+loguru
+
+# Airflow Providers (Airflow is provided by base image)
+apache-airflow-providers-amazon==8.15.0
+
+# Testing
+pytest
+pytest-cov
+pytest-mock
+psycopg2-binary
+asyncpg
+
+
