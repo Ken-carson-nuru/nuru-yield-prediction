@@ -63,6 +63,7 @@ def load_input_plots(**context):
     # Save metadata to storage
     storage = DataStorage()
     execution_date = context["execution_date"]
+    date_str = execution_date.strftime("%Y%m%d")
 
     df = pd.DataFrame(plots_data)
     buf = pd.io.common.BytesIO()
@@ -71,7 +72,7 @@ def load_input_plots(**context):
 
     storage.s3_client.put_object(
         Bucket=storage.settings.S3_BUCKET_NAME,
-        Key=f"{storage.settings.S3_BASE_PREFIX}/metadata/plots/plots_{execution_date:%Y%m%d}.parquet",
+        Key = f"{storage.settings.S3_BASE_PREFIX}/metadata/plots/plots_{date_str}.parquet",
         Body=buf.getvalue()
     )
 
