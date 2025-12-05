@@ -67,7 +67,7 @@ def _read_parquet_from_s3(bucket: str, key: str, storage: DataStorage) -> pd.Dat
 
 
 def _resolve_dataset_path() -> str:
-    """Find final_dataset.csv guided by yield_model.md usage."""
+    """Deprecated: CSV-based labels path (kept for rare fallback)."""
     candidates = [
         "/opt/airflow/dags/repo/final_dataset.csv",
         "/opt/airflow/dags/repo/notebooks/final_dataset.csv",
@@ -76,9 +76,7 @@ def _resolve_dataset_path() -> str:
     for p in candidates:
         if os.path.exists(p):
             return p
-    raise FileNotFoundError(
-        "final_dataset.csv not found. Place it at repo root or notebooks/ or data/."
-    )
+    return None
 
 
 def _preprocess(df: pd.DataFrame) -> pd.DataFrame:
@@ -135,11 +133,12 @@ with DAG(
 ):
 
     @task(multiple_outputs=False)
-    def load_dataset_path() -> str:
-        """Locate the dataset file used in yield_model.md."""
-        path = _resolve_dataset_path()
-        logger.info(f"Using dataset at: {path}")
-        return path
+    def load_labels_path() -> str:
+        """Return S3 path for labels parquet if available; will be used to merge with features."""
+        ds = _get_ds_from_airflow_env()
+        # Convention: labels stored under base prefix
+        key = f"{settings.S3_BASE_PREFIX}/labels/{ds}/yield.parquet"
+        return f"s3://{BUCKET}/{key}"
 
     @task(multiple_outputs=False)
     def load_plot_features_path() -> str:
@@ -149,12 +148,43 @@ with DAG(
         return f"s3://{BUCKET}/{key}"
 
     @task(multiple_outputs=True)
-    def combine_features_and_labels(labels_csv_path: str, plot_features_path: str) -> dict:
-        """Read labels CSV, read plot_features from S3, and merge to form final dataset.
+    def combine_features_and_labels(labels_path: str, plot_features_path: str) -> dict:
+        """Read labels (Parquet preferred), read plot_features from S3, and merge to form final dataset.
         Ensures weather + indices (from plot_features) are combined with yield labels.
         """
-        # Load labels
-        labels_df = pd.read_csv(labels_csv_path)
+        storage = DataStorage()
+        labels_df = None
+        # Try S3 parquet first
+        try:
+            if labels_path.startswith("s3://"):
+                labels_key = labels_path.replace(f"s3://{BUCKET}/", "")
+                labels_df = _read_parquet_from_s3(BUCKET, labels_key, storage)
+        except Exception as e:
+            logger.warning(f"Failed to read labels from S3 parquet: {e}")
+            labels_df = None
+
+        # Fallback to local parquet
+        if labels_df is None:
+            parq_candidates = [
+                "/opt/airflow/dags/repo/final_dataset.parquet",
+                "/opt/airflow/dags/repo/notebooks/final_dataset.parquet",
+                "/opt/airflow/dags/repo/data/final_dataset.parquet",
+            ]
+            for p in parq_candidates:
+                if os.path.exists(p):
+                    labels_df = pd.read_parquet(p)
+                    logger.info(f"Loaded labels from local parquet: {p}")
+                    break
+
+        # Last resort: CSV fallback if present (not preferred)
+        if labels_df is None:
+            csv_path = _resolve_dataset_path()
+            if csv_path:
+                labels_df = pd.read_csv(csv_path)
+                logger.warning(f"Falling back to CSV labels at: {csv_path}")
+            else:
+                raise FileNotFoundError("No labels parquet/CSV found. Ensure labels exist in S3 or repo.")
+
         # Normalize label keys
         if "plot_no" in labels_df.columns:
             labels_df = labels_df.rename(columns={"plot_no": "plot_id"})
@@ -162,7 +192,6 @@ with DAG(
             labels_df["Planting_Date"] = pd.to_datetime(labels_df["Planting_Date"], errors="coerce")
 
         # Load plot features from S3
-        storage = DataStorage()
         key = plot_features_path.replace(f"s3://{BUCKET}/", "")
         features_df = _read_parquet_from_s3(BUCKET, key, storage)
         # Normalize features timestamp
@@ -292,8 +321,8 @@ with DAG(
         return True
 
     # Task graph
-    dataset_path = load_dataset_path()
     plot_features_path = load_plot_features_path()
-    combined_dataset = combine_features_and_labels(dataset_path, plot_features_path)
+    labels_path = load_labels_path()
+    combined_dataset = combine_features_and_labels(labels_path, plot_features_path)
     metrics = train_models(combined_dataset)
     done = log_completion(metrics)
