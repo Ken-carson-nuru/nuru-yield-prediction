@@ -116,6 +116,13 @@ with DAG(
         # Drop rows without coordinates to avoid GEE geometry errors
         df = df.dropna(subset=["latitude", "longitude"])
 
+        # Ensure JSON-serializable values for XCom (strings or nulls)
+        for col in ["planting_date", "vt_date"]:
+            if col in df.columns:
+                df[col] = pd.to_datetime(df[col], errors="coerce")
+                df[col] = df[col].dt.strftime("%Y-%m-%d")
+                df[col] = df[col].where(df[col].notna(), None)
+
         return df.to_dict(orient="records")
 
     @task(multiple_outputs=False)
