@@ -40,8 +40,10 @@ services:
       AIRFLOW__CORE__FERNET_KEY: "U_LuSIrbivRLOyNg4rDl6wWg078-t57Ar18IkL1ZToU="
     volumes:
       - ./airflow_home:/opt/airflow       # Airflow runtime (config, logs, temp)
-      - ./dags:/opt/airflow/dags
-      - ./plugins:/opt/airflow/plugins
+      - ./airflow/dags:/opt/airflow/dags  # Correct DAGs path
+      - ./airflow/plugins:/opt/airflow/plugins  # Correct plugins path
+      - ./src:/opt/airflow/dags/repo/src  # Ensure project code is available
+      - ./config:/opt/airflow/dags/repo/config  # Ensure configs are available
     command: >
       bash -c "
         airflow db init &&
@@ -67,8 +69,10 @@ services:
       - "8083:8080"
     volumes:
       - ./airflow_home:/opt/airflow
-      - ./dags:/opt/airflow/dags
-      - ./plugins:/opt/airflow/plugins
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./src:/opt/airflow/dags/repo/src
+      - ./config:/opt/airflow/dags/repo/config
     command: airflow webserver
 
   airflow-scheduler:
@@ -88,8 +92,10 @@ services:
       AIRFLOW__CORE__FERNET_KEY: "U_LuSIrbivRLOyNg4rDl6wWg078-t57Ar18IkL1ZToU="
     volumes:
       - ./airflow_home:/opt/airflow
-      - ./dags:/opt/airflow/dags
-      - ./plugins:/opt/airflow/plugins
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./src:/opt/airflow/dags/repo/src
+      - ./config:/opt/airflow/dags/repo/config
     command: airflow scheduler
 
 volumes:
