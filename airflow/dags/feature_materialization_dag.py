@@ -7,11 +7,13 @@ import os
 import sys
 from datetime import datetime
 from loguru import logger
+from io import BytesIO
 
 # Ensure project packages (src/, config/) are importable in Airflow
 sys.path.insert(0, '/opt/airflow/dags/repo')
 
 from src.storage import DataStorage
+from src.labels import compute_labels_from_raw
 from config.settings import get_settings
 
 settings = get_settings()
@@ -341,5 +343,76 @@ with DAG(
         logger.success(f"Exported labels to {s3_path}")
         return s3_path
 
-    labels_local_path = load_labels_local_path()
-    labels_s3_path = export_labels_to_s3(labels_local_path)
+    @task(multiple_outputs=False)
+    def resolve_raw_labels_source() -> str:
+        """Resolve a raw labels source from S3, env URL, or local file."""
+        ds = _get_ds_from_airflow_env()
+        storage = DataStorage()
+
+        # Prefer S3 raw labels if present
+        s3_key_csv = f"{settings.S3_RAW_LABELS_PREFIX}/{ds}/{settings.RAW_LABELS_FILE_NAME}"
+        s3_key_parquet = f"{settings.S3_RAW_LABELS_PREFIX}/{ds}/harvest.parquet"
+        try:
+            storage.s3_client.head_object(Bucket=BUCKET, Key=s3_key_csv)
+            return f"s3://{BUCKET}/{s3_key_csv}"
+        except Exception:
+            try:
+                storage.s3_client.head_object(Bucket=BUCKET, Key=s3_key_parquet)
+                return f"s3://{BUCKET}/{s3_key_parquet}"
+            except Exception:
+                pass
+
+        # Next: environment-provided CSV URL (e.g., Google Sheets export URL)
+        if settings.HARVEST_SHEET_CSV_URL:
+            return settings.HARVEST_SHEET_CSV_URL
+
+        # Fallback: local raw file if present
+        local_csv = "/opt/airflow/dags/repo/data/raw/harvest.csv"
+        local_parquet = "/opt/airflow/dags/repo/data/raw/harvest.parquet"
+        if os.path.exists(local_csv):
+            return local_csv
+        if os.path.exists(local_parquet):
+            return local_parquet
+
+        logger.warning("No raw labels source resolved")
+        return None
+
+    @task(multiple_outputs=False)
+    def generate_labels_from_raw(raw_source: str) -> str:
+        """Read raw harvest inputs, compute kg/ha labels, and save to S3."""
+        if not raw_source:
+            logger.warning("Skipping labels generation: no raw source available")
+            raise AirflowSkipException("No raw labels source")
+
+        storage = DataStorage()
+        df = None
+        try:
+            if raw_source.startswith("s3://"):
+                key = raw_source.replace(f"s3://{BUCKET}/", "")
+                resp = storage.s3_client.get_object(Bucket=BUCKET, Key=key)
+                if key.endswith(".parquet"):
+                    df = pd.read_parquet(BytesIO(resp["Body"].read()))
+                else:
+                    df = pd.read_csv(BytesIO(resp["Body"].read()))
+            elif raw_source.startswith("http://") or raw_source.startswith("https://"):
+                df = pd.read_csv(raw_source)
+            else:
+                if raw_source.endswith(".parquet"):
+                    df = pd.read_parquet(raw_source)
+                else:
+                    df = pd.read_csv(raw_source)
+        except Exception:
+            logger.exception(f"Failed to read raw labels from source: {raw_source}")
+            raise
+
+        labels_df = compute_labels_from_raw(df)
+        if labels_df.empty:
+            logger.warning("Computed labels dataframe is empty")
+            raise AirflowSkipException("Labels computation yielded empty dataframe")
+
+        s3_path = storage.save_labels(labels_df)
+        logger.success(f"Generated and saved labels to {s3_path}")
+        return s3_path
+
+    raw_labels_source = resolve_raw_labels_source()
+    labels_s3_path = generate_labels_from_raw(raw_labels_source)

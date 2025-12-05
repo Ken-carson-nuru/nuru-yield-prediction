@@ -37,6 +37,10 @@ class Settings(BaseSettings):
     MIN_PLANTING_RAINFALL_MM: float = 5.0
     MIN_PLANTING_TEMP_C: float = 18.0
 
+    # Labels/raw harvest inputs
+    HARVEST_SHEET_CSV_URL: str | None = Field(None, env="HARVEST_SHEET_CSV_URL")
+    RAW_LABELS_FILE_NAME: str = Field("harvest.csv", env="RAW_LABELS_FILE_NAME")
+
     @property
     def S3_RAW_WEATHER_PREFIX(self):
         return f"{self.S3_BASE_PREFIX}/raw/weather"
@@ -44,6 +48,10 @@ class Settings(BaseSettings):
     @property
     def S3_PROCESSED_WEATHER_PREFIX(self):
         return f"{self.S3_BASE_PREFIX}/processed/weather"
+
+    @property
+    def S3_RAW_LABELS_PREFIX(self):
+        return f"{self.S3_BASE_PREFIX}/raw/labels"
 
     @property
     def s3_credentials(self):
