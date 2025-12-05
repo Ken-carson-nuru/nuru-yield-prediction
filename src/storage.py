@@ -171,6 +171,27 @@ class DataStorage:
             Body=parquet_buffer.getvalue()
         )
         return f"s3://{self.settings.S3_BUCKET_NAME}/{file_key}"
+
+    def save_vt_stages(self, vt_df: pd.DataFrame, execution_date):
+        """Save VT-only stages separately to avoid overwriting full crop stages."""
+        # Normalize execution_date into YYYY-MM-DD string
+        if isinstance(execution_date, datetime):
+            ds = execution_date.strftime("%Y-%m-%d")
+        else:
+            try:
+                ds = pd.to_datetime(execution_date).strftime("%Y-%m-%d")
+            except Exception:
+                ds = str(execution_date)
+
+        file_key = f"vt_stages/vt_stages_{ds}.parquet"
+        parquet_buffer = BytesIO()
+        vt_df.to_parquet(parquet_buffer, index=False)
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=file_key,
+            Body=parquet_buffer.getvalue()
+        )
+        return f"s3://{self.settings.S3_BUCKET_NAME}/{file_key}"
     
   
 

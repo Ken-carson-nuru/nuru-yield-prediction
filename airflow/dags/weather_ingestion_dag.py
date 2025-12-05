@@ -262,7 +262,7 @@ def determine_crop_stages(**context):
     # Save outputs
     execution_date = context["execution_date"]
     crop_path = storage.save_crop_stages(stages_df, execution_date)
-    vt_path = storage.save_crop_stages(vt_df, execution_date)
+    vt_path = storage.save_vt_stages(vt_df, execution_date)
 
     context["task_instance"].xcom_push(key="crop_stages_path", value=crop_path)
     context["task_instance"].xcom_push(key="vt_stage_dates_path", value=vt_path)

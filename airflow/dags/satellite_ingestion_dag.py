@@ -1,8 +1,9 @@
 from airflow import DAG
-from airflow.decorators import task, get_current_context
+from airflow.decorators import task
 from airflow.utils.dates import days_ago
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 import pandas as pd
+import os
 
 import sys
 # Ensure project packages (src/, config/) are importable in Airflow
@@ -37,8 +38,15 @@ with DAG(
     @task
     def load_crop_stages() -> dict:
         """Load crop stage parquet from S3 and validate."""
-        context = get_current_context()
-        ds = context.get("ds") or context["execution_date"].strftime("%Y-%m-%d")
+        # Use Airflow-exported env var for execution date (robust across versions)
+        exec_dt_env = os.environ.get("AIRFLOW_CTX_EXECUTION_DATE")
+        if exec_dt_env:
+            try:
+                ds = pd.to_datetime(exec_dt_env).strftime("%Y-%m-%d")
+            except Exception:
+                ds = (exec_dt_env.split("T")[0])
+        else:
+            ds = datetime.utcnow().strftime("%Y-%m-%d")
 
         key = f"crop_stages/crop_stages_{ds}.parquet"
 
