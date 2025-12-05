@@ -86,16 +86,35 @@ with DAG(
         return vt_rows
 
     @task(multiple_outputs=False)
-    def prepare_satellite_input(vt_stage_list: list) -> list:
-        """Convert VTStageOutput → DataFrame ready for SatelliteClient."""
-        df = pd.DataFrame(vt_stage_list)
+    def prepare_satellite_input(crop_stages: list, vt_stage_list: list) -> list:
+        """Prepare input records with plot_id, latitude, longitude, planting_date, optional vt_date.
+        If vt list is empty, fall back to planting_date only (SatelliteClient will default vt_date).
+        """
+        # Base from crop stages (has latitude/longitude)
+        cs_df = pd.DataFrame(crop_stages)
+        if cs_df.empty:
+            return []
 
-        df["vt_date"] = pd.to_datetime(df["vt_stage_date"])
-        df["planting_date"] = pd.to_datetime(df["planting_date"])
+        # Normalize planting_date
+        if "planting_date" in cs_df.columns:
+            cs_df["planting_date"] = pd.to_datetime(cs_df["planting_date"], errors="coerce")
 
-        df = df.rename(columns={
-            "vt_date": "vt_date",
-        })
+        # Select required columns
+        cols = [c for c in ["plot_id", "latitude", "longitude", "planting_date"] if c in cs_df.columns]
+        df = cs_df[cols].copy()
+
+        # Attach vt_date if available
+        vt_df = pd.DataFrame(vt_stage_list)
+        if not vt_df.empty and "vt_stage_date" in vt_df.columns:
+            vt_df["vt_stage_date"] = pd.to_datetime(vt_df["vt_stage_date"], errors="coerce")
+            df = df.merge(vt_df[["plot_id", "vt_stage_date"]], on="plot_id", how="left")
+            df["vt_date"] = df["vt_stage_date"]
+            df.drop(columns=["vt_stage_date"], inplace=True)
+        else:
+            df["vt_date"] = pd.NaT
+
+        # Drop rows without coordinates to avoid GEE geometry errors
+        df = df.dropna(subset=["latitude", "longitude"])
 
         return df.to_dict(orient="records")
 
@@ -111,5 +130,5 @@ with DAG(
     # Task execution sequence
     crop_stages = load_crop_stages()
     vt_stage_list = extract_vt_stage(crop_stages)
-    sat_input = prepare_satellite_input(vt_stage_list)
+    sat_input = prepare_satellite_input(crop_stages, vt_stage_list)
     satellite_output = run_sat_client(sat_input)
