@@ -35,8 +35,8 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    @task
-    def load_crop_stages() -> dict:
+    @task(multiple_outputs=False)
+    def load_crop_stages() -> list:
         """Load crop stage parquet from S3 and validate."""
         # Use Airflow-exported env var for execution date (robust across versions)
         exec_dt_env = os.environ.get("AIRFLOW_CTX_EXECUTION_DATE")
@@ -63,8 +63,8 @@ with DAG(
         ]
         return [v.model_dump() for v in validated]
 
-    @task
-    def extract_vt_stage(crop_stages: list) -> dict:
+    @task(multiple_outputs=False)
+    def extract_vt_stage(crop_stages: list) -> list:
         """Extract VT stage and produce validated VTStageOutput schema."""
         df = pd.DataFrame(crop_stages)
 
@@ -85,8 +85,8 @@ with DAG(
 
         return vt_rows
 
-    @task
-    def prepare_satellite_input(vt_stage_list: list) -> dict:
+    @task(multiple_outputs=False)
+    def prepare_satellite_input(vt_stage_list: list) -> list:
         """Convert VTStageOutput → DataFrame ready for SatelliteClient."""
         df = pd.DataFrame(vt_stage_list)
 
@@ -99,8 +99,8 @@ with DAG(
 
         return df.to_dict(orient="records")
 
-    @task
-    def run_sat_client(validated_plots: list):
+    @task(multiple_outputs=False)
+    def run_sat_client(validated_plots: list) -> list:
         df = pd.DataFrame(validated_plots)
         client = SatelliteClient()
 
