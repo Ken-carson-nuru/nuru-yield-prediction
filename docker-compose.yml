@@ -38,6 +38,7 @@ services:
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       AIRFLOW__WEBSERVER__SECRET_KEY: "93f6d3692bd1eea014723780720e156b066385c2c026b0055aaaedc15d33e9bd"
       AIRFLOW__CORE__FERNET_KEY: "U_LuSIrbivRLOyNg4rDl6wWg078-t57Ar18IkL1ZToU="
+      AIRFLOW_CONN_AWS_DEFAULT: "aws://minioadmin:minioadmin@/?endpoint_url=http%3A%2F%2Fminio%3A9000&region_name=us-east-1&verify=false"
     volumes:
       - ./airflow_home:/opt/airflow       # Airflow runtime (config, logs, temp)
       - ./airflow/dags:/opt/airflow/dags  # Correct DAGs path
@@ -65,6 +66,7 @@ services:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__WEBSERVER__SECRET_KEY: "93f6d3692bd1eea014723780720e156b066385c2c026b0055aaaedc15d33e9bd"
       AIRFLOW__CORE__FERNET_KEY: "U_LuSIrbivRLOyNg4rDl6wWg078-t57Ar18IkL1ZToU="
+      AIRFLOW_CONN_AWS_DEFAULT: "aws://minioadmin:minioadmin@/?endpoint_url=http%3A%2F%2Fminio%3A9000&region_name=us-east-1&verify=false"
     ports:
       - "8083:8080"
     volumes:
@@ -90,6 +92,7 @@ services:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__WEBSERVER__SECRET_KEY: "93f6d3692bd1eea014723780720e156b066385c2c026b0055aaaedc15d33e9bd"
       AIRFLOW__CORE__FERNET_KEY: "U_LuSIrbivRLOyNg4rDl6wWg078-t57Ar18IkL1ZToU="
+      AIRFLOW_CONN_AWS_DEFAULT: "aws://minioadmin:minioadmin@/?endpoint_url=http%3A%2F%2Fminio%3A9000&region_name=us-east-1&verify=false"
     volumes:
       - ./airflow_home:/opt/airflow
       - ./airflow/dags:/opt/airflow/dags

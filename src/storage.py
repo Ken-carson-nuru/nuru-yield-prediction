@@ -149,9 +149,20 @@ class DataStorage:
         s3_path = f"s3://{self.settings.S3_BUCKET_NAME}/{key}"
         logger.success(f"Saved planting dates to {s3_path}")
         return s3_path
-    def save_crop_stages(self, stages_df: pd.DataFrame, execution_date: str):
-        """Save crop stages to S3 as a parquet file."""
-        file_key = f"crop_stages/crop_stages_{execution_date}.parquet"
+    def save_crop_stages(self, stages_df: pd.DataFrame, execution_date):
+        """Save crop stages to S3 as a parquet file.
+        Normalizes key to use Airflow `ds` format (YYYY-MM-DD).
+        """
+        # Normalize execution_date into YYYY-MM-DD string
+        if isinstance(execution_date, datetime):
+            ds = execution_date.strftime("%Y-%m-%d")
+        else:
+            try:
+                ds = pd.to_datetime(execution_date).strftime("%Y-%m-%d")
+            except Exception:
+                ds = str(execution_date)
+
+        file_key = f"crop_stages/crop_stages_{ds}.parquet"
         parquet_buffer = BytesIO()
         stages_df.to_parquet(parquet_buffer, index=False)
         self.s3_client.put_object(

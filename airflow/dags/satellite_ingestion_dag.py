@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.decorators import task
+from airflow.decorators import task, get_current_context
 from airflow.utils.dates import days_ago
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 import pandas as pd
@@ -14,8 +14,12 @@ from src.ingestion.satellite_client import SatelliteClient
 from src.storage import DataStorage
 from config.schemas import CropStageOutput, VTStageOutput
 
-BUCKET = "wardbucket"
-CROP_STAGE_KEY = "crop_stages/crop_stages_{{ ds }}.parquet"
+from config.settings import get_settings
+settings = get_settings()
+BUCKET = settings.S3_BUCKET_NAME
+
+# Build key inside task using Airflow context; macros don't render in Python values
+# Template example: crop_stages/crop_stages_<ds>.parquet
 
 default_args = {
     "owner": "nuru",
@@ -33,10 +37,16 @@ with DAG(
     @task
     def load_crop_stages() -> dict:
         """Load crop stage parquet from S3 and validate."""
-        hook = S3Hook(aws_conn_id="aws_default")
-        obj = hook.get_key(key=CROP_STAGE_KEY, bucket_name=BUCKET)
+        context = get_current_context()
+        ds = context.get("ds") or context["execution_date"].strftime("%Y-%m-%d")
 
-        df = pd.read_parquet(obj.get()['Body'])
+        key = f"crop_stages/crop_stages_{ds}.parquet"
+
+        hook = S3Hook(aws_conn_id="aws_default")
+        obj = hook.get_key(key=key, bucket_name=BUCKET)
+
+        body = obj.get()["Body"].read()
+        df = pd.read_parquet(pd.io.common.BytesIO(body))
 
         # Pydantic validation (CropStageOutput)
         validated = [
