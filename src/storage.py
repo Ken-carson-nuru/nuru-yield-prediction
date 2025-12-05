@@ -233,3 +233,70 @@ class DataStorage:
         logger.success(f"Saved satellite indices to s3://{self.settings.S3_BUCKET_NAME}/{key}")
         return f"s3://{self.settings.S3_BUCKET_NAME}/{key}"
 
+    def save_features_daily(self, df: pd.DataFrame, execution_date: datetime = None) -> str:
+        """Save daily materialized features to S3/MinIO."""
+        execution_date = execution_date or datetime.utcnow()
+        date_str = execution_date.strftime("%Y-%m-%d")
+        key = f"{self.settings.S3_BASE_PREFIX}/features/{date_str}/daily_features.parquet"
+
+        buf = BytesIO()
+        df.to_parquet(buf, index=False)
+        buf.seek(0)
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=key,
+            Body=buf.getvalue(),
+        )
+
+        metadata = {
+            "execution_date": execution_date.isoformat(),
+            "row_count": int(len(df)),
+            "plot_count": int(df['plot_id'].nunique()) if 'plot_id' in df.columns else None,
+            "date_range": {
+                "start": df['date'].min() if 'date' in df.columns else None,
+                "end": df['date'].max() if 'date' in df.columns else None,
+            },
+            "columns": df.columns.tolist(),
+        }
+
+        metadata_key = f"{self.settings.S3_BASE_PREFIX}/features/{date_str}/daily_features_metadata.json"
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=metadata_key,
+            Body=json.dumps(make_json_safe(metadata), indent=2)
+        )
+
+        logger.success(f"Saved daily features to s3://{self.settings.S3_BUCKET_NAME}/{key}")
+        return f"s3://{self.settings.S3_BUCKET_NAME}/{key}"
+
+    def save_features_plot(self, df: pd.DataFrame, execution_date: datetime = None) -> str:
+        """Save plot-level aggregated features to S3/MinIO."""
+        execution_date = execution_date or datetime.utcnow()
+        date_str = execution_date.strftime("%Y-%m-%d")
+        key = f"{self.settings.S3_BASE_PREFIX}/features/{date_str}/plot_features.parquet"
+
+        buf = BytesIO()
+        df.to_parquet(buf, index=False)
+        buf.seek(0)
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=key,
+            Body=buf.getvalue(),
+        )
+
+        metadata = {
+            "execution_date": execution_date.isoformat(),
+            "plot_count": int(len(df)),
+            "columns": df.columns.tolist(),
+        }
+
+        metadata_key = f"{self.settings.S3_BASE_PREFIX}/features/{date_str}/plot_features_metadata.json"
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=metadata_key,
+            Body=json.dumps(make_json_safe(metadata), indent=2)
+        )
+
+        logger.success(f"Saved plot features to s3://{self.settings.S3_BUCKET_NAME}/{key}")
+        return f"s3://{self.settings.S3_BUCKET_NAME}/{key}"
+
