@@ -1,6 +1,7 @@
 from airflow import DAG
 from airflow.decorators import task
 from airflow.utils.dates import days_ago
+from airflow.exceptions import AirflowSkipException
 import pandas as pd
 import os
 import sys
@@ -287,3 +288,58 @@ with DAG(
 
     daily_features_path = build_daily_features(weather_path, planting_path, crop_stages_path, satellite_path)
     plot_features_path = aggregate_plot_features(daily_features_path, crop_stages_path)
+
+    @task(multiple_outputs=False)
+    def load_labels_local_path() -> str:
+        """Locate a local labels dataset produced by notebooks or preprocessing."""
+        candidates = [
+            "/opt/airflow/dags/repo/data/processed/yield.parquet",
+            "/opt/airflow/dags/repo/final_for_yield.parquet",
+            "/opt/airflow/dags/repo/notebooks/final_for_yield.parquet",
+            "/opt/airflow/dags/repo/data/final_dataset.parquet",
+            "/opt/airflow/dags/repo/data/processed/final_for_yield.parquet",
+            "/opt/airflow/dags/repo/final_for_yield.csv",
+            "/opt/airflow/dags/repo/notebooks/final_for_yield.csv",
+            "/opt/airflow/dags/repo/final_dataset.csv",
+        ]
+        for p in candidates:
+            if os.path.exists(p):
+                logger.info(f"Found local labels dataset: {p}")
+                return p
+        logger.warning("No local labels dataset found in expected locations")
+        return None
+
+    @task(multiple_outputs=False)
+    def export_labels_to_s3(labels_local_path: str) -> str:
+        """Read local labels (parquet/csv) and export to S3 canonical labels path."""
+        if not labels_local_path:
+            logger.warning("Skipping labels export: no local labels file found")
+            raise AirflowSkipException("No local labels file found")
+        storage = DataStorage()
+        try:
+            if labels_local_path.endswith(".parquet"):
+                df = pd.read_parquet(labels_local_path)
+            elif labels_local_path.endswith(".csv"):
+                df = pd.read_csv(labels_local_path)
+            else:
+                logger.warning(f"Unsupported labels file type: {labels_local_path}")
+                raise AirflowSkipException("Unsupported labels file type")
+        except Exception:
+            logger.exception(f"Failed to read local labels file: {labels_local_path}")
+            raise
+
+        # Normalize keys for downstream training merge
+        if "plot_no" in df.columns and "plot_id" not in df.columns:
+            df = df.rename(columns={"plot_no": "plot_id"})
+        # Ensure Planting_Date is present in Title case
+        if "Planting_Date" in df.columns:
+            df["Planting_Date"] = pd.to_datetime(df["Planting_Date"], errors="coerce")
+        elif "planting_date" in df.columns:
+            df["Planting_Date"] = pd.to_datetime(df["planting_date"], errors="coerce")
+
+        s3_path = storage.save_labels(df)
+        logger.success(f"Exported labels to {s3_path}")
+        return s3_path
+
+    labels_local_path = load_labels_local_path()
+    labels_s3_path = export_labels_to_s3(labels_local_path)

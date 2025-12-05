@@ -300,3 +300,35 @@ class DataStorage:
         logger.success(f"Saved plot features to s3://{self.settings.S3_BUCKET_NAME}/{key}")
         return f"s3://{self.settings.S3_BUCKET_NAME}/{key}"
 
+    def save_labels(self, df: pd.DataFrame, execution_date: datetime = None) -> str:
+        """Save yield labels to S3/MinIO in a canonical location for training."""
+        execution_date = execution_date or datetime.utcnow()
+        date_str = execution_date.strftime("%Y-%m-%d")
+        key = f"{self.settings.S3_BASE_PREFIX}/labels/{date_str}/yield.parquet"
+
+        # Save parquet
+        buf = BytesIO()
+        df.to_parquet(buf, index=False)
+        buf.seek(0)
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=key,
+            Body=buf.getvalue(),
+        )
+
+        # Save metadata
+        metadata = {
+            "execution_date": execution_date.isoformat(),
+            "row_count": int(len(df)),
+            "columns": df.columns.tolist(),
+        }
+        metadata_key = f"{self.settings.S3_BASE_PREFIX}/labels/{date_str}/metadata.json"
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=metadata_key,
+            Body=json.dumps(make_json_safe(metadata), indent=2)
+        )
+
+        logger.success(f"Saved labels to s3://{self.settings.S3_BUCKET_NAME}/{key}")
+        return f"s3://{self.settings.S3_BUCKET_NAME}/{key}"
+
