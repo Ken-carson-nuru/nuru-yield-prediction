@@ -17,4 +17,5 @@ COPY src/ /opt/airflow/dags/repo/src/
 COPY config/ /opt/airflow/dags/repo/config/
 COPY airflow/dags/ /opt/airflow/dags/
 
-ENV PYTHONPATH=/opt/airflow/dags/repo/src
+# Include both repo root and src so imports like `from src...` and `from config...` work
+ENV PYTHONPATH=/opt/airflow/dags/repo:/opt/airflow/dags/repo/src

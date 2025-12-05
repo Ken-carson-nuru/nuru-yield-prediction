@@ -4,6 +4,10 @@ from airflow.utils.dates import days_ago
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 import pandas as pd
 
+import sys
+# Ensure project packages (src/, config/) are importable in Airflow
+sys.path.insert(0, '/opt/airflow/dags/repo')
+
 from datetime import datetime
 
 from src.ingestion.satellite_client import SatelliteClient

@@ -18,6 +18,8 @@ pydantic-settings
 # API & Requests
 requests
 tenacity
+earthengine-api
+google-auth
 
 # Storage
 boto3
@@ -36,5 +38,4 @@ pytest-cov
 pytest-mock
 psycopg2-binary
 asyncpg
-
 
