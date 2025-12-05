@@ -160,3 +160,44 @@ class DataStorage:
             Body=parquet_buffer.getvalue()
         )
         return f"s3://{self.settings.S3_BUCKET_NAME}/{file_key}"
+    
+  
+
+    def save_satellite_indices(self, df: pd.DataFrame, execution_date: datetime = None) -> str:
+        
+        execution_date = execution_date or datetime.utcnow()
+        date_str = execution_date.strftime("%Y-%m-%d")
+        key = f"{self.settings.S3_BASE_PREFIX}/processed/satellite/{date_str}/all_indices.parquet"
+
+        # Save parquet
+        buf = BytesIO()
+        df.to_parquet(buf, index=False)
+        buf.seek(0)
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=key,
+            Body=buf.getvalue(),
+        )
+
+        # Save metadata
+        metadata = {
+            "execution_date": execution_date.isoformat(),
+            "plot_count": int(df['plot_id'].nunique()),
+            "sample_count": int(len(df)),
+            "date_range": {
+                "start": df['date'].min(),
+                "end": df['date'].max()
+            },
+            "columns": df.columns.tolist()
+        }
+
+        metadata_key = f"{self.settings.S3_BASE_PREFIX}/processed/satellite/{date_str}/metadata.json"
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=metadata_key,
+            Body=json.dumps(make_json_safe(metadata), indent=2)
+        )
+
+        logger.success(f"Saved satellite indices to s3://{self.settings.S3_BUCKET_NAME}/{key}")
+        return f"s3://{self.settings.S3_BUCKET_NAME}/{key}"
+

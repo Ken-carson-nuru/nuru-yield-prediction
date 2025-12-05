@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "serene-bastion-406504",
+  "private_key_id": "9c938287deceabf438dc0a78c6d4cf9c363c4b3d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDDR6/wJqmMLY0+\njZJ7EtCAKC9+RduTU7qc0AxGAMiTSkgn7clWmzFu/EjtT2kbCpl+n9qcX0DblnRS\n+G1FUa7lML4q+aJLMV2gno9Wo1mFT1+Iaw+F4DtAZiVOR/DzjnioBKBbQ9E1IhO5\nMnHDRQnfDkQguQ01RifB0r9hV8SqwbMVfTnB/CZSQL1Ip2GnT068BBVaO/zOcwt7\ndYtY43piIbjsWYJ3XPssGsjyXSidFuB98bs4ds/PuWtrkrXEGwdYG4bZF2MMFC9z\niMTHhb30kgf5ubQluF43gm7d3Xr90HelfdMhHNIUQApZNKiaY46+ER+rrzx7yoD/\n0D1i3J4TAgMBAAECggEADLhFLK/gAwT5OnYEm2ao1R2I+8EiIdEQ3+OqAP9OZqWu\ngzH5F4k+qZDeUTLce59E9fCvT9iL2XcjNupT98bFInb6fsMe6qXvCCYmhl6tLJf0\ndubTroU3Zs+ge3OygrLTh3eHAxrXluM+2fqABYJK4nrD6PEU0VUIruvYJ8eMmbtX\nNi2gsntDJiQdT0UvCgoNr99f0xoIKnpBeCgmHtBjXRDXcpgxK8VZecaeF3ueL+x/\nST6f0mpe2CUlarVgvp01KpsMa+C0482e/x2hUUj5u3uVYPX7PeKUIqDRb6DRMgrU\n/C3tK1XoCyqSlxL2Tscqzqj8JanxsCQKXCzaWiXP6QKBgQD9UKWne+FGArcuk+9t\nuCPfBlgxMWC7FXhTZ28ywg9zn3wrspXfKQuluPRrFx1dYmrqwAPBettJ+74CkYij\nFz35Dt/odLnM+H+iKwTwBl0O7hE2PkcDrsDzi6jYQLo4btypQL7vCXGO/YPPR1Hz\nToWidkhqYByZEdcIiHhnLCNWqwKBgQDFWZDx2Uhdg04j/K6y8aIDOByNXXfmsDBD\n2jyujDkdSqpRhRFNc6XEIEa/hVSLCg4q3tQI4/yJtITEH8QpSMRmyEaFhOQxG2+F\n0BapF39bz2b4f/dzIkUvm97xF1IL/AuaPUVhu6GVkARHXWTjoOAOiIspN6hOZFcX\nBdFnRSL2OQKBgGRXVccKIyoAWV9x6h2kG1F0yepyjMaOsqMXDc0lYcmDG0ST8Rn8\nwEhdAzSIa3FaUs+6T8KMT+D2f0W1MFKqGjpV0gvacN7ocGZkdAg//Qy08Mxzzt1+\nk5/lanR+70T7ZR0GMJuvOfRSJ6wrrCKcsAKyp+y7NZjMoEkZBdiYe0cRAoGAPPRH\nEov8D/YIYpEfHGIJmljwaLFf4T62CZ8Ucw0YbvWq2XbyOyvnHUai03DJBhDbA17D\nuuNAEwBQqYruOZoiH2Toc0DygkBpF7mH5j49tgu/UC2mLkd9exD3sRt02gLFSqR2\nE5OyetF6oNg12yDLU3HVGav5Lg1L4O6JGQ5/l/ECgYAQ2mRMEHTM25utbplXInD/\nhs3b1QPk9uouB7M0k7WlckxzNr/lcn6VAT6MifKX/u67L43+P4DYUZzIEi9a4Gll\niHAEtvia4oELEJswG0uGY5TNR9PTR7O+M0flNl++gAH+co+GpfeDY1IZXK+tTJ2E\nX+ec0KQ4OlnWYVblqofZ6g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "precisionfarms@serene-bastion-406504.iam.gserviceaccount.com",
+  "client_id": "117629705995681706332",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/precisionfarms%40serene-bastion-406504.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
