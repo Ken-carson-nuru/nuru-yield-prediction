@@ -6,6 +6,7 @@ import os
 import sys
 import pandas as pd
 import numpy as np
+from io import BytesIO
 from loguru import logger
 
 # Ensure project packages (src/, config/) are importable in Airflow
@@ -63,7 +64,7 @@ def _get_ds_from_airflow_env() -> str:
 def _read_parquet_from_s3(bucket: str, key: str, storage: DataStorage) -> pd.DataFrame:
     """Utility to read parquet from S3/MinIO using DataStorage's s3 client."""
     resp = storage.s3_client.get_object(Bucket=bucket, Key=key)
-    return pd.read_parquet(pd.io.common.BytesIO(resp["Body"].read()))
+    return pd.read_parquet(BytesIO(resp["Body"].read()))
 
 
 def _resolve_dataset_path() -> str:
@@ -72,11 +73,45 @@ def _resolve_dataset_path() -> str:
         "/opt/airflow/dags/repo/final_dataset.csv",
         "/opt/airflow/dags/repo/notebooks/final_dataset.csv",
         "/opt/airflow/dags/repo/data/final_dataset.csv",
+        "/opt/airflow/dags/repo/final_for_yield.csv",
+        "/opt/airflow/dags/repo/notebooks/final_for_yield.csv",
+        "/opt/airflow/dags/repo/data/processed/final_for_yield.csv",
     ]
     for p in candidates:
         if os.path.exists(p):
             return p
     return None
+
+
+def _find_latest_s3_parquet(bucket: str, base_prefix: str, subdir: str, filename: str, storage: DataStorage) -> str:
+    """Find the latest available parquet in S3 under base_prefix/subdir/YYYY-MM-DD/filename.
+    Returns full s3:// path or None.
+    """
+    prefix = f"{base_prefix}/{subdir}/"
+    try:
+        resp = storage.s3_client.list_objects_v2(Bucket=bucket, Prefix=prefix)
+        contents = resp.get("Contents", [])
+        keys = [obj["Key"] for obj in contents if obj["Key"].endswith(f"/{filename}")]
+        if not keys:
+            return None
+        dated = []
+        for k in keys:
+            parts = k.split("/")
+            # Expect .../<subdir>/<YYYY-MM-DD>/<filename>
+            ds = parts[-2] if len(parts) >= 2 else None
+            try:
+                dt = pd.to_datetime(ds)
+                dated.append((k, dt))
+            except Exception:
+                continue
+        if not dated:
+            return None
+        dated.sort(key=lambda x: x[1], reverse=True)
+        latest_key = dated[0][0]
+        return f"s3://{bucket}/{latest_key}"
+    except Exception as e:
+        logger.warning(f"Failed to list S3 objects for {prefix}: {e}")
+        return None
 
 
 def _preprocess(df: pd.DataFrame) -> pd.DataFrame:
@@ -154,21 +189,36 @@ with DAG(
         """
         storage = DataStorage()
         labels_df = None
-        # Try S3 parquet first
+        # Try S3 parquet first (provided path)
         try:
             if labels_path.startswith("s3://"):
                 labels_key = labels_path.replace(f"s3://{BUCKET}/", "")
                 labels_df = _read_parquet_from_s3(BUCKET, labels_key, storage)
+                logger.info(f"Loaded labels from S3: {labels_path}")
         except Exception as e:
-            logger.warning(f"Failed to read labels from S3 parquet: {e}")
+            logger.warning(f"Failed to read labels from provided S3 path {labels_path}: {e}")
             labels_df = None
 
-        # Fallback to local parquet
+        # Fallback: find latest labels parquet in S3
+        if labels_df is None:
+            latest_labels_s3 = _find_latest_s3_parquet(BUCKET, settings.S3_BASE_PREFIX, "labels", "yield.parquet", storage)
+            if latest_labels_s3:
+                try:
+                    labels_key = latest_labels_s3.replace(f"s3://{BUCKET}/", "")
+                    labels_df = _read_parquet_from_s3(BUCKET, labels_key, storage)
+                    logger.info(f"Loaded latest available labels from S3: {latest_labels_s3}")
+                except Exception as e:
+                    logger.warning(f"Failed to read latest labels from S3 {latest_labels_s3}: {e}")
+
+        # Fallback to local parquet (support older notebook outputs)
         if labels_df is None:
             parq_candidates = [
                 "/opt/airflow/dags/repo/final_dataset.parquet",
                 "/opt/airflow/dags/repo/notebooks/final_dataset.parquet",
                 "/opt/airflow/dags/repo/data/final_dataset.parquet",
+                "/opt/airflow/dags/repo/final_for_yield.parquet",
+                "/opt/airflow/dags/repo/notebooks/final_for_yield.parquet",
+                "/opt/airflow/dags/repo/data/processed/final_for_yield.parquet",
             ]
             for p in parq_candidates:
                 if os.path.exists(p):
@@ -183,7 +233,10 @@ with DAG(
                 labels_df = pd.read_csv(csv_path)
                 logger.warning(f"Falling back to CSV labels at: {csv_path}")
             else:
-                raise FileNotFoundError("No labels parquet/CSV found. Ensure labels exist in S3 or repo.")
+                # Gracefully skip if labels truly missing
+                from airflow.exceptions import AirflowSkipException
+                logger.warning("No labels parquet/CSV found. Skipping combine and training for this run.")
+                raise AirflowSkipException("Labels not found for execution date")
 
         # Normalize label keys
         if "plot_no" in labels_df.columns:
@@ -192,19 +245,42 @@ with DAG(
             labels_df["Planting_Date"] = pd.to_datetime(labels_df["Planting_Date"], errors="coerce")
 
         # Load plot features from S3
-        key = plot_features_path.replace(f"s3://{BUCKET}/", "")
-        features_df = _read_parquet_from_s3(BUCKET, key, storage)
+        # Load plot features from S3 (provided path first)
+        features_df = None
+        try:
+            key = plot_features_path.replace(f"s3://{BUCKET}/", "")
+            features_df = _read_parquet_from_s3(BUCKET, key, storage)
+            logger.info(f"Loaded plot features from S3: {plot_features_path}")
+        except Exception as e:
+            logger.warning(f"Failed to read plot features from provided S3 path {plot_features_path}: {e}")
+            # Try latest available features parquet
+            latest_features_s3 = _find_latest_s3_parquet(BUCKET, settings.S3_BASE_PREFIX, "features", "plot_features.parquet", storage)
+            if latest_features_s3:
+                try:
+                    key = latest_features_s3.replace(f"s3://{BUCKET}/", "")
+                    features_df = _read_parquet_from_s3(BUCKET, key, storage)
+                    logger.info(f"Loaded latest available plot features from S3: {latest_features_s3}")
+                except Exception as e2:
+                    logger.warning(f"Failed to read latest plot features from S3 {latest_features_s3}: {e2}")
+        if features_df is None:
+            raise FileNotFoundError("Plot features parquet not found in S3. Ensure feature materialization ran.")
         # Normalize features timestamp
         if "planting_date" in features_df.columns:
             features_df["planting_date"] = pd.to_datetime(features_df["planting_date"], errors="coerce")
 
         # Merge on plot_id and planting_date (fallback to plot_id only if needed)
-        merged = labels_df.merge(
-            features_df,
-            left_on=[c for c in ["plot_id", "Planting_Date"] if c in labels_df.columns],
-            right_on=[c for c in ["plot_id", "planting_date"] if c in features_df.columns],
-            how="left",
-        )
+        # Normalize keys for robust join
+        # Map lower-case columns if present
+        if "plot_no" in labels_df.columns and "plot_id" not in labels_df.columns:
+            labels_df = labels_df.rename(columns={"plot_no": "plot_id"})
+        if "planting_date" in labels_df.columns and "Planting_Date" not in labels_df.columns:
+            # unify to Title case used in training preprocessing
+            labels_df = labels_df.rename(columns={"planting_date": "Planting_Date"})
+
+        # Merge on plot_id and planting_date when available
+        left_keys = [c for c in ["plot_id", "Planting_Date"] if c in labels_df.columns]
+        right_keys = [c for c in ["plot_id", "planting_date"] if c in features_df.columns]
+        merged = labels_df.merge(features_df, left_on=left_keys, right_on=right_keys, how="left")
         if merged.isna().all(axis=1).sum() > 0:
             # Fallback: join by plot_id only
             merged = labels_df.merge(features_df, on="plot_id", how="left")
