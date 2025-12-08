@@ -40,8 +40,10 @@ services:
       AIRFLOW__CORE__FERNET_KEY: "U_LuSIrbivRLOyNg4rDl6wWg078-t57Ar18IkL1ZToU="
       AIRFLOW_CONN_AWS_DEFAULT: "aws://minioadmin:minioadmin@/?endpoint_url=http%3A%2F%2Fminio%3A9000&region_name=us-east-1&verify=false"
       GEE_SERVICE_ACCOUNT_JSON: "/opt/airflow/dags/repo/src/serene-bastion-406504-9c938287dece.json"
+      AIRFLOW_UID: "50000"
     volumes:
-      - ./airflow_home:/opt/airflow       # Airflow runtime (config, logs, temp)
+      - ./airflow_home:/opt/airflow       # Airflow runtime (config, temp)
+      - ./airflow_logs:/opt/airflow/logs  # Isolate logs to a writable host path
       - ./airflow/dags:/opt/airflow/dags  # Correct DAGs path
       - ./airflow/plugins:/opt/airflow/plugins  # Correct plugins path
       - ./src:/opt/airflow/dags/repo/src  # Ensure project code is available
@@ -69,10 +71,12 @@ services:
       AIRFLOW__CORE__FERNET_KEY: "U_LuSIrbivRLOyNg4rDl6wWg078-t57Ar18IkL1ZToU="
       AIRFLOW_CONN_AWS_DEFAULT: "aws://minioadmin:minioadmin@/?endpoint_url=http%3A%2F%2Fminio%3A9000&region_name=us-east-1&verify=false"
       GEE_SERVICE_ACCOUNT_JSON: "/opt/airflow/dags/repo/src/serene-bastion-406504-9c938287dece.json"
+      AIRFLOW_UID: "50000"
     ports:
       - "8083:8080"
     volumes:
       - ./airflow_home:/opt/airflow
+      - ./airflow_logs:/opt/airflow/logs
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/plugins:/opt/airflow/plugins
       - ./src:/opt/airflow/dags/repo/src
@@ -96,8 +100,10 @@ services:
       AIRFLOW__CORE__FERNET_KEY: "U_LuSIrbivRLOyNg4rDl6wWg078-t57Ar18IkL1ZToU="
       AIRFLOW_CONN_AWS_DEFAULT: "aws://minioadmin:minioadmin@/?endpoint_url=http%3A%2F%2Fminio%3A9000&region_name=us-east-1&verify=false"
       GEE_SERVICE_ACCOUNT_JSON: "/opt/airflow/dags/repo/src/serene-bastion-406504-9c938287dece.json"
+      AIRFLOW_UID: "50000"
     volumes:
       - ./airflow_home:/opt/airflow
+      - ./airflow_logs:/opt/airflow/logs
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/plugins:/opt/airflow/plugins
       - ./src:/opt/airflow/dags/repo/src
