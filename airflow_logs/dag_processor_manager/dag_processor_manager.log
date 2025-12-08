@@ -1,0 +1,16 @@
+[2025-12-08T10:27:25.861+0000] {manager.py:470} INFO - Processing files using up to 2 processes at a time 
+[2025-12-08T10:27:25.863+0000] {manager.py:471} INFO - Process each file at most once every 30 seconds
+[2025-12-08T10:27:25.865+0000] {manager.py:472} INFO - Checking for new files in /opt/airflow/dags every 300 seconds
+[2025-12-08T10:27:25.867+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-08T10:27:26.452+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-08T10:27:27.119+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  ----------
+/opt/airflow/dags/feature_materialization_dag.py    166  0.30s             0           0
+/opt/airflow/dags/model_training_dag.py             169  0.21s             0           0
+/opt/airflow/dags/satellite_ingestion_dag.py                               0           0
+/opt/airflow/dags/weather_ingestion_dag.py                                 0           0
+================================================================================
