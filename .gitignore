@@ -7,3 +7,4 @@ data/processed/*
 data/features/*
 mlruns/
 feature_repo/
+airflow_logs/
