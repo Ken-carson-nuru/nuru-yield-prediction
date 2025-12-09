@@ -23,6 +23,20 @@ services:
     volumes:
       - minio_data:/data
 
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      - minio
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      S3_BUCKET_NAME: ${S3_BUCKET_NAME}
+    entrypoint: ["/bin/sh", "-c"]
+    command: >-
+      "mc alias set local http://minio:9000 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD && 
+       mc mb --ignore-existing local/$S3_BUCKET_NAME && 
+       mc anonymous set none local/$S3_BUCKET_NAME"
+
   airflow-init:
     build:
       context: .
@@ -63,6 +77,7 @@ services:
       - airflow-init
       - postgres
       - minio
+      - mlflow-server
     env_file:
       - .env
     environment:
@@ -73,6 +88,7 @@ services:
       AIRFLOW_CONN_AWS_DEFAULT: "aws://minioadmin:minioadmin@/?endpoint_url=http%3A%2F%2Fminio%3A9000&region_name=us-east-1&verify=false"
       GEE_SERVICE_ACCOUNT_JSON: "/opt/airflow/dags/repo/src/serene-bastion-406504-9c938287dece.json"
       AIRFLOW_UID: "50000"
+      MLFLOW_TRACKING_URI: "http://mlflow-server:5000"
     ports:
       - "8083:8080"
     volumes:
@@ -94,6 +110,7 @@ services:
       - airflow-init
       - postgres
       - minio
+      - mlflow-server
     env_file:
       - .env
     environment:
@@ -104,6 +121,7 @@ services:
       AIRFLOW_CONN_AWS_DEFAULT: "aws://minioadmin:minioadmin@/?endpoint_url=http%3A%2F%2Fminio%3A9000&region_name=us-east-1&verify=false"
       GEE_SERVICE_ACCOUNT_JSON: "/opt/airflow/dags/repo/src/serene-bastion-406504-9c938287dece.json"
       AIRFLOW_UID: "50000"
+      MLFLOW_TRACKING_URI: "http://mlflow-server:5000"
     volumes:
       - airflow_home:/opt/airflow
       - ./airflow_logs:/opt/airflow/logs
@@ -115,7 +133,34 @@ services:
     command: airflow scheduler
     user: "0:0"  # Run as root to avoid Windows bind mount ACL issues
 
+  mlflow-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: mlflow
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: ${MLFLOW_DB_PASSWORD}
+    volumes:
+      - mlflow_pg_data:/var/lib/postgresql/data
+
+  mlflow-server:
+    image: bitnami/mlflow:latest
+    depends_on:
+      - mlflow-db
+      - minio
+      - minio-init
+    environment:
+      MLFLOW_BACKEND_STORE_URI: postgresql://mlflow:${MLFLOW_DB_PASSWORD}@mlflow-db:5432/mlflow
+      MLFLOW_ARTIFACT_ROOT: s3://${S3_BUCKET_NAME}/mlflow-artifacts
+      AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-minioadmin}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MLFLOW_S3_ENDPOINT_URL: http://minio:9000
+      MLFLOW_SERVER_HOST: 0.0.0.0
+      MLFLOW_SERVER_PORT: 5000
+    ports:
+      - "5000:5000"
+
 volumes:
   postgres_data:
   minio_data:
   airflow_home:
+  mlflow_pg_data:

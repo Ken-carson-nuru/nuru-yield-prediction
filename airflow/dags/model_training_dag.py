@@ -7,6 +7,8 @@ import sys
 import pandas as pd
 import numpy as np
 from io import BytesIO
+import socket
+from urllib.parse import urlparse
 from loguru import logger
 
 # Ensure project packages (src/, config/) are importable in Airflow
@@ -43,11 +45,16 @@ BUCKET = settings.S3_BUCKET_NAME
 
 
 def _get_tracking_uri() -> str:
-    """Resolve MLflow tracking URI for Airflow runtime."""
     uri = os.environ.get("MLFLOW_TRACKING_URI")
     if uri:
-        return uri
-    # Default to a local path inside the repo (persisted by the Airflow container)
+        try:
+            p = urlparse(uri)
+            host = p.hostname
+            if p.scheme in ("http", "https") and host:
+                socket.gethostbyname(host)
+                return uri
+        except Exception:
+            logger.warning(f"Invalid or unreachable MLFLOW_TRACKING_URI '{uri}', falling back to local path")
     return "/opt/airflow/dags/repo/mlruns"
 
 
