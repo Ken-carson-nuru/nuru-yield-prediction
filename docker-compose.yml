@@ -35,7 +35,9 @@ services:
     command: >-
       "mc alias set local http://minio:9000 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD && 
        mc mb --ignore-existing local/$S3_BUCKET_NAME && 
+       mc mb --ignore-existing local/$S3_BUCKET_NAME/mlflow-artifacts &&
        mc anonymous set none local/$S3_BUCKET_NAME"
+       
 
   airflow-init:
     build:
@@ -143,21 +145,27 @@ services:
       - mlflow_pg_data:/var/lib/postgresql/data
 
   mlflow-server:
-    image: bitnami/mlflow:latest
+    build:
+      context: .
+      dockerfile: mlflow.Dockerfile
     depends_on:
       - mlflow-db
       - minio
       - minio-init
     environment:
-      MLFLOW_BACKEND_STORE_URI: postgresql://mlflow:${MLFLOW_DB_PASSWORD}@mlflow-db:5432/mlflow
-      MLFLOW_ARTIFACT_ROOT: s3://${S3_BUCKET_NAME}/mlflow-artifacts
       AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-minioadmin}
       AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
       MLFLOW_S3_ENDPOINT_URL: http://minio:9000
-      MLFLOW_SERVER_HOST: 0.0.0.0
-      MLFLOW_SERVER_PORT: 5000
     ports:
       - "5000:5000"
+    command: >
+      mlflow server
+        --backend-store-uri postgresql://mlflow:${MLFLOW_DB_PASSWORD}@mlflow-db:5432/mlflow
+        --default-artifact-root s3://${S3_BUCKET_NAME}/mlflow-artifacts
+        --host 0.0.0.0
+        --port 5000
+
+
 
 volumes:
   postgres_data:
