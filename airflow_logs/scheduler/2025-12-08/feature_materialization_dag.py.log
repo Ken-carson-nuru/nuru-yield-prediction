@@ -212,3 +212,500 @@
 [2025-12-08T10:43:06.553+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:43:06.552+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2025-12-08T10:43:06.578+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:43:06.578+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
 [2025-12-08T10:43:06.620+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.548 seconds
+[2025-12-08T10:43:36.813+0000] {processor.py:161} INFO - Started process (PID=1163) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:43:36.816+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:43:36.821+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:43:36.818+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:43:38.144+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:43:38.215+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:43:38.215+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:43:38.241+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:43:38.241+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:43:38.282+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.492 seconds
+[2025-12-08T10:44:08.605+0000] {processor.py:161} INFO - Started process (PID=1193) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:44:08.607+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:44:08.610+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:44:08.609+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:44:09.776+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:44:09.840+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:44:09.839+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:44:09.871+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:44:09.871+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:44:09.916+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.328 seconds
+[2025-12-08T10:44:40.957+0000] {processor.py:161} INFO - Started process (PID=1213) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:44:40.959+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:44:40.963+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:44:40.962+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:44:42.402+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:44:42.702+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:44:42.691+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:44:42.797+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:44:42.796+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:44:43.001+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 2.077 seconds
+[2025-12-08T10:45:13.462+0000] {processor.py:161} INFO - Started process (PID=1245) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:45:13.464+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:45:13.467+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:45:13.466+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:45:14.616+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:45:14.678+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:45:14.677+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:45:14.709+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:45:14.708+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:45:14.757+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.317 seconds
+[2025-12-08T10:45:45.310+0000] {processor.py:161} INFO - Started process (PID=1277) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:45:45.316+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:45:45.324+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:45:45.322+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:45:46.714+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:45:46.771+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:45:46.771+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:45:46.796+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:45:46.796+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:45:46.839+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.576 seconds
+[2025-12-08T10:46:17.412+0000] {processor.py:161} INFO - Started process (PID=1309) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:46:17.414+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:46:17.418+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:46:17.417+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:46:18.592+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:46:18.658+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:46:18.657+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:46:18.683+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:46:18.682+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:46:18.724+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.337 seconds
+[2025-12-08T10:46:49.500+0000] {processor.py:161} INFO - Started process (PID=1341) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:46:49.510+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:46:49.514+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:46:49.513+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:46:50.723+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:46:50.799+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:46:50.799+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:46:50.827+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:46:50.827+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:46:50.878+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.438 seconds
+[2025-12-08T10:47:21.812+0000] {processor.py:161} INFO - Started process (PID=1373) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:47:21.814+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:47:21.817+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:47:21.817+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:47:22.966+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:47:23.014+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:47:23.013+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:47:23.046+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:47:23.046+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:47:23.100+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.310 seconds
+[2025-12-08T10:47:53.707+0000] {processor.py:161} INFO - Started process (PID=1405) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:47:53.709+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:47:53.713+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:47:53.712+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:47:54.914+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:47:54.979+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:47:54.979+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:47:55.005+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:47:55.005+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:47:55.048+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.360 seconds
+[2025-12-08T10:48:25.591+0000] {processor.py:161} INFO - Started process (PID=1435) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:48:25.593+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:48:25.595+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:48:25.595+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:48:26.732+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:48:26.803+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:48:26.802+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:48:26.828+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:48:26.828+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:48:26.874+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.301 seconds
+[2025-12-08T10:48:57.275+0000] {processor.py:161} INFO - Started process (PID=1455) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:48:57.278+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:48:57.283+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:48:57.281+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:48:58.423+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:48:58.484+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:48:58.484+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:48:58.510+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:48:58.509+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:48:58.555+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.304 seconds
+[2025-12-08T10:49:29.179+0000] {processor.py:161} INFO - Started process (PID=1487) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:49:29.181+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:49:29.185+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:49:29.184+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:49:30.205+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:49:30.290+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:49:30.290+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:49:30.326+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:49:30.325+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:49:30.384+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.224 seconds
+[2025-12-08T10:50:01.238+0000] {processor.py:161} INFO - Started process (PID=1519) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:50:01.241+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:50:01.249+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:50:01.245+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:50:02.234+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:50:02.303+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:50:02.303+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:50:02.333+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:50:02.332+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:50:02.379+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.162 seconds
+[2025-12-08T10:50:33.037+0000] {processor.py:161} INFO - Started process (PID=1551) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:50:33.039+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:50:33.041+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:50:33.040+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:50:33.767+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:50:33.821+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:50:33.821+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:50:33.847+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:50:33.846+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:50:33.886+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.863 seconds
+[2025-12-08T10:51:04.351+0000] {processor.py:161} INFO - Started process (PID=1583) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:51:04.353+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:51:04.356+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:51:04.355+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:51:05.529+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:51:05.585+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:51:05.585+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:51:05.610+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:51:05.610+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:51:05.648+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.318 seconds
+[2025-12-08T10:51:36.319+0000] {processor.py:161} INFO - Started process (PID=1615) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:51:36.320+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:51:36.335+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:51:36.334+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:51:37.653+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:51:37.752+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:51:37.751+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:51:37.781+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:51:37.781+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:51:37.848+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.550 seconds
+[2025-12-08T10:52:08.425+0000] {processor.py:161} INFO - Started process (PID=1680) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:52:08.427+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:52:08.429+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:52:08.428+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:52:08.974+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:52:09.016+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:52:09.016+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:52:09.038+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:52:09.038+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:52:09.068+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.655 seconds
+[2025-12-08T10:52:39.443+0000] {processor.py:161} INFO - Started process (PID=1710) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:52:39.445+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:52:39.447+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:52:39.446+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:52:40.172+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:52:40.223+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:52:40.223+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:52:40.248+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:52:40.248+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:52:40.287+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.858 seconds
+[2025-12-08T10:53:10.862+0000] {processor.py:161} INFO - Started process (PID=1730) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:53:10.864+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:53:10.866+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:53:10.865+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:53:12.427+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:53:12.496+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:53:12.496+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:53:12.530+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:53:12.529+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:53:12.576+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.751 seconds
+[2025-12-08T10:53:42.872+0000] {processor.py:161} INFO - Started process (PID=1762) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:53:42.874+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:53:42.876+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:53:42.875+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:53:43.482+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:53:43.530+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:53:43.530+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:53:43.557+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:53:43.556+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:53:43.596+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.737 seconds
+[2025-12-08T10:54:14.202+0000] {processor.py:161} INFO - Started process (PID=1818) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:54:14.204+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:54:14.216+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:54:14.215+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:54:25.806+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:54:28.123+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:54:28.122+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:54:28.379+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:54:28.374+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:54:28.731+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 14.659 seconds
+[2025-12-08T10:54:59.294+0000] {processor.py:161} INFO - Started process (PID=1921) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:54:59.295+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:54:59.297+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:54:59.297+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:54:59.993+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:55:00.050+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:55:00.050+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:55:00.070+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:55:00.070+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:55:00.104+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.825 seconds
+[2025-12-08T10:55:30.672+0000] {processor.py:161} INFO - Started process (PID=1953) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:55:30.674+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:55:30.676+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:55:30.675+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:55:31.395+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:55:31.441+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:55:31.441+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:55:31.463+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:55:31.463+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:55:31.729+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.070 seconds
+[2025-12-08T10:56:02.267+0000] {processor.py:161} INFO - Started process (PID=1983) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:56:02.269+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:56:02.272+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:56:02.271+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:56:03.351+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:56:03.420+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:56:03.420+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:56:03.651+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:56:03.651+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:56:03.687+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.442 seconds
+[2025-12-08T10:56:34.136+0000] {processor.py:161} INFO - Started process (PID=2003) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:56:34.138+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:56:34.140+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:56:34.139+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:56:35.172+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:56:35.257+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:56:35.257+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:56:35.596+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:56:35.596+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:56:35.653+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.533 seconds
+[2025-12-08T10:57:06.160+0000] {processor.py:161} INFO - Started process (PID=2035) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:57:06.161+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:57:06.163+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:57:06.163+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:57:07.070+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:57:07.128+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:57:07.128+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:57:07.150+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:57:07.150+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:57:07.197+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.051 seconds
+[2025-12-08T10:57:38.155+0000] {processor.py:161} INFO - Started process (PID=2067) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:57:38.156+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:57:38.158+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:57:38.157+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:57:38.907+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:57:38.955+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:57:38.954+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:57:38.974+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:57:38.974+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:57:39.035+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.891 seconds
+[2025-12-08T10:58:09.781+0000] {processor.py:161} INFO - Started process (PID=2099) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:58:09.782+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:58:09.785+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:58:09.784+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:58:10.930+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:58:10.974+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:58:10.973+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:58:10.991+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:58:10.991+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:58:11.020+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.263 seconds
+[2025-12-08T10:58:41.230+0000] {processor.py:161} INFO - Started process (PID=2131) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:58:41.231+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:58:41.234+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:58:41.233+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:58:42.781+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:58:42.894+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:58:42.893+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:58:42.970+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:58:42.969+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:58:43.037+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.825 seconds
+[2025-12-08T10:59:13.425+0000] {processor.py:161} INFO - Started process (PID=2181) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:59:13.427+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:59:13.430+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:59:13.429+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:59:14.264+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:59:14.317+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:59:14.316+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:59:14.337+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:59:14.337+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:59:14.371+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.965 seconds
+[2025-12-08T10:59:45.071+0000] {processor.py:161} INFO - Started process (PID=2223) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:59:45.073+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T10:59:45.076+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:59:45.075+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:59:47.062+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T10:59:47.188+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:59:47.187+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T10:59:47.242+0000] {logging_mixin.py:188} INFO - [2025-12-08T10:59:47.241+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T10:59:47.356+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 2.302 seconds
+[2025-12-08T11:00:18.202+0000] {processor.py:161} INFO - Started process (PID=2294) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:00:18.204+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:00:18.210+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:00:18.207+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:00:19.490+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:00:19.565+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:00:19.565+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:00:19.595+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:00:19.595+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:00:19.653+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.470 seconds
+[2025-12-08T11:00:50.452+0000] {processor.py:161} INFO - Started process (PID=2314) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:00:50.454+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:00:50.458+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:00:50.456+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:00:52.136+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:00:52.199+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:00:52.199+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:00:52.226+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:00:52.226+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:00:52.274+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.845 seconds
+[2025-12-08T11:01:23.151+0000] {processor.py:161} INFO - Started process (PID=2346) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:01:23.152+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:01:23.154+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:01:23.153+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:01:23.877+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:01:23.915+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:01:23.915+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:01:23.937+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:01:23.936+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:01:23.991+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.851 seconds
+[2025-12-08T11:01:54.135+0000] {processor.py:161} INFO - Started process (PID=2378) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:01:54.137+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:01:54.141+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:01:54.140+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:01:55.185+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:01:55.229+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:01:55.229+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:01:55.253+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:01:55.253+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:01:55.290+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.172 seconds
+[2025-12-08T11:02:25.509+0000] {processor.py:161} INFO - Started process (PID=2410) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:02:25.510+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:02:25.512+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:02:25.511+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:02:26.268+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:02:26.307+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:02:26.307+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:02:26.324+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:02:26.324+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:02:26.361+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.863 seconds
+[2025-12-08T11:02:56.970+0000] {processor.py:161} INFO - Started process (PID=2442) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:02:56.972+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:02:56.976+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:02:56.975+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:02:57.876+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:02:57.935+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:02:57.934+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:02:57.961+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:02:57.960+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:02:58.004+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.052 seconds
+[2025-12-08T11:03:28.480+0000] {processor.py:161} INFO - Started process (PID=2474) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:03:28.482+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:03:28.484+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:03:28.483+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:03:29.432+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:03:29.500+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:03:29.499+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:03:29.537+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:03:29.536+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:03:29.590+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.122 seconds
+[2025-12-08T11:03:59.754+0000] {processor.py:161} INFO - Started process (PID=2506) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:03:59.756+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:03:59.759+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:03:59.758+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:04:00.670+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:04:00.724+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:04:00.724+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:04:00.749+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:04:00.749+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:04:00.786+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.048 seconds
+[2025-12-08T11:04:31.260+0000] {processor.py:161} INFO - Started process (PID=2536) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:04:31.261+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:04:31.264+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:04:31.264+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:04:32.089+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:04:32.133+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:04:32.132+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:04:32.159+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:04:32.158+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:04:32.200+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.962 seconds
+[2025-12-08T11:05:02.315+0000] {processor.py:161} INFO - Started process (PID=2584) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:05:02.316+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:05:02.318+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:05:02.318+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:05:02.959+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:05:03.014+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:05:03.014+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:05:03.041+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:05:03.041+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:05:03.078+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.777 seconds
+[2025-12-08T11:05:33.522+0000] {processor.py:161} INFO - Started process (PID=2612) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:05:33.524+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:05:33.526+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:05:33.526+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:05:34.172+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:05:34.218+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:05:34.218+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:05:34.238+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:05:34.238+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:05:34.267+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.760 seconds
+[2025-12-08T11:06:04.949+0000] {processor.py:161} INFO - Started process (PID=2644) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:06:04.951+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:06:04.954+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:06:04.953+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:06:05.785+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:06:05.875+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:06:05.875+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:06:05.921+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:06:05.920+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:06:05.983+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.061 seconds
+[2025-12-08T11:06:36.546+0000] {processor.py:161} INFO - Started process (PID=2676) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:06:36.547+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:06:36.550+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:06:36.549+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:06:37.428+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:06:37.497+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:06:37.497+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:06:37.528+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:06:37.528+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:06:37.569+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.038 seconds
+[2025-12-08T11:07:08.667+0000] {processor.py:161} INFO - Started process (PID=2708) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:07:08.669+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:07:08.674+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:07:08.673+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:07:11.326+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:07:11.530+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:07:11.529+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:07:11.599+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:07:11.599+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:07:11.720+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 3.113 seconds
+[2025-12-08T11:07:42.485+0000] {processor.py:161} INFO - Started process (PID=2740) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:07:42.487+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:07:42.489+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:07:42.488+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:07:43.119+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:07:43.166+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:07:43.166+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:07:43.189+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:07:43.189+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:07:43.223+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.750 seconds
+[2025-12-08T11:08:13.552+0000] {processor.py:161} INFO - Started process (PID=2772) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:08:13.554+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:08:13.555+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:08:13.555+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:08:14.361+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:08:14.420+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:08:14.420+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:08:14.448+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:08:14.448+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:08:14.488+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.950 seconds
+[2025-12-08T11:08:45.530+0000] {processor.py:161} INFO - Started process (PID=2804) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:08:45.531+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:08:45.532+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:08:45.532+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:08:46.332+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:08:46.385+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:08:46.385+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:08:46.409+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:08:46.408+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:08:46.446+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.927 seconds
+[2025-12-08T11:09:16.865+0000] {processor.py:161} INFO - Started process (PID=2836) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:09:16.866+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:09:16.868+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:09:16.868+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:09:17.645+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:09:17.694+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:09:17.694+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:09:17.719+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:09:17.719+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:09:17.754+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.906 seconds
+[2025-12-08T11:09:47.904+0000] {processor.py:161} INFO - Started process (PID=2866) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:09:47.905+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:09:47.908+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:09:47.907+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:09:48.646+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:09:48.738+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:09:48.737+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:09:48.771+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:09:48.771+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:09:48.818+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.927 seconds
+[2025-12-08T11:10:19.558+0000] {processor.py:161} INFO - Started process (PID=2886) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:10:19.562+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:10:19.566+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:10:19.564+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:10:22.067+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:10:22.299+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:10:22.299+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:10:22.390+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:10:22.390+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:10:22.646+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 3.117 seconds
+[2025-12-08T11:10:53.416+0000] {processor.py:161} INFO - Started process (PID=2918) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:10:53.417+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:10:53.420+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:10:53.419+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:10:55.833+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:10:55.966+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:10:55.965+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:10:56.029+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:10:56.029+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:10:56.123+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 2.745 seconds
+[2025-12-08T11:11:26.763+0000] {processor.py:161} INFO - Started process (PID=2950) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:11:26.764+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:11:26.767+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:11:26.766+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:11:27.580+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:11:27.632+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:11:27.632+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:11:27.661+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:11:27.660+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:11:27.695+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.948 seconds
+[2025-12-08T11:11:58.284+0000] {processor.py:161} INFO - Started process (PID=2980) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:11:58.285+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:11:58.287+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:11:58.286+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:11:58.908+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:11:58.963+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:11:58.963+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:11:58.985+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:11:58.985+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:11:59.018+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.746 seconds
+[2025-12-08T11:12:30.088+0000] {processor.py:161} INFO - Started process (PID=3004) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:12:30.090+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:12:30.101+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:12:30.098+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:12:32.727+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:12:33.009+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:12:33.008+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:12:33.115+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:12:33.114+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:12:33.287+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 3.233 seconds
+[2025-12-08T11:13:04.717+0000] {processor.py:161} INFO - Started process (PID=3032) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:13:04.719+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:13:04.722+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:13:04.721+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:13:05.671+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:13:05.723+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:13:05.723+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:13:05.750+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:13:05.750+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:13:05.788+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.091 seconds
+[2025-12-08T11:13:36.426+0000] {processor.py:161} INFO - Started process (PID=3064) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:13:36.438+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:13:36.444+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:13:36.443+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:13:37.808+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:13:37.890+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:13:37.889+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:13:37.926+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:13:37.925+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:13:38.025+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.641 seconds
+[2025-12-08T11:14:08.440+0000] {processor.py:161} INFO - Started process (PID=3096) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:14:08.441+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:14:08.443+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:14:08.442+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:14:09.042+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:14:09.086+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:14:09.085+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:14:09.104+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:14:09.104+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:14:09.135+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.707 seconds
+[2025-12-08T11:14:39.302+0000] {processor.py:161} INFO - Started process (PID=3128) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:14:39.303+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:14:39.305+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:14:39.304+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:14:40.089+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:14:40.131+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:14:40.131+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:14:40.149+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:14:40.149+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:14:40.188+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.899 seconds
+[2025-12-08T11:15:10.549+0000] {processor.py:161} INFO - Started process (PID=3160) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:15:10.551+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:15:10.552+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:15:10.552+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:15:11.305+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:15:11.352+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:15:11.351+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:15:11.370+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:15:11.369+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:15:11.402+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.865 seconds
+[2025-12-08T11:15:42.193+0000] {processor.py:161} INFO - Started process (PID=3192) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:15:42.195+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:15:42.197+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:15:42.196+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:15:43.027+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:15:43.073+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:15:43.072+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:15:43.099+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:15:43.098+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:15:43.138+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.960 seconds
+[2025-12-08T11:16:13.702+0000] {processor.py:161} INFO - Started process (PID=3222) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:16:13.703+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:16:13.705+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:16:13.704+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:16:14.773+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:16:14.847+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:16:14.847+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:16:14.876+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:16:14.876+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:16:14.930+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.243 seconds
+[2025-12-08T11:16:45.685+0000] {processor.py:161} INFO - Started process (PID=3242) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:16:45.697+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:16:45.703+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:16:45.702+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:16:49.990+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:16:50.089+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:16:50.089+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:16:50.126+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:16:50.125+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:16:50.180+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 4.561 seconds
+[2025-12-08T11:17:21.130+0000] {processor.py:161} INFO - Started process (PID=3274) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:17:21.132+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:17:21.134+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:17:21.133+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:17:22.506+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:17:22.584+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:17:22.584+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:17:22.618+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:17:22.617+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:17:22.667+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.555 seconds
+[2025-12-08T11:17:53.276+0000] {processor.py:161} INFO - Started process (PID=3306) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:17:53.277+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:17:53.280+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:17:53.279+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:17:54.088+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:17:54.142+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:17:54.141+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:17:54.164+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:17:54.164+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:17:54.202+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 0.939 seconds
+[2025-12-08T11:18:24.543+0000] {processor.py:161} INFO - Started process (PID=3338) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:18:24.546+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:18:24.549+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:18:24.548+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:18:25.801+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:18:25.865+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:18:25.864+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:18:25.896+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:18:25.895+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:18:25.940+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.447 seconds
+[2025-12-08T11:18:56.122+0000] {processor.py:161} INFO - Started process (PID=3370) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:18:56.124+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:18:56.126+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:18:56.125+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:18:57.014+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:18:57.061+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:18:57.061+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:18:57.082+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:18:57.081+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:18:57.122+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.014 seconds
+[2025-12-08T11:19:27.628+0000] {processor.py:161} INFO - Started process (PID=3402) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:19:27.630+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:19:27.633+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:19:27.632+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:19:28.744+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:19:28.809+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:19:28.809+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:19:28.832+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:19:28.832+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:19:28.873+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 1.266 seconds
+[2025-12-08T11:19:59.337+0000] {processor.py:161} INFO - Started process (PID=3432) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:19:59.339+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:19:59.343+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:19:59.342+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:20:03.858+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:20:04.057+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:20:04.047+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:20:04.147+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:20:04.146+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:20:04.259+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 4.963 seconds
+[2025-12-08T11:20:34.500+0000] {processor.py:161} INFO - Started process (PID=3452) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:20:34.501+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:20:34.504+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:20:34.503+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:20:37.571+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:20:37.682+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:20:37.681+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:20:37.721+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:20:37.720+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:20:37.791+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 3.324 seconds
+[2025-12-08T11:21:07.964+0000] {processor.py:161} INFO - Started process (PID=3484) to work on /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:21:07.965+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/feature_materialization_dag.py for tasks to queue
+[2025-12-08T11:21:07.967+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:21:07.967+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:21:09.627+0000] {processor.py:840} INFO - DAG(s) 'feature_materialization' retrieved from /opt/airflow/dags/feature_materialization_dag.py
+[2025-12-08T11:21:09.727+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:21:09.723+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-08T11:21:09.773+0000] {logging_mixin.py:188} INFO - [2025-12-08T11:21:09.772+0000] {dag.py:3954} INFO - Setting next_dagrun for feature_materialization to None, run_after=None
+[2025-12-08T11:21:10.012+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/feature_materialization_dag.py took 2.062 seconds

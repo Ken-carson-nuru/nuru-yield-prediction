@@ -42,8 +42,8 @@ services:
       GEE_SERVICE_ACCOUNT_JSON: "/opt/airflow/dags/repo/src/serene-bastion-406504-9c938287dece.json"
       AIRFLOW_UID: "50000"
     volumes:
-      - ./airflow_home:/opt/airflow       # Airflow runtime (config, temp)
-      - ./airflow_logs:/opt/airflow/logs  # Isolate logs to a writable host path
+      - airflow_home:/opt/airflow         # Use named volume for Airflow HOME to avoid host ACL issues
+      - ./airflow_logs:/opt/airflow/logs  # Host logs for visibility
       - ./airflow/dags:/opt/airflow/dags  # Correct DAGs path
       - ./airflow/plugins:/opt/airflow/plugins  # Correct plugins path
       - ./src:/opt/airflow/dags/repo/src  # Ensure project code is available
@@ -75,13 +75,14 @@ services:
     ports:
       - "8083:8080"
     volumes:
-      - ./airflow_home:/opt/airflow
+      - airflow_home:/opt/airflow
       - ./airflow_logs:/opt/airflow/logs
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/plugins:/opt/airflow/plugins
       - ./src:/opt/airflow/dags/repo/src
       - ./config:/opt/airflow/dags/repo/config
     command: airflow webserver
+    user: "0:0"  # Run as root to avoid Windows bind mount ACL issues
 
   airflow-scheduler:
     build:
@@ -102,14 +103,16 @@ services:
       GEE_SERVICE_ACCOUNT_JSON: "/opt/airflow/dags/repo/src/serene-bastion-406504-9c938287dece.json"
       AIRFLOW_UID: "50000"
     volumes:
-      - ./airflow_home:/opt/airflow
+      - airflow_home:/opt/airflow
       - ./airflow_logs:/opt/airflow/logs
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/plugins:/opt/airflow/plugins
       - ./src:/opt/airflow/dags/repo/src
       - ./config:/opt/airflow/dags/repo/config
     command: airflow scheduler
+    user: "0:0"  # Run as root to avoid Windows bind mount ACL issues
 
 volumes:
   postgres_data:
   minio_data:
+  airflow_home:
