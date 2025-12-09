@@ -9,3 +9,10 @@
 [2025-12-09T09:41:17.286+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_ingestion_planting_and_crop_stages.fetch_weather_data manual__2025-12-09T09:41:07.558476+00:00 [running]> on host caef28cdc6b7
 [2025-12-09T09:41:17.495+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='kennedy@nuru.solutions' AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_ingestion_planting_and_crop_stages' AIRFLOW_CTX_TASK_ID='fetch_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2025-12-09T09:41:07.558476+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-09T09:41:07.558476+00:00'
 [2025-12-09T09:41:17.497+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-09T09:43:30.915+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/utils/context.py:320 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-12-09T09:43:31.124+0000] {python.py:237} INFO - Done. Returned value was: s3://wardbuckets/nuru-yield/raw/weather/2025-12-09/weather_data.parquet
+[2025-12-09T09:43:31.125+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-09T09:43:31.163+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_ingestion_planting_and_crop_stages, task_id=fetch_weather_data, run_id=manual__2025-12-09T09:41:07.558476+00:00, execution_date=20251209T094107, start_date=20251209T094117, end_date=20251209T094331
+[2025-12-09T09:43:31.226+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-12-09T09:43:31.277+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-09T09:43:31.282+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
