@@ -5738,3 +5738,24 @@
 [2025-12-09T10:35:06.566+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:35:06.566+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2025-12-09T10:35:06.611+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:35:06.611+0000] {dag.py:3954} INFO - Setting next_dagrun for satellite_ingestion to None, run_after=None
 [2025-12-09T10:35:06.677+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/satellite_ingestion_dag.py took 2.220 seconds
+[2025-12-09T10:35:37.074+0000] {processor.py:161} INFO - Started process (PID=19989) to work on /opt/airflow/dags/satellite_ingestion_dag.py
+[2025-12-09T10:35:37.075+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/satellite_ingestion_dag.py for tasks to queue
+[2025-12-09T10:35:37.078+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:35:37.077+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/satellite_ingestion_dag.py
+[2025-12-09T10:35:39.295+0000] {processor.py:840} INFO - DAG(s) 'satellite_ingestion' retrieved from /opt/airflow/dags/satellite_ingestion_dag.py
+[2025-12-09T10:35:39.474+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:35:39.474+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-09T10:35:39.566+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:35:39.555+0000] {dag.py:3954} INFO - Setting next_dagrun for satellite_ingestion to None, run_after=None
+[2025-12-09T10:35:39.682+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/satellite_ingestion_dag.py took 2.654 seconds
+[2025-12-09T10:36:09.994+0000] {processor.py:161} INFO - Started process (PID=20021) to work on /opt/airflow/dags/satellite_ingestion_dag.py
+[2025-12-09T10:36:09.996+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/satellite_ingestion_dag.py for tasks to queue
+[2025-12-09T10:36:09.998+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:36:09.997+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/satellite_ingestion_dag.py
+[2025-12-09T10:36:11.292+0000] {processor.py:840} INFO - DAG(s) 'satellite_ingestion' retrieved from /opt/airflow/dags/satellite_ingestion_dag.py
+[2025-12-09T10:36:11.346+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:36:11.345+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-09T10:36:11.374+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:36:11.373+0000] {dag.py:3954} INFO - Setting next_dagrun for satellite_ingestion to None, run_after=None
+[2025-12-09T10:36:11.431+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/satellite_ingestion_dag.py took 1.448 seconds
+[2025-12-09T10:36:42.014+0000] {processor.py:161} INFO - Started process (PID=20053) to work on /opt/airflow/dags/satellite_ingestion_dag.py
+[2025-12-09T10:36:42.015+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/satellite_ingestion_dag.py for tasks to queue
+[2025-12-09T10:36:42.017+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:36:42.016+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/satellite_ingestion_dag.py
+[2025-12-09T10:36:43.116+0000] {processor.py:840} INFO - DAG(s) 'satellite_ingestion' retrieved from /opt/airflow/dags/satellite_ingestion_dag.py
+[2025-12-09T10:36:43.164+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:36:43.164+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-09T10:36:43.193+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:36:43.193+0000] {dag.py:3954} INFO - Setting next_dagrun for satellite_ingestion to None, run_after=None
+[2025-12-09T10:36:43.229+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/satellite_ingestion_dag.py took 1.226 seconds
