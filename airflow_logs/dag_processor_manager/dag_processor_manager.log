@@ -9794,3 +9794,1112 @@ File Path                                           PID  Runtime      # DAGs    
 /opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.23s           2025-12-09T09:42:11
 /opt/airflow/dags/feature_materialization_dag.py  16907  1.04s             1           0  1.84s           2025-12-09T09:42:07
 ================================================================================
+[2025-12-09T09:43:09.196+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           16919  12.80s            1           0  11.87s          2025-12-09T09:42:25
+/opt/airflow/dags/satellite_ingestion_dag.py      16931  8.55s             1           0  4.55s           2025-12-09T09:42:30
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.70s           2025-12-09T09:42:39
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.18s           2025-12-09T09:42:43
+================================================================================
+[2025-12-09T09:43:39.515+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  13.96s          2025-12-09T09:43:10
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  11.18s          2025-12-09T09:43:11
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  3.94s           2025-12-09T09:43:14
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.52s           2025-12-09T09:43:16
+================================================================================
+[2025-12-09T09:44:10.161+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  7.28s           2025-12-09T09:43:47
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.35s           2025-12-09T09:43:45
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.48s           2025-12-09T09:43:47
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.35s           2025-12-09T09:43:46
+================================================================================
+[2025-12-09T09:44:40.421+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.80s           2025-12-09T09:44:22
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.53s           2025-12-09T09:44:20
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.32s           2025-12-09T09:44:16
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.30s           2025-12-09T09:44:17
+================================================================================
+[2025-12-09T09:45:10.509+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  7.33s           2025-12-09T09:45:00
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.82s           2025-12-09T09:44:53
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.07s           2025-12-09T09:44:49
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.69s           2025-12-09T09:44:49
+================================================================================
+[2025-12-09T09:45:40.884+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.95s           2025-12-09T09:45:36
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.67s           2025-12-09T09:45:25
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.32s           2025-12-09T09:45:20
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.21s           2025-12-09T09:45:21
+================================================================================
+[2025-12-09T09:46:11.205+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           17173  4.05s             1           0  5.95s           2025-12-09T09:45:36
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.61s           2025-12-09T09:45:52
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.26s           2025-12-09T09:45:52
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.10s           2025-12-09T09:45:56
+================================================================================
+[2025-12-09T09:46:41.340+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.60s           2025-12-09T09:46:11
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.16s           2025-12-09T09:46:24
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.02s           2025-12-09T09:46:28
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.00s           2025-12-09T09:46:24
+================================================================================
+[2025-12-09T09:46:59.913+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-09T09:47:00.574+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-09T09:47:11.722+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.93s           2025-12-09T09:46:47
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.93s           2025-12-09T09:47:00
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.29s           2025-12-09T09:46:55
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.07s           2025-12-09T09:46:55
+================================================================================
+[2025-12-09T09:47:41.733+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.65s           2025-12-09T09:47:22
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.81s           2025-12-09T09:47:27
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.55s           2025-12-09T09:47:27
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.82s           2025-12-09T09:47:31
+================================================================================
+[2025-12-09T09:48:12.239+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.57s           2025-12-09T09:47:58
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.58s           2025-12-09T09:48:00
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.23s           2025-12-09T09:47:59
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.06s           2025-12-09T09:48:03
+================================================================================
+[2025-12-09T09:48:42.605+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.14s           2025-12-09T09:48:35
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.81s           2025-12-09T09:48:32
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.14s           2025-12-09T09:48:34
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.08s           2025-12-09T09:48:30
+================================================================================
+[2025-12-09T09:49:13.061+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.23s           2025-12-09T09:49:10
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.47s           2025-12-09T09:49:06
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.02s           2025-12-09T09:49:03
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.82s           2025-12-09T09:49:01
+================================================================================
+[2025-12-09T09:49:43.315+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           17383  3.04s             1           0  4.23s           2025-12-09T09:49:10
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.95s           2025-12-09T09:49:38
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.49s           2025-12-09T09:49:33
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.40s           2025-12-09T09:49:35
+================================================================================
+[2025-12-09T09:50:13.919+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.10s           2025-12-09T09:49:44
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.41s           2025-12-09T09:50:10
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.15s           2025-12-09T09:50:04
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.15s           2025-12-09T09:50:06
+================================================================================
+[2025-12-09T09:50:44.374+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.62s           2025-12-09T09:50:19
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.97s           2025-12-09T09:50:43
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.71s           2025-12-09T09:50:38
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.48s           2025-12-09T09:50:36
+================================================================================
+[2025-12-09T09:51:14.494+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  9.54s           2025-12-09T09:50:59
+/opt/airflow/dags/weather_ingestion_dag.py        17473  1.03s             1           0  2.97s           2025-12-09T09:50:43
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.14s           2025-12-09T09:51:07
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.05s           2025-12-09T09:51:10
+================================================================================
+[2025-12-09T09:51:44.506+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.13s           2025-12-09T09:51:34
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  3.27s           2025-12-09T09:51:41
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.35s           2025-12-09T09:51:43
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.34s           2025-12-09T09:51:14
+================================================================================
+[2025-12-09T09:52:00.620+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-09T09:52:01.333+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-09T09:52:14.620+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.06s           2025-12-09T09:52:10
+/opt/airflow/dags/satellite_ingestion_dag.py      17531  1.02s             1           0  2.35s           2025-12-09T09:51:43
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.94s           2025-12-09T09:51:47
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.07s           2025-12-09T09:52:12
+================================================================================
+[2025-12-09T09:52:45.494+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           17543  4.10s             1           0  5.06s           2025-12-09T09:52:10
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.96s           2025-12-09T09:52:45
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.54s           2025-12-09T09:52:19
+/opt/airflow/dags/satellite_ingestion_dag.py      17561  0.01s             1           0  1.38s           2025-12-09T09:52:14
+================================================================================
+[2025-12-09T09:53:16.220+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  13.51s          2025-12-09T09:52:54
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  5.23s           2025-12-09T09:52:55
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  4.83s           2025-12-09T09:52:50
+/opt/airflow/dags/feature_materialization_dag.py  17575  0.75s             1           0  1.96s           2025-12-09T09:52:45
+================================================================================
+[2025-12-09T09:53:47.432+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.43s           2025-12-09T09:53:30
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.03s           2025-12-09T09:53:28
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.69s           2025-12-09T09:53:22
+/opt/airflow/dags/feature_materialization_dag.py  17607  0.04s             1           0  0.95s           2025-12-09T09:53:16
+================================================================================
+[2025-12-09T09:54:17.461+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.57s           2025-12-09T09:54:06
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  4.53s           2025-12-09T09:53:51
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.90s           2025-12-09T09:53:55
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.42s           2025-12-09T09:54:00
+================================================================================
+[2025-12-09T09:54:47.876+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  9.10s           2025-12-09T09:54:45
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  4.07s           2025-12-09T09:54:34
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  3.48s           2025-12-09T09:54:25
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.03s           2025-12-09T09:54:28
+================================================================================
+[2025-12-09T09:55:18.421+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           17689  2.05s             1           0  9.10s           2025-12-09T09:54:45
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.76s           2025-12-09T09:54:57
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.67s           2025-12-09T09:55:06
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.27s           2025-12-09T09:55:00
+================================================================================
+[2025-12-09T09:55:48.497+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.63s           2025-12-09T09:55:23
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.48s           2025-12-09T09:55:32
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  2.23s           2025-12-09T09:55:30
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.44s           2025-12-09T09:55:38
+================================================================================
+[2025-12-09T09:56:18.659+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  9.64s           2025-12-09T09:56:02
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.74s           2025-12-09T09:56:02
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.62s           2025-12-09T09:56:04
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.34s           2025-12-09T09:56:09
+================================================================================
+[2025-12-09T09:56:48.979+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.70s           2025-12-09T09:56:38
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.82s           2025-12-09T09:56:36
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.23s           2025-12-09T09:56:41
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.91s           2025-12-09T09:56:33
+================================================================================
+[2025-12-09T09:57:01.127+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-09T09:57:01.695+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-09T09:57:19.193+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.60s           2025-12-09T09:57:13
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.44s           2025-12-09T09:57:08
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.15s           2025-12-09T09:57:13
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.11s           2025-12-09T09:57:05
+================================================================================
+[2025-12-09T09:57:49.387+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.70s           2025-12-09T09:57:48
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.47s           2025-12-09T09:57:37
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.30s           2025-12-09T09:57:40
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.16s           2025-12-09T09:57:44
+================================================================================
+[2025-12-09T09:58:19.933+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           17867  1.02s             1           0  4.70s           2025-12-09T09:57:48
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.33s           2025-12-09T09:58:11
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.88s           2025-12-09T09:58:15
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.83s           2025-12-09T09:58:08
+================================================================================
+[2025-12-09T09:58:50.470+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  3.98s           2025-12-09T09:58:22
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.32s           2025-12-09T09:58:47
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.03s           2025-12-09T09:58:43
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.80s           2025-12-09T09:58:39
+================================================================================
+[2025-12-09T09:59:21.048+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.58s           2025-12-09T09:58:59
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.05s           2025-12-09T09:59:19
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.98s           2025-12-09T09:59:10
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  0.93s           2025-12-09T09:59:14
+================================================================================
+[2025-12-09T09:59:51.254+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.92s           2025-12-09T09:59:34
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.15s           2025-12-09T09:59:46
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.07s           2025-12-09T09:59:50
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.79s           2025-12-09T09:59:41
+================================================================================
+[2025-12-09T10:00:21.946+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.32s           2025-12-09T10:00:09
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.59s           2025-12-09T10:00:18
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.97s           2025-12-09T10:00:21
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.82s           2025-12-09T10:00:13
+================================================================================
+[2025-12-09T10:00:52.084+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.40s           2025-12-09T10:00:46
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.49s           2025-12-09T10:00:45
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.46s           2025-12-09T10:00:49
+/opt/airflow/dags/weather_ingestion_dag.py        18021  0.03s             1           0  0.97s           2025-12-09T10:00:21
+================================================================================
+[2025-12-09T10:01:22.842+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.69s           2025-12-09T10:01:22
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.42s           2025-12-09T10:01:21
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.21s           2025-12-09T10:00:53
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.93s           2025-12-09T10:01:17
+================================================================================
+[2025-12-09T10:01:53.209+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           18065  1.07s             1           0  4.69s           2025-12-09T10:01:22
+/opt/airflow/dags/satellite_ingestion_dag.py      18068  1.03s             1           0  1.42s           2025-12-09T10:01:21
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.02s           2025-12-09T10:01:24
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.91s           2025-12-09T10:01:49
+================================================================================
+[2025-12-09T10:02:01.381+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-09T10:02:01.966+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-09T10:02:23.239+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.73s           2025-12-09T10:01:56
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.57s           2025-12-09T10:01:53
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.03s           2025-12-09T10:01:56
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.78s           2025-12-09T10:02:19
+================================================================================
+[2025-12-09T10:02:53.254+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.65s           2025-12-09T10:02:31
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.31s           2025-12-09T10:02:25
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.15s           2025-12-09T10:02:51
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.03s           2025-12-09T10:02:27
+================================================================================
+[2025-12-09T10:03:23.338+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.53s           2025-12-09T10:03:07
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.35s           2025-12-09T10:02:58
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.11s           2025-12-09T10:02:56
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.98s           2025-12-09T10:03:23
+================================================================================
+[2025-12-09T10:03:53.381+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.62s           2025-12-09T10:03:42
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.35s           2025-12-09T10:03:30
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.26s           2025-12-09T10:03:28
+/opt/airflow/dags/feature_materialization_dag.py  18187  0.16s             1           0  0.98s           2025-12-09T10:03:23
+================================================================================
+[2025-12-09T10:04:23.517+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.87s           2025-12-09T10:04:18
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  2.05s           2025-12-09T10:03:55
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.94s           2025-12-09T10:04:00
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.24s           2025-12-09T10:04:02
+================================================================================
+[2025-12-09T10:04:53.586+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           18237  5.08s             1           0  5.87s           2025-12-09T10:04:18
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.45s           2025-12-09T10:04:26
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.31s           2025-12-09T10:04:32
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.25s           2025-12-09T10:04:34
+================================================================================
+[2025-12-09T10:05:24.137+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.03s           2025-12-09T10:04:54
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.96s           2025-12-09T10:05:06
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.37s           2025-12-09T10:05:04
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.27s           2025-12-09T10:04:58
+================================================================================
+[2025-12-09T10:05:54.419+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  7.44s           2025-12-09T10:05:32
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.49s           2025-12-09T10:05:37
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  2.26s           2025-12-09T10:05:31
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.39s           2025-12-09T10:05:38
+================================================================================
+[2025-12-09T10:06:24.734+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  8.89s           2025-12-09T10:06:11
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.22s           2025-12-09T10:06:09
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.71s           2025-12-09T10:06:11
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.44s           2025-12-09T10:06:03
+================================================================================
+[2025-12-09T10:06:55.011+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  7.50s           2025-12-09T10:06:49
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.55s           2025-12-09T10:06:43
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.40s           2025-12-09T10:06:42
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.92s           2025-12-09T10:06:34
+================================================================================
+[2025-12-09T10:07:02.130+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-09T10:07:03.138+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-09T10:07:25.085+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           18383  5.06s             1           0  7.50s           2025-12-09T10:06:49
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.50s           2025-12-09T10:07:15
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.36s           2025-12-09T10:07:06
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.22s           2025-12-09T10:07:13
+================================================================================
+[2025-12-09T10:07:55.484+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.93s           2025-12-09T10:07:25
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.46s           2025-12-09T10:07:47
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.41s           2025-12-09T10:07:38
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.17s           2025-12-09T10:07:45
+================================================================================
+[2025-12-09T10:08:25.543+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.64s           2025-12-09T10:08:02
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.39s           2025-12-09T10:08:19
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.34s           2025-12-09T10:08:17
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.11s           2025-12-09T10:08:10
+================================================================================
+[2025-12-09T10:08:55.653+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.36s           2025-12-09T10:08:38
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.77s           2025-12-09T10:08:41
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.48s           2025-12-09T10:08:51
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.09s           2025-12-09T10:08:49
+================================================================================
+[2025-12-09T10:09:26.159+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.22s           2025-12-09T10:09:14
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.43s           2025-12-09T10:09:13
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  0.92s           2025-12-09T10:09:20
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.84s           2025-12-09T10:09:22
+================================================================================
+[2025-12-09T10:09:56.716+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.74s           2025-12-09T10:09:50
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.67s           2025-12-09T10:09:53
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.14s           2025-12-09T10:09:53
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.06s           2025-12-09T10:09:45
+================================================================================
+[2025-12-09T10:10:27.272+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.25s           2025-12-09T10:10:27
+/opt/airflow/dags/satellite_ingestion_dag.py      18567  2.05s             1           0  1.67s           2025-12-09T10:09:53
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.10s           2025-12-09T10:10:25
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.00s           2025-12-09T10:10:16
+================================================================================
+[2025-12-09T10:10:57.641+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           18587  0.01s             1           0  6.25s           2025-12-09T10:10:27
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.99s           2025-12-09T10:10:28
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.08s           2025-12-09T10:10:56
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.91s           2025-12-09T10:10:48
+================================================================================
+[2025-12-09T10:11:27.792+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.88s           2025-12-09T10:11:03
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.13s           2025-12-09T10:11:00
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.05s           2025-12-09T10:11:19
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.93s           2025-12-09T10:11:27
+================================================================================
+[2025-12-09T10:11:58.202+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.90s           2025-12-09T10:11:38
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.18s           2025-12-09T10:11:32
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.17s           2025-12-09T10:11:51
+/opt/airflow/dags/weather_ingestion_dag.py        18645  0.01s             1           0  0.93s           2025-12-09T10:11:27
+================================================================================
+[2025-12-09T10:12:02.254+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-09T10:12:02.892+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-09T10:12:28.646+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.77s           2025-12-09T10:12:15
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.36s           2025-12-09T10:12:22
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.31s           2025-12-09T10:12:04
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.05s           2025-12-09T10:11:59
+================================================================================
+[2025-12-09T10:12:58.970+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.54s           2025-12-09T10:12:51
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.69s           2025-12-09T10:12:31
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.41s           2025-12-09T10:12:35
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.83s           2025-12-09T10:12:53
+================================================================================
+[2025-12-09T10:13:29.001+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.41s           2025-12-09T10:13:26
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.69s           2025-12-09T10:13:04
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.60s           2025-12-09T10:13:07
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.19s           2025-12-09T10:13:25
+================================================================================
+[2025-12-09T10:13:59.014+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           18753  2.84s             1           0  4.41s           2025-12-09T10:13:26
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  2.63s           2025-12-09T10:13:58
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.84s           2025-12-09T10:13:36
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.78s           2025-12-09T10:13:39
+================================================================================
+[2025-12-09T10:14:29.132+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  8.23s           2025-12-09T10:14:04
+/opt/airflow/dags/feature_materialization_dag.py  18785  0.01s             1           0  2.63s           2025-12-09T10:13:58
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.42s           2025-12-09T10:14:08
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.41s           2025-12-09T10:14:11
+================================================================================
+[2025-12-09T10:14:59.491+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.28s           2025-12-09T10:14:39
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.38s           2025-12-09T10:14:43
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.10s           2025-12-09T10:14:40
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.90s           2025-12-09T10:14:30
+================================================================================
+[2025-12-09T10:15:30.259+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.71s           2025-12-09T10:15:14
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.34s           2025-12-09T10:15:12
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.26s           2025-12-09T10:15:15
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.16s           2025-12-09T10:15:01
+================================================================================
+[2025-12-09T10:16:00.308+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  10.51s          2025-12-09T10:15:55
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  3.11s           2025-12-09T10:15:48
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.80s           2025-12-09T10:15:44
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.13s           2025-12-09T10:15:33
+================================================================================
+[2025-12-09T10:16:30.407+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           18899  5.10s             1           0  10.51s          2025-12-09T10:15:55
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.44s           2025-12-09T10:16:20
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.21s           2025-12-09T10:16:16
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.10s           2025-12-09T10:16:04
+================================================================================
+[2025-12-09T10:17:00.663+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.38s           2025-12-09T10:16:30
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.67s           2025-12-09T10:16:52
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.51s           2025-12-09T10:16:48
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.01s           2025-12-09T10:16:36
+================================================================================
+[2025-12-09T10:17:02.686+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-09T10:17:03.395+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-09T10:17:31.062+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.39s           2025-12-09T10:17:06
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.34s           2025-12-09T10:17:08
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.32s           2025-12-09T10:17:24
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.26s           2025-12-09T10:17:19
+================================================================================
+[2025-12-09T10:18:01.330+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.92s           2025-12-09T10:17:41
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.08s           2025-12-09T10:17:52
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.73s           2025-12-09T10:17:56
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.23s           2025-12-09T10:17:40
+================================================================================
+[2025-12-09T10:18:32.013+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.09s           2025-12-09T10:18:15
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.48s           2025-12-09T10:18:29
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.01s           2025-12-09T10:18:11
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.85s           2025-12-09T10:18:23
+================================================================================
+[2025-12-09T10:19:02.356+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  7.14s           2025-12-09T10:18:53
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.20s           2025-12-09T10:18:43
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.12s           2025-12-09T10:19:00
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.81s           2025-12-09T10:18:55
+================================================================================
+[2025-12-09T10:19:32.939+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.54s           2025-12-09T10:19:28
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.36s           2025-12-09T10:19:14
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.23s           2025-12-09T10:19:32
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.05s           2025-12-09T10:19:26
+================================================================================
+[2025-12-09T10:20:03.548+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           19101  4.97s             1           0  4.54s           2025-12-09T10:19:28
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.00s           2025-12-09T10:19:59
+/opt/airflow/dags/satellite_ingestion_dag.py      19115  1.02s             1           0  1.23s           2025-12-09T10:19:32
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.12s           2025-12-09T10:19:46
+================================================================================
+[2025-12-09T10:20:33.954+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.12s           2025-12-09T10:20:04
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.72s           2025-12-09T10:20:31
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.35s           2025-12-09T10:20:18
+/opt/airflow/dags/satellite_ingestion_dag.py      19135  0.01s             1           0  1.26s           2025-12-09T10:20:03
+================================================================================
+[2025-12-09T10:21:04.277+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.21s           2025-12-09T10:20:41
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.66s           2025-12-09T10:20:35
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.38s           2025-12-09T10:21:04
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.05s           2025-12-09T10:20:49
+================================================================================
+[2025-12-09T10:21:34.453+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.39s           2025-12-09T10:21:15
+/opt/airflow/dags/weather_ingestion_dag.py        19193  0.01s             1           0  1.38s           2025-12-09T10:21:04
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.33s           2025-12-09T10:21:07
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.76s           2025-12-09T10:21:20
+================================================================================
+[2025-12-09T10:22:02.841+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-09T10:22:03.570+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-09T10:22:04.626+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.71s           2025-12-09T10:21:50
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.86s           2025-12-09T10:21:39
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.26s           2025-12-09T10:21:51
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.96s           2025-12-09T10:21:35
+================================================================================
+[2025-12-09T10:22:35.046+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.03s           2025-12-09T10:22:25
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.60s           2025-12-09T10:22:07
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.41s           2025-12-09T10:22:11
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.96s           2025-12-09T10:22:22
+================================================================================
+[2025-12-09T10:23:05.381+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  7.34s           2025-12-09T10:23:03
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  2.13s           2025-12-09T10:22:55
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.25s           2025-12-09T10:22:42
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.09s           2025-12-09T10:22:38
+================================================================================
+[2025-12-09T10:23:35.450+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           19307  1.87s             1           0  7.34s           2025-12-09T10:23:03
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.50s           2025-12-09T10:23:10
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.18s           2025-12-09T10:23:14
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.00s           2025-12-09T10:23:26
+================================================================================
+[2025-12-09T10:24:05.909+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.06s           2025-12-09T10:23:38
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.45s           2025-12-09T10:23:46
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.09s           2025-12-09T10:23:41
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.07s           2025-12-09T10:23:57
+================================================================================
+[2025-12-09T10:24:36.265+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  10.35s          2025-12-09T10:24:19
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.89s           2025-12-09T10:24:19
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.87s           2025-12-09T10:24:15
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.02s           2025-12-09T10:24:29
+================================================================================
+[2025-12-09T10:25:06.385+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.77s           2025-12-09T10:24:56
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.85s           2025-12-09T10:24:51
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.08s           2025-12-09T10:25:00
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.03s           2025-12-09T10:24:46
+================================================================================
+[2025-12-09T10:25:36.514+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  6.57s           2025-12-09T10:25:33
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.33s           2025-12-09T10:25:32
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.31s           2025-12-09T10:25:22
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.21s           2025-12-09T10:25:17
+================================================================================
+[2025-12-09T10:26:07.105+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           19451  3.10s             1           0  6.57s           2025-12-09T10:25:33
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.55s           2025-12-09T10:25:54
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.52s           2025-12-09T10:25:50
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.32s           2025-12-09T10:26:04
+================================================================================
+[2025-12-09T10:26:37.595+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.68s           2025-12-09T10:26:09
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.88s           2025-12-09T10:26:27
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.25s           2025-12-09T10:26:21
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.02s           2025-12-09T10:26:35
+================================================================================
+[2025-12-09T10:27:02.912+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-09T10:27:03.895+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-09T10:27:07.963+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  8.23s           2025-12-09T10:26:48
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  2.83s           2025-12-09T10:26:55
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.27s           2025-12-09T10:26:58
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.96s           2025-12-09T10:27:06
+================================================================================
+[2025-12-09T10:27:38.414+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  7.37s           2025-12-09T10:27:26
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.18s           2025-12-09T10:27:27
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.09s           2025-12-09T10:27:30
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.92s           2025-12-09T10:27:38
+================================================================================
+[2025-12-09T10:28:08.560+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.81s           2025-12-09T10:28:01
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.48s           2025-12-09T10:27:59
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.27s           2025-12-09T10:28:02
+/opt/airflow/dags/feature_materialization_dag.py  19575  0.01s             1           0  0.92s           2025-12-09T10:27:38
+================================================================================
+[2025-12-09T10:28:38.999+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           19587  7.22s             1           0  4.81s           2025-12-09T10:28:01
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.02s           2025-12-09T10:28:34
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.96s           2025-12-09T10:28:09
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.93s           2025-12-09T10:28:30
+================================================================================
+[2025-12-09T10:29:09.416+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  8.35s           2025-12-09T10:28:40
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.26s           2025-12-09T10:28:40
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.21s           2025-12-09T10:29:06
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.20s           2025-12-09T10:29:02
+================================================================================
+[2025-12-09T10:29:39.751+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  5.11s           2025-12-09T10:29:15
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.29s           2025-12-09T10:29:12
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.08s           2025-12-09T10:29:37
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.88s           2025-12-09T10:29:33
+================================================================================
+[2025-12-09T10:30:10.307+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.19s           2025-12-09T10:29:49
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.50s           2025-12-09T10:30:09
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.30s           2025-12-09T10:30:05
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.83s           2025-12-09T10:29:43
+================================================================================
+[2025-12-09T10:30:40.547+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  3.90s           2025-12-09T10:30:24
+/opt/airflow/dags/satellite_ingestion_dag.py      19715  0.79s             1           0  1.50s           2025-12-09T10:30:09
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  0.98s           2025-12-09T10:30:36
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  0.76s           2025-12-09T10:30:14
+================================================================================
+[2025-12-09T10:31:10.874+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.17s           2025-12-09T10:30:58
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  2.27s           2025-12-09T10:30:42
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.54s           2025-12-09T10:30:46
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.23s           2025-12-09T10:31:08
+================================================================================
+[2025-12-09T10:31:41.744+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                         PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  4.57s           2025-12-09T10:31:33
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  1.83s           2025-12-09T10:31:19
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  1.78s           2025-12-09T10:31:39
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.09s           2025-12-09T10:31:13
+================================================================================
+[2025-12-09T10:32:03.243+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2025-12-09T10:32:03.985+0000] {manager.py:740} INFO - There are 4 files in /opt/airflow/dags
+[2025-12-09T10:32:12.490+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py                                    1           0  7.41s           2025-12-09T10:32:11
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  2.85s           2025-12-09T10:31:52
+/opt/airflow/dags/weather_ingestion_dag.py        19803  2.32s             1           0  1.78s           2025-12-09T10:31:39
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  1.61s           2025-12-09T10:31:45
+================================================================================
+[2025-12-09T10:32:42.561+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                           PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/model_training_dag.py           19823  1.03s             1           0  7.41s           2025-12-09T10:32:11
+/opt/airflow/dags/satellite_ingestion_dag.py                               1           0  6.96s           2025-12-09T10:32:22
+/opt/airflow/dags/weather_ingestion_dag.py                                 1           0  4.83s           2025-12-09T10:32:14
+/opt/airflow/dags/feature_materialization_dag.py                           1           0  2.43s           2025-12-09T10:32:25
+================================================================================
