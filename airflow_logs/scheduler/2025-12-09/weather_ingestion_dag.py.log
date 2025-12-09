@@ -5742,3 +5742,17 @@
 [2025-12-09T10:34:23.370+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:34:23.370+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2025-12-09T10:34:23.423+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:34:23.423+0000] {dag.py:3954} INFO - Setting next_dagrun for weather_ingestion_planting_and_crop_stages to 2025-12-09 02:00:00+00:00, run_after=2025-12-10 02:00:00+00:00
 [2025-12-09T10:34:23.471+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_ingestion_dag.py took 1.902 seconds
+[2025-12-09T10:34:53.593+0000] {processor.py:161} INFO - Started process (PID=19951) to work on /opt/airflow/dags/weather_ingestion_dag.py
+[2025-12-09T10:34:53.596+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_ingestion_dag.py for tasks to queue
+[2025-12-09T10:34:53.598+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:34:53.597+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_ingestion_dag.py
+[2025-12-09T10:34:55.340+0000] {processor.py:840} INFO - DAG(s) 'weather_ingestion_planting_and_crop_stages' retrieved from /opt/airflow/dags/weather_ingestion_dag.py
+[2025-12-09T10:34:55.411+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:34:55.410+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-09T10:34:55.465+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:34:55.465+0000] {dag.py:3954} INFO - Setting next_dagrun for weather_ingestion_planting_and_crop_stages to 2025-12-09 02:00:00+00:00, run_after=2025-12-10 02:00:00+00:00
+[2025-12-09T10:34:55.516+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_ingestion_dag.py took 1.935 seconds
+[2025-12-09T10:35:25.771+0000] {processor.py:161} INFO - Started process (PID=19983) to work on /opt/airflow/dags/weather_ingestion_dag.py
+[2025-12-09T10:35:25.774+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_ingestion_dag.py for tasks to queue
+[2025-12-09T10:35:25.776+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:35:25.775+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_ingestion_dag.py
+[2025-12-09T10:35:26.822+0000] {processor.py:840} INFO - DAG(s) 'weather_ingestion_planting_and_crop_stages' retrieved from /opt/airflow/dags/weather_ingestion_dag.py
+[2025-12-09T10:35:26.873+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:35:26.872+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-09T10:35:26.920+0000] {logging_mixin.py:188} INFO - [2025-12-09T10:35:26.919+0000] {dag.py:3954} INFO - Setting next_dagrun for weather_ingestion_planting_and_crop_stages to 2025-12-09 02:00:00+00:00, run_after=2025-12-10 02:00:00+00:00
+[2025-12-09T10:35:26.953+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_ingestion_dag.py took 1.196 seconds
