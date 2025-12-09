@@ -46,6 +46,7 @@ services:
       - ./airflow_logs:/opt/airflow/logs  # Host logs for visibility
       - ./airflow/dags:/opt/airflow/dags  # Correct DAGs path
       - ./airflow/plugins:/opt/airflow/plugins  # Correct plugins path
+      - ./data:/opt/airflow/dags/repo/data  # Mount local data for raw labels fallback
       - ./src:/opt/airflow/dags/repo/src  # Ensure project code is available
       - ./config:/opt/airflow/dags/repo/config  # Ensure configs are available
     command: >
@@ -79,6 +80,7 @@ services:
       - ./airflow_logs:/opt/airflow/logs
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/dags/repo/data
       - ./src:/opt/airflow/dags/repo/src
       - ./config:/opt/airflow/dags/repo/config
     command: airflow webserver
@@ -107,6 +109,7 @@ services:
       - ./airflow_logs:/opt/airflow/logs
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/dags/repo/data
       - ./src:/opt/airflow/dags/repo/src
       - ./config:/opt/airflow/dags/repo/config
     command: airflow scheduler

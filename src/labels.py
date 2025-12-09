@@ -26,6 +26,12 @@ def normalize_raw_labels(df: pd.DataFrame) -> pd.DataFrame:
     if "crop_type" not in df.columns and "boxes_crop" in df.columns:
         df = df.rename(columns={"boxes_crop": "crop_type"})
 
+    # Coordinates
+    if "Latitude" in df.columns and "latitude" not in df.columns:
+        df = df.rename(columns={"Latitude": "latitude"})
+    if "Longitude" in df.columns and "longitude" not in df.columns:
+        df = df.rename(columns={"Longitude": "longitude"})
+
     # Numeric measurements
     for c in [
         "wet_kgs_crop_box1",
@@ -33,6 +39,11 @@ def normalize_raw_labels(df: pd.DataFrame) -> pd.DataFrame:
         "dry_box1_dry_weight",
         "dry_box2_dry_weight",
     ]:
+        if c in df.columns:
+            df[c] = pd.to_numeric(df[c], errors="coerce")
+
+    # Ensure coordinates numeric if present
+    for c in ["latitude", "longitude"]:
         if c in df.columns:
             df[c] = pd.to_numeric(df[c], errors="coerce")
 
@@ -75,9 +86,10 @@ def compute_labels_from_raw(df: pd.DataFrame, box_area_m2: float = 40.0, boxes_c
         "plot_id",
         "Planting_Date",
         "crop_type",
+        "latitude",
+        "longitude",
         "wet_harvest_kg/ha",
         "dry_harvest_kg/ha",
     ]
     existing = [c for c in keep if c in df.columns]
     return df[existing].copy()
-

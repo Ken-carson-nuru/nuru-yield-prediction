@@ -1,0 +1,18 @@
+[2025-12-09T02:00:16.600+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-09T02:00:16.638+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_ingestion_planting_and_crop_stages.infer_planting_dates scheduled__2025-12-08T02:00:00+00:00 [queued]>
+[2025-12-09T02:00:16.658+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_ingestion_planting_and_crop_stages.infer_planting_dates scheduled__2025-12-08T02:00:00+00:00 [queued]>
+[2025-12-09T02:00:16.659+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-12-09T02:00:16.685+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): infer_planting_dates> on 2025-12-08 02:00:00+00:00
+[2025-12-09T02:00:16.695+0000] {standard_task_runner.py:63} INFO - Started process 850 to run task
+[2025-12-09T02:00:16.702+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'weather_ingestion_planting_and_crop_stages', 'infer_planting_dates', 'scheduled__2025-12-08T02:00:00+00:00', '--job-id', '227', '--raw', '--subdir', 'DAGS_FOLDER/weather_ingestion_dag.py', '--cfg-path', '/tmp/tmp26mzorsm']
+[2025-12-09T02:00:16.708+0000] {standard_task_runner.py:91} INFO - Job 227: Subtask infer_planting_dates
+[2025-12-09T02:00:16.815+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_ingestion_planting_and_crop_stages.infer_planting_dates scheduled__2025-12-08T02:00:00+00:00 [running]> on host c48c9ca27509
+[2025-12-09T02:00:17.231+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='kennedy@nuru.solutions' AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_ingestion_planting_and_crop_stages' AIRFLOW_CTX_TASK_ID='infer_planting_dates' AIRFLOW_CTX_EXECUTION_DATE='2025-12-08T02:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-12-08T02:00:00+00:00'
+[2025-12-09T02:00:17.234+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-09T02:00:18.360+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/utils/context.py:320 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-12-09T02:00:18.576+0000] {python.py:237} INFO - Done. Returned value was: s3://wardbuckets/nuru-yield/processed/weather/2025-12-08/planting_dates.parquet
+[2025-12-09T02:00:18.586+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-09T02:00:18.732+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_ingestion_planting_and_crop_stages, task_id=infer_planting_dates, run_id=scheduled__2025-12-08T02:00:00+00:00, execution_date=20251208T020000, start_date=20251209T020016, end_date=20251209T020018
+[2025-12-09T02:00:18.808+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-12-09T02:00:18.931+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-09T02:00:18.936+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

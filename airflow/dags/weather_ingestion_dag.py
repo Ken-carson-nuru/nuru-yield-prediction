@@ -5,6 +5,7 @@ from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
 from datetime import datetime, timedelta
 import pandas as pd
+import os
 import json
 import sys
 from loguru import logger
@@ -40,43 +41,151 @@ default_args = {
 # -------------------------------------------------------------------------
 def load_input_plots(**context):
     """
-    Load initial plot list.
-    TODO: Replace this with a DB or API call.
+    Load initial plot list from CSV at data/processed/selected_farm_data.csv.
+    Expected columns (case-insensitive, flexible):
+      - plot_id (or plot_no / Plot_No)
+      - latitude (or Latitude)
+      - longitude (or Longitude)
+      - altitude (optional)
+      - season (optional; derived from planting_date if missing)
+      - year (optional; derived from planting_date if missing)
+      - planting_date (optional; can be Planting_Date or boxes_planting_date)
     """
 
+    # Resolve CSV path inside the Airflow container
+    repo_root = "/opt/airflow/dags/repo"
+    csv_path = os.path.join(repo_root, "data", "processed", "selected_farm_data.csv")
+
+    if not os.path.exists(csv_path):
+        raise FileNotFoundError(
+            f"Plot input CSV not found at '{csv_path}'. Please place your file at data/processed/selected_farm_data.csv on the host."
+        )
+
+    df = pd.read_csv(csv_path)
+
+    # Normalize column names
+    cols = {c.lower(): c for c in df.columns}
+    def has(name):
+        return name in cols
+
+    # Map identifiers
+    if not has("plot_id"):
+        for alt in ["plot_no", "plotid", "plot", "plot_no_id", "Plot_No"]:
+            if alt.lower() in cols:
+                df = df.rename(columns={cols[alt.lower()]: "plot_id"})
+                break
+    if "plot_id" not in df.columns:
+        raise ValueError("selected_farm_data.csv must include a 'plot_id' (or 'plot_no') column")
+
+    # Coordinates
+    if not has("latitude") and "Latitude" in df.columns:
+        df = df.rename(columns={"Latitude": "latitude"})
+    if not has("longitude") and "Longitude" in df.columns:
+        df = df.rename(columns={"Longitude": "longitude"})
+    if not {"latitude", "longitude"}.issubset(df.columns):
+        raise ValueError("selected_farm_data.csv must include latitude/longitude columns")
+
+    # Planting date for deriving season/year if missing
+    planting_col = None
+    for cand in ["Planting_Date", "planting_date", "boxes_planting_date"]:
+        if cand in df.columns:
+            planting_col = cand
+            break
+    if planting_col:
+        df[planting_col] = pd.to_datetime(df[planting_col], errors="coerce")
+
+    if "season" in df.columns:
+        def _norm_season(s):
+            if pd.isna(s):
+                return None
+            sv = str(s).strip().lower()
+            if sv in ["short rains", "short", "sr", "short_rains", "short-rains"]:
+                return "Short Rains"
+            if sv in ["long rains", "long", "lr", "long_rains", "long-rains"]:
+                return "Long Rains"
+            return None
+        df["season"] = df["season"].apply(_norm_season)
+
+    def derive_season(dt):
+        if pd.isna(dt):
+            return "Short Rains"
+        m = dt.month
+        if m in [9, 10, 11, 12]:
+            return "Short Rains"
+        if m in [2, 3, 4, 5]:
+            return "Long Rains"
+        return "Short Rains"
+
+    if "season" in df.columns:
+        if planting_col:
+            df["season"] = df["season"].fillna(df[planting_col].apply(derive_season))
+        else:
+            df["season"] = df["season"].fillna("Short Rains")
+    else:
+        df["season"] = df[planting_col].apply(derive_season) if planting_col else "Short Rains"
+
+    # Derive year if missing from planting date
+    if "year" not in df.columns:
+        if planting_col:
+            df["year"] = df[planting_col].dt.year.bfill().ffill().fillna(2021).astype(int)
+        else:
+            df["year"] = 2021
+
+    # Coerce types
+    df["plot_id"] = pd.to_numeric(df["plot_id"], errors="coerce").astype("Int64")
+    df["latitude"] = pd.to_numeric(df["latitude"], errors="coerce")
+    df["longitude"] = pd.to_numeric(df["longitude"], errors="coerce")
+    # altitude optional (PlotInput defaults to 1200.0 if None)
+    if "altitude" in df.columns:
+        df["altitude"] = pd.to_numeric(df["altitude"], errors="coerce")
+
+    # Drop rows with missing required fields
+    required = ["plot_id", "latitude", "longitude", "season", "year"]
+    clean = df.dropna(subset=required).copy()
+
+    # Deduplicate per plot_id
+    clean = clean.sort_values(["plot_id"]).drop_duplicates(subset=["plot_id"], keep="first")
+
+    # Build PlotInput list
     plots_data = [
-        {"plot_id": 1, "longitude": 37.612253, "latitude": -0.499127, "altitude": 1252.08, "season": "Short Rains", "year": 2021},
-        {"plot_id": 2, "longitude": 37.640289, "latitude": -0.475451, "altitude": 1234.50, "season": "Short Rains", "year": 2021},
-        {"plot_id": 3, "longitude": 37.608650, "latitude": -0.535121, "altitude": 1226.40, "season": "Short Rains", "year": 2021},
+        {
+            "plot_id": int(row["plot_id"]),
+            "longitude": float(row["longitude"]),
+            "latitude": float(row["latitude"]),
+            "altitude": float(row["altitude"]) if not pd.isna(row.get("altitude", None)) else None,
+            "season": str(row["season"]),
+            "year": int(row["year"]),
+        }
+        for _, row in clean.iterrows()
     ]
 
     plots = [PlotInput(**p) for p in plots_data]
 
     # Push to XCom
     context["task_instance"].xcom_push(
-        key="input_plots", 
+        key="input_plots",
         value=[p.model_dump() for p in plots]
     )
 
-    logger.info(f"[LOAD INPUT] Loaded {len(plots)} plots")
+    logger.info(f"[LOAD INPUT] Loaded {len(plots)} plots from {csv_path}")
 
     # Save metadata to storage
     storage = DataStorage()
     execution_date = context["execution_date"]
     date_str = execution_date.strftime("%Y%m%d")
 
-    df = pd.DataFrame(plots_data)
+    out_df = pd.DataFrame([p.model_dump() for p in plots])
     buf = pd.io.common.BytesIO()
-    df.to_parquet(buf, index=False)
+    out_df.to_parquet(buf, index=False)
     buf.seek(0)
 
     storage.s3_client.put_object(
         Bucket=storage.settings.S3_BUCKET_NAME,
-        Key = f"{storage.settings.S3_BASE_PREFIX}/metadata/plots/plots_{date_str}.parquet",
+        Key=f"{storage.settings.S3_BASE_PREFIX}/metadata/plots/plots_{date_str}.parquet",
         Body=buf.getvalue()
     )
 
-    return df
+    return out_df
 
 
 # -------------------------------------------------------------------------

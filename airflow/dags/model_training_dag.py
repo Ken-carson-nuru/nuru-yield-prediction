@@ -22,6 +22,7 @@ import mlflow.catboost
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.preprocessing import LabelEncoder
+from sklearn.neighbors import NearestNeighbors
 
 from catboost import CatBoostRegressor
 import xgboost as xgb
@@ -159,6 +160,64 @@ def _eval_and_log(run_name: str, model, X_test, y_test, params: dict):
         return {"RMSE": rmse, "MAE": mae, "R2": r2}
 
 
+def _assign_plot_id_from_coordinates(labels_df: pd.DataFrame, features_df: pd.DataFrame, tolerance_deg: float = 0.01) -> pd.DataFrame:
+    """Assign plot_id in labels_df using nearest latitude/longitude from features_df when missing.
+
+    tolerance_deg is the maximum allowed Euclidean distance in degrees to accept a match.
+    Roughly, 0.01° ~ 1.1 km at the equator; adjust as needed.
+    """
+    df = labels_df.copy()
+
+    # Normalize coordinate column names in labels
+    if "Latitude" in df.columns and "latitude" not in df.columns:
+        df = df.rename(columns={"Latitude": "latitude"})
+    if "Longitude" in df.columns and "longitude" not in df.columns:
+        df = df.rename(columns={"Longitude": "longitude"})
+
+    # If plot_id already present and non-null for all rows, nothing to do
+    if "plot_id" in df.columns and df["plot_id"].notna().all():
+        return df
+
+    # Require coordinates in both frames
+    if not {"latitude", "longitude"}.issubset(df.columns):
+        return df
+    if not {"latitude", "longitude", "plot_id"}.issubset(features_df.columns):
+        return df
+
+    # Prepare coordinate arrays (dropna and ensure numeric)
+    try:
+        df["latitude"] = pd.to_numeric(df["latitude"], errors="coerce")
+        df["longitude"] = pd.to_numeric(df["longitude"], errors="coerce")
+    except Exception:
+        return df
+
+    features_coords = features_df[["plot_id", "latitude", "longitude"]].dropna().drop_duplicates(subset=["plot_id"]).copy()
+    if features_coords.empty:
+        return df
+
+    labels_missing_mask = ~(df.get("plot_id").notna() if "plot_id" in df.columns else pd.Series([False]*len(df), index=df.index))
+    labels_missing = df.loc[labels_missing_mask & df[["latitude", "longitude"]].notna().all(axis=1)]
+    if labels_missing.empty:
+        return df
+
+    # Fit nearest neighbors on features coordinates
+    nbrs = NearestNeighbors(n_neighbors=1, algorithm="auto")
+    nbrs.fit(features_coords[["latitude", "longitude"]])
+    distances, indices = nbrs.kneighbors(labels_missing[["latitude", "longitude"]])
+
+    # Assign matches within tolerance
+    matched_plot_ids = []
+    for i, (dist, idx) in enumerate(zip(distances[:, 0], indices[:, 0])):
+        if np.isfinite(dist) and dist <= tolerance_deg:
+            pid = features_coords.iloc[idx]["plot_id"]
+            matched_plot_ids.append(pid)
+        else:
+            matched_plot_ids.append(np.nan)
+
+    df.loc[labels_missing.index, "plot_id"] = matched_plot_ids
+    return df
+
+
 with DAG(
     dag_id="model_training_dag_weekly",
     default_args=default_args,
@@ -182,7 +241,7 @@ with DAG(
         key = f"{settings.S3_BASE_PREFIX}/features/{ds}/plot_features.parquet"
         return f"s3://{BUCKET}/{key}"
 
-    @task(multiple_outputs=True)
+    @task(multiple_outputs=False)
     def combine_features_and_labels(labels_path: str, plot_features_path: str) -> dict:
         """Read labels (Parquet preferred), read plot_features from S3, and merge to form final dataset.
         Ensures weather + indices (from plot_features) are combined with yield labels.
@@ -242,7 +301,8 @@ with DAG(
         if "plot_no" in labels_df.columns:
             labels_df = labels_df.rename(columns={"plot_no": "plot_id"})
         if "Planting_Date" in labels_df.columns:
-            labels_df["Planting_Date"] = pd.to_datetime(labels_df["Planting_Date"], errors="coerce")
+            # Parse as UTC and strip timezone to avoid tz-aware vs naive mismatches
+            labels_df["Planting_Date"] = pd.to_datetime(labels_df["Planting_Date"], errors="coerce", utc=True).dt.tz_convert(None)
 
         # Load plot features from S3
         # Load plot features from S3 (provided path first)
@@ -266,9 +326,10 @@ with DAG(
             raise FileNotFoundError("Plot features parquet not found in S3. Ensure feature materialization ran.")
         # Normalize features timestamp
         if "planting_date" in features_df.columns:
-            features_df["planting_date"] = pd.to_datetime(features_df["planting_date"], errors="coerce")
+            # Parse as UTC and strip timezone to avoid tz-aware vs naive mismatches
+            features_df["planting_date"] = pd.to_datetime(features_df["planting_date"], errors="coerce", utc=True).dt.tz_convert(None)
 
-        # Merge on plot_id and planting_date (fallback to plot_id only if needed)
+        # Merge on plot_id and planting_date (fallbacks: plot_id only, then lat/long)
         # Normalize keys for robust join
         # Map lower-case columns if present
         if "plot_no" in labels_df.columns and "plot_id" not in labels_df.columns:
@@ -277,13 +338,123 @@ with DAG(
             # unify to Title case used in training preprocessing
             labels_df = labels_df.rename(columns={"planting_date": "Planting_Date"})
 
-        # Merge on plot_id and planting_date when available
-        left_keys = [c for c in ["plot_id", "Planting_Date"] if c in labels_df.columns]
-        right_keys = [c for c in ["plot_id", "planting_date"] if c in features_df.columns]
-        merged = labels_df.merge(features_df, left_on=left_keys, right_on=right_keys, how="left")
-        if merged.isna().all(axis=1).sum() > 0:
-            # Fallback: join by plot_id only
-            merged = labels_df.merge(features_df, on="plot_id", how="left")
+        # Try to infer plot_id from coordinates when missing
+        try:
+            labels_df = _assign_plot_id_from_coordinates(labels_df, features_df, tolerance_deg=0.01)
+        except Exception as e:
+            logger.warning(f"Failed coordinate-based plot_id inference: {e}")
+
+        # Standardize plot_id dtype across frames to improve merge reliability
+        if "plot_id" in labels_df.columns:
+            try:
+                labels_df["plot_id"] = pd.to_numeric(labels_df["plot_id"], errors="coerce")
+                # Cast float integers to pandas Int64 where appropriate
+                def _to_int64_if_integer(x):
+                    try:
+                        return int(x) if pd.notna(x) and float(x).is_integer() else pd.NA
+                    except Exception:
+                        return pd.NA
+                if pd.api.types.is_float_dtype(labels_df["plot_id"]):
+                    labels_df["plot_id"] = labels_df["plot_id"].apply(_to_int64_if_integer).astype("Int64")
+            except Exception as e:
+                logger.warning(f"Failed to normalize plot_id dtype in labels: {e}")
+        if "plot_id" in features_df.columns:
+            try:
+                features_df["plot_id"] = pd.to_numeric(features_df["plot_id"], errors="coerce")
+                if pd.api.types.is_float_dtype(features_df["plot_id"]):
+                    features_df["plot_id"] = features_df["plot_id"].apply(
+                        lambda x: int(x) if pd.notna(x) and float(x).is_integer() else pd.NA
+                    ).astype("Int64")
+            except Exception as e:
+                logger.warning(f"Failed to normalize plot_id dtype in features: {e}")
+
+        # Build aligned merge keys only when both sides have the corresponding columns
+        left_keys = []
+        right_keys = []
+        if "plot_id" in labels_df.columns and "plot_id" in features_df.columns:
+            left_keys.append("plot_id")
+            right_keys.append("plot_id")
+        if "Planting_Date" in labels_df.columns and "planting_date" in features_df.columns:
+            left_keys.append("Planting_Date")
+            right_keys.append("planting_date")
+
+        # Perform primary merge safely
+        if left_keys:
+            logger.info(f"Merging using keys left={left_keys} right={right_keys}")
+            merged = labels_df.merge(features_df, left_on=left_keys, right_on=right_keys, how="left")
+        else:
+            # If no aligned keys, attempt plot_id-only if present, else leave for coordinate fallback
+            if "plot_id" in labels_df.columns and "plot_id" in features_df.columns:
+                logger.info("Merging using plot_id only")
+                merged = labels_df.merge(features_df, on="plot_id", how="left")
+            else:
+                merged = labels_df.copy()
+
+        # Detect rows where feature columns are entirely missing (labels are present, features are NaN)
+        feature_indicator_cols = [
+            c for c in [
+                "precip_total", "gdd_sum", "gdd_peak",
+                "mean_ndvi", "mean_evi", "mean_ndre", "mean_savi", "mean_ndwi", "mean_ndmi",
+                "days_to_vt"
+            ] if c in merged.columns
+        ]
+        if not feature_indicator_cols:
+            logger.warning("No feature indicator columns found in merged frame; proceeding without fallback detection.")
+        else:
+            missing_features_mask = merged[feature_indicator_cols].isna().all(axis=1)
+            missing_count = int(missing_features_mask.sum())
+            total_count = int(len(merged))
+            logger.info(
+                f"Primary merge results: features missing for {missing_count}/{total_count} rows (by {feature_indicator_cols})."
+            )
+
+            if missing_count > 0:
+                # Fallback: join by plot_id only (ignore planting date mismatches)
+                merged_by_id = labels_df.merge(features_df, on="plot_id", how="left")
+
+                if feature_indicator_cols:
+                    missing_by_id = merged_by_id[feature_indicator_cols].isna().all(axis=1).sum()
+                    logger.info(
+                        f"plot_id-only merge: features missing for {int(missing_by_id)}/{total_count} rows."
+                    )
+
+                # If still many unmatched, attempt coordinate-based merge (rounded coords +- planting date)
+                needs_coord_fallback = (
+                    feature_indicator_cols and merged_by_id[feature_indicator_cols].isna().all(axis=1).any()
+                )
+                if needs_coord_fallback:
+                    lbl = labels_df.copy()
+                    feats = features_df.copy()
+                    # Normalize coordinate column names in labels
+                    if "Latitude" in lbl.columns and "latitude" not in lbl.columns:
+                        lbl = lbl.rename(columns={"Latitude": "latitude"})
+                    if "Longitude" in lbl.columns and "longitude" not in lbl.columns:
+                        lbl = lbl.rename(columns={"Longitude": "longitude"})
+                    if {"latitude", "longitude"}.issubset(lbl.columns) and {"latitude", "longitude"}.issubset(feats.columns):
+                        # Round to 4 decimals to allow approximate match
+                        for df_ in (lbl, feats):
+                            df_["lat_round"] = pd.to_numeric(df_.get("latitude"), errors="coerce").round(4)
+                            df_["lon_round"] = pd.to_numeric(df_.get("longitude"), errors="coerce").round(4)
+                        # Prefer matching with planting date if available
+                        left_on = [c for c in ["lat_round", "lon_round", "Planting_Date"] if c in lbl.columns]
+                        right_on = [c for c in ["lat_round", "lon_round", "planting_date"] if c in feats.columns]
+                        logger.info(f"Coordinate merge using keys left={left_on} right={right_on}")
+                        if left_on and right_on:
+                            merged_coords = lbl.merge(feats, left_on=left_on, right_on=right_on, how="left")
+                        else:
+                            merged_coords = lbl.merge(feats, on=["lat_round", "lon_round"], how="left")
+
+                        if feature_indicator_cols:
+                            missing_after_coords = merged_coords[feature_indicator_cols].isna().all(axis=1).sum()
+                            logger.info(
+                                f"Coordinate-based merge: features missing for {int(missing_after_coords)}/{total_count} rows."
+                            )
+                        merged = merged_coords
+                    else:
+                        logger.warning("Coordinate fallback unavailable due to missing latitude/longitude on one side.")
+                        merged = merged_by_id
+                else:
+                    merged = merged_by_id
 
         # Return as JSON-safe records for XCom
         merged_records = merged.to_dict(orient="records")
