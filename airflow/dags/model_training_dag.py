@@ -456,8 +456,13 @@ with DAG(
                 else:
                     merged = merged_by_id
 
-        # Return as JSON-safe records for XCom
-        merged_records = merged.to_dict(orient="records")
+        def _json_safe_records(df: pd.DataFrame) -> list:
+            recs = df.to_dict(orient="records")
+            return [
+                {k: (v.strftime("%Y-%m-%d") if isinstance(v, pd.Timestamp) else (None if pd.isna(v) else v)) for k, v in r.items()}
+                for r in recs
+            ]
+        merged_records = _json_safe_records(merged)
         logger.info(f"Combined dataset rows: {len(merged_records)}")
         return merged_records
 
