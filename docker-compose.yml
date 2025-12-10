@@ -164,7 +164,9 @@ services:
         --default-artifact-root s3://${S3_BUCKET_NAME}/mlflow-artifacts
         --host 0.0.0.0
         --port 5000
-
+        --allowed-hosts="*"
+        --cors-allowed-origins="*"
+        --disable-security-middleware
 
 
 volumes:
