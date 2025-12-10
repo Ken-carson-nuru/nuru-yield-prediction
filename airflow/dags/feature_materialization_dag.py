@@ -142,24 +142,94 @@ with DAG(
 
     @task(multiple_outputs=False)
     def load_planting_dates_path() -> str:
-        """Return S3 path for processed (inferred) planting dates."""
+        storage = DataStorage()
         ds = _get_ds_from_airflow_env()
         key = f"{settings.S3_PROCESSED_WEATHER_PREFIX}/{ds}/planting_dates.parquet"
-        return f"s3://{BUCKET}/{key}"
+        try:
+            storage.s3_client.head_object(Bucket=BUCKET, Key=key)
+            return f"s3://{BUCKET}/{key}"
+        except Exception:
+            try:
+                resp = storage.s3_client.list_objects_v2(Bucket=BUCKET, Prefix=f"{settings.S3_PROCESSED_WEATHER_PREFIX}/")
+                contents = resp.get("Contents", [])
+                keys = [o["Key"] for o in contents if o["Key"].endswith("/planting_dates.parquet")]
+                dated = []
+                for k in keys:
+                    parts = k.split("/")
+                    if len(parts) >= 2:
+                        ds2 = parts[-2]
+                        try:
+                            dt = pd.to_datetime(ds2)
+                            dated.append((k, dt))
+                        except Exception:
+                            pass
+                if dated:
+                    dated.sort(key=lambda x: x[1], reverse=True)
+                    latest_key = dated[0][0]
+                    return f"s3://{BUCKET}/{latest_key}"
+            except Exception:
+                pass
+            raise AirflowSkipException("No planting dates available")
 
     @task(multiple_outputs=False)
     def load_crop_stages_path() -> str:
-        """Return S3 path for crop stages parquet."""
+        storage = DataStorage()
         ds = _get_ds_from_airflow_env()
         key = f"crop_stages/crop_stages_{ds}.parquet"
-        return f"s3://{BUCKET}/{key}"
+        try:
+            storage.s3_client.head_object(Bucket=BUCKET, Key=key)
+            return f"s3://{BUCKET}/{key}"
+        except Exception:
+            try:
+                resp = storage.s3_client.list_objects_v2(Bucket=BUCKET, Prefix="crop_stages/")
+                contents = resp.get("Contents", [])
+                keys = [o["Key"] for o in contents if o["Key"].endswith(".parquet") and "crop_stages_" in o["Key"]]
+                dated = []
+                for k in keys:
+                    try:
+                        ds2 = k.split("crop_stages_")[-1].replace(".parquet", "")
+                        dt = pd.to_datetime(ds2)
+                        dated.append((k, dt))
+                    except Exception:
+                        pass
+                if dated:
+                    dated.sort(key=lambda x: x[1], reverse=True)
+                    latest_key = dated[0][0]
+                    return f"s3://{BUCKET}/{latest_key}"
+            except Exception:
+                pass
+            raise AirflowSkipException("No crop stages available")
 
     @task(multiple_outputs=False)
     def load_satellite_indices_path() -> str:
-        """Return S3 path for satellite indices parquet."""
+        storage = DataStorage()
         ds = _get_ds_from_airflow_env()
         key = f"{settings.S3_BASE_PREFIX}/processed/satellite/{ds}/all_indices.parquet"
-        return f"s3://{BUCKET}/{key}"
+        try:
+            storage.s3_client.head_object(Bucket=BUCKET, Key=key)
+            return f"s3://{BUCKET}/{key}"
+        except Exception:
+            try:
+                resp = storage.s3_client.list_objects_v2(Bucket=BUCKET, Prefix=f"{settings.S3_BASE_PREFIX}/processed/satellite/")
+                contents = resp.get("Contents", [])
+                keys = [o["Key"] for o in contents if o["Key"].endswith("/all_indices.parquet")]
+                dated = []
+                for k in keys:
+                    parts = k.split("/")
+                    if len(parts) >= 2:
+                        ds2 = parts[-2]
+                        try:
+                            dt = pd.to_datetime(ds2)
+                            dated.append((k, dt))
+                        except Exception:
+                            pass
+                if dated:
+                    dated.sort(key=lambda x: x[1], reverse=True)
+                    latest_key = dated[0][0]
+                    return f"s3://{BUCKET}/{latest_key}"
+            except Exception:
+                pass
+            raise AirflowSkipException("No satellite indices available")
 
     @task(multiple_outputs=False)
     def build_daily_features(weather_path: str, planting_path: str, crop_stages_path: str, satellite_path: str) -> str:
