@@ -481,6 +481,8 @@ with DAG(
         # Set MLflow tracking
         tracking_uri = _get_tracking_uri()
         os.environ["MLFLOW_S3_ENDPOINT_URL"] = os.environ.get("MLFLOW_S3_ENDPOINT_URL", os.environ.get("S3_ENDPOINT_URL", "http://minio:9000"))
+        os.environ["AWS_ACCESS_KEY_ID"] = os.environ.get("S3_ACCESS_KEY", os.environ.get("MINIO_ROOT_USER", "minioadmin") or "minioadmin")
+        os.environ["AWS_SECRET_ACCESS_KEY"] = os.environ.get("S3_SECRET_KEY", os.environ.get("MINIO_ROOT_PASSWORD", "minioadmin") or "minioadmin")
         mlflow.set_tracking_uri(tracking_uri)
         mlflow.set_experiment("YieldPrediction_MultiModel")
 
@@ -517,7 +519,7 @@ with DAG(
         xgb_gs.fit(X_train, y_train)
         xgb_best = xgb_gs.best_estimator_
         xgb_metrics = _eval_and_log("XGBoost_GridSearch", xgb_best, X_test, y_test, xgb_gs.best_params_)
-        mlflow.xgboost.log_model(xgb_best, artifact_path="xgb_model")
+        mlflow.xgboost.log_model(xgb_best, name="xgb_model")
         results["XGBoost"] = {**xgb_metrics, "best_params": xgb_gs.best_params_}
 
         # =====================
@@ -542,7 +544,7 @@ with DAG(
         lgb_gs.fit(X_train, y_train)
         lgb_best = lgb_gs.best_estimator_
         lgb_metrics = _eval_and_log("LightGBM_GridSearch", lgb_best, X_test, y_test, lgb_gs.best_params_)
-        mlflow.lightgbm.log_model(lgb_best, artifact_path="lgb_model")
+        mlflow.lightgbm.log_model(lgb_best, name="lgb_model")
         results["LightGBM"] = {**lgb_metrics, "best_params": lgb_gs.best_params_}
 
         # =====================
@@ -569,7 +571,7 @@ with DAG(
         cat_gs.fit(X_train, y_train, **({"cat_features": cat_idx} if cat_idx else {}))
         cat_best = cat_gs.best_estimator_
         cat_metrics = _eval_and_log("CatBoost_GridSearch", cat_best, X_test, y_test, cat_gs.best_params_)
-        mlflow.catboost.log_model(cat_best, artifact_path="cat_model")
+        mlflow.catboost.log_model(cat_best, name="cat_model")
         results["CatBoost"] = {**cat_metrics, "best_params": cat_gs.best_params_}
 
         logger.success("Model training with GridSearchCV completed for XGB, LGBM, CatBoost")
