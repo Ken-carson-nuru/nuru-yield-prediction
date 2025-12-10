@@ -2,6 +2,8 @@ from airflow import DAG
 from airflow.decorators import task
 from airflow.utils.dates import days_ago
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+from airflow.exceptions import AirflowSkipException
+from botocore.exceptions import ClientError
 import pandas as pd
 import os
 
@@ -51,10 +53,37 @@ with DAG(
         key = f"crop_stages/crop_stages_{ds}.parquet"
 
         hook = S3Hook(aws_conn_id="aws_default")
-        obj = hook.get_key(key=key, bucket_name=BUCKET)
-
-        body = obj.get()["Body"].read()
-        df = pd.read_parquet(pd.io.common.BytesIO(body))
+        try:
+            obj = hook.get_key(key=key, bucket_name=BUCKET)
+            body = obj.get()["Body"].read()
+            df = pd.read_parquet(pd.io.common.BytesIO(body))
+        except Exception:
+            storage = DataStorage()
+            try:
+                resp = storage.s3_client.list_objects_v2(Bucket=BUCKET, Prefix="crop_stages/")
+                contents = resp.get("Contents", [])
+                keys = [o["Key"] for o in contents if o["Key"].endswith(".parquet") and "crop_stages_" in o["Key"]]
+                if not keys:
+                    raise AirflowSkipException("No crop_stages parquet found")
+                dated = []
+                for k in keys:
+                    try:
+                        ds_str = k.split("crop_stages_")[-1].replace(".parquet", "")
+                        dt = pd.to_datetime(ds_str)
+                        dated.append((k, dt))
+                    except Exception:
+                        continue
+                if not dated:
+                    raise AirflowSkipException("No dated crop_stages parquet found")
+                dated.sort(key=lambda x: x[1], reverse=True)
+                latest_key = dated[0][0]
+                obj2 = storage.s3_client.get_object(Bucket=BUCKET, Key=latest_key)
+                body2 = obj2["Body"].read()
+                df = pd.read_parquet(pd.io.common.BytesIO(body2))
+            except AirflowSkipException:
+                raise
+            except Exception:
+                raise AirflowSkipException("Failed to load crop_stages from S3")
 
         # Pydantic validation (CropStageOutput)
         validated = [
