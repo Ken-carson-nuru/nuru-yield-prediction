@@ -78,23 +78,67 @@ with DAG(
 
     @task(multiple_outputs=False)
     def load_weather_path() -> str:
-        """Return S3 path for validated weather; fallback to raw if not present."""
         storage = DataStorage()
         ds = _get_ds_from_airflow_env()
 
         validated_key = f"{settings.S3_BASE_PREFIX}/validated/weather/{ds}/weather_data.parquet"
         raw_key = f"{settings.S3_RAW_WEATHER_PREFIX}/{ds}/weather_data.parquet"
 
-        # Try validated first
         try:
             storage.s3_client.head_object(Bucket=BUCKET, Key=validated_key)
-            logger.info(f"Found validated weather: s3://{BUCKET}/{validated_key}")
             return f"s3://{BUCKET}/{validated_key}"
         except Exception:
-            # Fallback to raw
-            storage.s3_client.head_object(Bucket=BUCKET, Key=raw_key)
-            logger.warning("Using raw weather (validated not found)")
-            return f"s3://{BUCKET}/{raw_key}"
+            try:
+                storage.s3_client.head_object(Bucket=BUCKET, Key=raw_key)
+                return f"s3://{BUCKET}/{raw_key}"
+            except Exception:
+                try:
+                    resp = storage.s3_client.list_objects_v2(
+                        Bucket=BUCKET,
+                        Prefix=f"{settings.S3_BASE_PREFIX}/validated/weather/"
+                    )
+                    contents = resp.get("Contents", [])
+                    keys = [o["Key"] for o in contents if o["Key"].endswith("/weather_data.parquet")]
+                    dated = []
+                    for k in keys:
+                        parts = k.split("/")
+                        if len(parts) >= 2:
+                            ds2 = parts[-2]
+                            try:
+                                dt = pd.to_datetime(ds2)
+                                dated.append((k, dt))
+                            except Exception:
+                                pass
+                    if dated:
+                        dated.sort(key=lambda x: x[1], reverse=True)
+                        latest_key = dated[0][0]
+                        return f"s3://{BUCKET}/{latest_key}"
+                except Exception:
+                    pass
+                try:
+                    resp = storage.s3_client.list_objects_v2(
+                        Bucket=BUCKET,
+                        Prefix=f"{settings.S3_RAW_WEATHER_PREFIX}/"
+                    )
+                    contents = resp.get("Contents", [])
+                    keys = [o["Key"] for o in contents if o["Key"].endswith("/weather_data.parquet")]
+                    dated = []
+                    for k in keys:
+                        parts = k.split("/")
+                        if len(parts) >= 2:
+                            ds2 = parts[-2]
+                            try:
+                                dt = pd.to_datetime(ds2)
+                                dated.append((k, dt))
+                            except Exception:
+                                pass
+                    if dated:
+                        dated.sort(key=lambda x: x[1], reverse=True)
+                        latest_key = dated[0][0]
+                        return f"s3://{BUCKET}/{latest_key}"
+                except Exception:
+                    pass
+                raise AirflowSkipException("No weather data available")
 
     @task(multiple_outputs=False)
     def load_planting_dates_path() -> str:
