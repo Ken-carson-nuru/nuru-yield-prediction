@@ -25,6 +25,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.preprocessing import LabelEncoder
 from sklearn.neighbors import NearestNeighbors
+from sklearn.ensemble import RandomForestRegressor, VotingRegressor
 
 from catboost import CatBoostRegressor
 import xgboost as xgb
@@ -475,7 +476,7 @@ with DAG(
 
     @task(multiple_outputs=True)
     def train_models(dataset_records: list) -> dict:
-        """Preprocess, split, run GridSearchCV for XGB, LGBM, CatBoost; log to MLflow.
+        """Preprocess, split, run GridSearchCV for XGB, LGBM, CatBoost, RandomForest; create ensemble; log to MLflow and S3.
         Accepts combined dataset records to ensure features include weather + indices.
         """
         # Set MLflow tracking
@@ -494,12 +495,23 @@ with DAG(
             raise ValueError(f"Target column '{target}' not found in dataset")
 
         X_train, X_test, y_train, y_test = _split_features_labels(df, target)
+        
+        # Store execution date for S3 saving
+        execution_date = datetime.utcnow()
+        ds = _get_ds_from_airflow_env()
+        try:
+            execution_date = pd.to_datetime(ds).to_pydatetime()
+        except Exception:
+            pass
 
         results = {}
+        trained_models = {}  # Store all trained models for ensemble
+        all_predictions = {}  # Store predictions for comparison
 
         # =====================
         # XGBoost GridSearchCV
         # =====================
+        logger.info("Starting XGBoost GridSearchCV...")
         xgb_base = xgb.XGBRegressor(
             random_state=42,
             n_estimators=600,
@@ -515,16 +527,20 @@ with DAG(
             "subsample": [0.8, 1.0],
             "colsample_bytree": [0.8, 1.0],
         }
-        xgb_gs = GridSearchCV(xgb_base, xgb_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error")
+        xgb_gs = GridSearchCV(xgb_base, xgb_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error", verbose=1)
         xgb_gs.fit(X_train, y_train)
         xgb_best = xgb_gs.best_estimator_
         xgb_metrics = _eval_and_log("XGBoost_GridSearch", xgb_best, X_test, y_test, xgb_gs.best_params_)
         mlflow.xgboost.log_model(xgb_best, name="xgb_model")
         results["XGBoost"] = {**xgb_metrics, "best_params": xgb_gs.best_params_}
+        trained_models["xgb"] = xgb_best
+        all_predictions["XGBoost"] = xgb_best.predict(X_test)
+        logger.success(f"XGBoost completed - RMSE: {xgb_metrics['RMSE']:.4f}, R2: {xgb_metrics['R2']:.4f}")
 
         # =====================
         # LightGBM GridSearchCV
         # =====================
+        logger.info("Starting LightGBM GridSearchCV...")
         lgb_base = lgb.LGBMRegressor(
             random_state=42,
             n_estimators=600,
@@ -540,17 +556,20 @@ with DAG(
             "subsample": [0.8, 1.0],
             "colsample_bytree": [0.8, 1.0],
         }
-        lgb_gs = GridSearchCV(lgb_base, lgb_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error")
+        lgb_gs = GridSearchCV(lgb_base, lgb_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error", verbose=1)
         lgb_gs.fit(X_train, y_train)
         lgb_best = lgb_gs.best_estimator_
         lgb_metrics = _eval_and_log("LightGBM_GridSearch", lgb_best, X_test, y_test, lgb_gs.best_params_)
         mlflow.lightgbm.log_model(lgb_best, name="lgb_model")
         results["LightGBM"] = {**lgb_metrics, "best_params": lgb_gs.best_params_}
+        trained_models["lgb"] = lgb_best
+        all_predictions["LightGBM"] = lgb_best.predict(X_test)
+        logger.success(f"LightGBM completed - RMSE: {lgb_metrics['RMSE']:.4f}, R2: {lgb_metrics['R2']:.4f}")
 
         # =====================
         # CatBoost GridSearchCV
         # =====================
-        # Use scikit wrapper and pass categorical feature indices via fit_params
+        logger.info("Starting CatBoost GridSearchCV...")
         cat_base = CatBoostRegressor(
             random_seed=42,
             verbose=False,
@@ -562,7 +581,7 @@ with DAG(
             "learning_rate": [0.03, 0.05],
             "iterations": [1000, 2000],
         }
-        cat_gs = GridSearchCV(cat_base, cat_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error")
+        cat_gs = GridSearchCV(cat_base, cat_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error", verbose=1)
 
         # Determine categorical indices (prefer encoded column if present)
         cat_cols = [c for c in ["crop_type_enc"] if c in X_train.columns]
@@ -573,9 +592,122 @@ with DAG(
         cat_metrics = _eval_and_log("CatBoost_GridSearch", cat_best, X_test, y_test, cat_gs.best_params_)
         mlflow.catboost.log_model(cat_best, name="cat_model")
         results["CatBoost"] = {**cat_metrics, "best_params": cat_gs.best_params_}
+        trained_models["cat"] = cat_best
+        all_predictions["CatBoost"] = cat_best.predict(X_test)
+        logger.success(f"CatBoost completed - RMSE: {cat_metrics['RMSE']:.4f}, R2: {cat_metrics['R2']:.4f}")
 
-        logger.success("Model training with GridSearchCV completed for XGB, LGBM, CatBoost")
-        return results
+        # =====================
+        # Random Forest GridSearchCV
+        # =====================
+        logger.info("Starting Random Forest GridSearchCV...")
+        rf_base = RandomForestRegressor(
+            random_state=42,
+            n_estimators=100,
+            max_depth=10,
+            min_samples_split=5,
+            min_samples_leaf=2,
+        )
+        rf_grid = {
+            "n_estimators": [100, 200, 300],
+            "max_depth": [8, 10, 12, None],
+            "min_samples_split": [2, 5, 10],
+            "min_samples_leaf": [1, 2, 4],
+            "max_features": ["sqrt", "log2", 0.5],
+        }
+        rf_gs = GridSearchCV(rf_base, rf_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error", verbose=1)
+        rf_gs.fit(X_train, y_train)
+        rf_best = rf_gs.best_estimator_
+        rf_metrics = _eval_and_log("RandomForest_GridSearch", rf_best, X_test, y_test, rf_gs.best_params_)
+        mlflow.sklearn.log_model(rf_best, name="rf_model")
+        results["RandomForest"] = {**rf_metrics, "best_params": rf_gs.best_params_}
+        trained_models["rf"] = rf_best
+        all_predictions["RandomForest"] = rf_best.predict(X_test)
+        logger.success(f"Random Forest completed - RMSE: {rf_metrics['RMSE']:.4f}, R2: {rf_metrics['R2']:.4f}")
+
+        # =====================
+        # Ensemble Model (VotingRegressor)
+        # =====================
+        logger.info("Creating ensemble model (VotingRegressor)...")
+        ensemble = VotingRegressor(
+            estimators=[
+                ("xgb", trained_models["xgb"]),
+                ("lgb", trained_models["lgb"]),
+                ("cat", trained_models["cat"]),
+                ("rf", trained_models["rf"]),
+            ],
+            weights=None  # Equal weights, can be optimized later
+        )
+        ensemble.fit(X_train, y_train)
+        ensemble_preds = ensemble.predict(X_test)
+        ensemble_rmse = float(np.sqrt(mean_squared_error(y_test, ensemble_preds)))
+        ensemble_mae = float(mean_absolute_error(y_test, ensemble_preds))
+        ensemble_r2 = float(r2_score(y_test, ensemble_preds))
+        
+        # Log ensemble to MLflow
+        with mlflow.start_run(run_name="Ensemble_VotingRegressor"):
+            mlflow.log_params({
+                "ensemble_type": "VotingRegressor",
+                "base_models": "XGBoost,LightGBM,CatBoost,RandomForest",
+                "weights": "equal"
+            })
+            mlflow.log_metrics({
+                "RMSE": ensemble_rmse,
+                "MAE": ensemble_mae,
+                "R2": ensemble_r2
+            })
+            mlflow.sklearn.log_model(ensemble, name="ensemble_model")
+        
+        results["Ensemble"] = {
+            "RMSE": ensemble_rmse,
+            "MAE": ensemble_mae,
+            "R2": ensemble_r2,
+            "ensemble_type": "VotingRegressor",
+            "base_models": ["XGBoost", "LightGBM", "CatBoost", "RandomForest"]
+        }
+        all_predictions["Ensemble"] = ensemble_preds
+        logger.success(f"Ensemble completed - RMSE: {ensemble_rmse:.4f}, R2: {ensemble_r2:.4f}")
+
+        # =====================
+        # Create Predictions Comparison DataFrame
+        # =====================
+        predictions_df = pd.DataFrame({
+            "actual": y_test.values,
+            **{f"pred_{model}": preds for model, preds in all_predictions.items()}
+        })
+        
+        # =====================
+        # Create Model Comparison DataFrame
+        # =====================
+        comparison_data = []
+        for model_name, model_results in results.items():
+            comparison_data.append({
+                "model": model_name,
+                "RMSE": model_results.get("RMSE", None),
+                "MAE": model_results.get("MAE", None),
+                "R2": model_results.get("R2", None),
+                "best_params": str(model_results.get("best_params", {})) if "best_params" in model_results else None
+            })
+        comparison_df = pd.DataFrame(comparison_data)
+        comparison_df = comparison_df.sort_values("RMSE", ascending=True)
+        
+        # =====================
+        # Save to S3/MinIO
+        # =====================
+        storage = DataStorage()
+        s3_paths = storage.save_training_results(
+            training_metrics=results,
+            predictions_comparison=predictions_df,
+            model_comparison=comparison_df,
+            execution_date=execution_date
+        )
+        logger.success(f"Training results saved to S3: {s3_paths}")
+
+        logger.success("Model training with GridSearchCV completed for XGBoost, LightGBM, CatBoost, RandomForest, and Ensemble")
+        return {
+            **results,
+            "_s3_paths": s3_paths,
+            "_comparison_df": comparison_df.to_dict(orient="records")
+        }
 
     @task(multiple_outputs=False)
     def log_completion(metrics: dict) -> bool:

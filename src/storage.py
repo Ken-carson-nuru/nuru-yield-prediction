@@ -332,3 +332,88 @@ class DataStorage:
         logger.success(f"Saved labels to s3://{self.settings.S3_BUCKET_NAME}/{key}")
         return f"s3://{self.settings.S3_BUCKET_NAME}/{key}"
 
+    def save_training_results(
+        self,
+        training_metrics: dict,
+        predictions_comparison: pd.DataFrame = None,
+        model_comparison: pd.DataFrame = None,
+        execution_date: datetime = None
+    ) -> dict:
+        """Save training results to S3/MinIO including metrics, predictions, and model comparison.
+        
+        Args:
+            training_metrics: Dictionary with model names as keys and metrics/params as values
+            predictions_comparison: DataFrame with actual vs predicted values for all models
+            model_comparison: DataFrame comparing all models' performance
+            execution_date: Execution date for organizing files
+            
+        Returns:
+            Dictionary with S3 paths for saved files
+        """
+        execution_date = execution_date or datetime.utcnow()
+        date_str = execution_date.strftime("%Y-%m-%d")
+        base_key = f"{self.settings.S3_BASE_PREFIX}/models/{date_str}"
+        
+        saved_paths = {}
+        
+        # 1. Save training metrics JSON
+        metrics_key = f"{base_key}/training_metrics.json"
+        metrics_safe = make_json_safe(training_metrics)
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=metrics_key,
+            Body=json.dumps(metrics_safe, indent=2)
+        )
+        saved_paths["metrics"] = f"s3://{self.settings.S3_BUCKET_NAME}/{metrics_key}"
+        logger.info(f"Saved training metrics to {saved_paths['metrics']}")
+        
+        # 2. Save predictions comparison if provided
+        if predictions_comparison is not None and not predictions_comparison.empty:
+            pred_key = f"{base_key}/predictions_comparison.parquet"
+            buf = BytesIO()
+            predictions_comparison.to_parquet(buf, index=False)
+            buf.seek(0)
+            self.s3_client.put_object(
+                Bucket=self.settings.S3_BUCKET_NAME,
+                Key=pred_key,
+                Body=buf.getvalue()
+            )
+            saved_paths["predictions"] = f"s3://{self.settings.S3_BUCKET_NAME}/{pred_key}"
+            logger.info(f"Saved predictions comparison to {saved_paths['predictions']}")
+        
+        # 3. Save model comparison DataFrame if provided
+        if model_comparison is not None and not model_comparison.empty:
+            comp_key = f"{base_key}/model_comparison.csv"
+            buf = BytesIO()
+            model_comparison.to_csv(buf, index=False)
+            buf.seek(0)
+            self.s3_client.put_object(
+                Bucket=self.settings.S3_BUCKET_NAME,
+                Key=comp_key,
+                Body=buf.getvalue()
+            )
+            saved_paths["comparison"] = f"s3://{self.settings.S3_BUCKET_NAME}/{comp_key}"
+            logger.info(f"Saved model comparison to {saved_paths['comparison']}")
+        
+        # 4. Save summary metadata
+        summary_metadata = {
+            "execution_date": execution_date.isoformat(),
+            "models_trained": list(training_metrics.keys()),
+            "total_models": len(training_metrics),
+            "best_model": min(
+                training_metrics.items(),
+                key=lambda x: x[1].get("RMSE", float("inf"))
+            )[0] if training_metrics else None,
+        }
+        
+        summary_key = f"{base_key}/training_summary.json"
+        self.s3_client.put_object(
+            Bucket=self.settings.S3_BUCKET_NAME,
+            Key=summary_key,
+            Body=json.dumps(make_json_safe(summary_metadata), indent=2)
+        )
+        saved_paths["summary"] = f"s3://{self.settings.S3_BUCKET_NAME}/{summary_key}"
+        
+        logger.success(f"Saved training results to s3://{self.settings.S3_BUCKET_NAME}/{base_key}/")
+        return saved_paths
+
