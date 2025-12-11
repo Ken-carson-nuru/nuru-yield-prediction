@@ -454,62 +454,40 @@ load_plot_features_path ──┐
 - **Target:** `dry_harvest_kg/ha`
 
 ##### Model 1: XGBoost
-- **Base Parameters:**
-  - `n_estimators`: 600
-  - `learning_rate`: 0.05
-  - `max_depth`: 8
-  - `subsample`: 0.8
-  - `colsample_bytree`: 0.8
-- **Grid Search:**
-  - `n_estimators`: [600, 1200]
-  - `learning_rate`: [0.03, 0.05]
-  - `max_depth`: [6, 8, 10]
-  - `subsample`: [0.8, 1.0]
-  - `colsample_bytree`: [0.8, 1.0]
-- **CV:** 3-fold
-- **Scoring:** Negative RMSE
+- **Search:** RandomizedSearchCV (n_iter=20, 3-fold, neg RMSE)
+- **Distributions (examples):**
+  - `n_estimators`: 400–1500 (step 100)
+  - `learning_rate`: 0.01–0.2
+  - `max_depth`: 4–12
+  - `subsample`: 0.6–1.0
+  - `colsample_bytree`: 0.6–1.0
 
 ##### Model 2: LightGBM
-- **Base Parameters:**
-  - `n_estimators`: 600
-  - `learning_rate`: 0.05
-  - `subsample`: 0.8
-  - `colsample_bytree`: 0.8
-- **Grid Search:**
-  - `n_estimators`: [600, 1200]
-  - `learning_rate`: [0.03, 0.05]
-  - `num_leaves`: [31, 63, 127]
-  - `max_depth`: [-1, 8, 12]
-  - `subsample`: [0.8, 1.0]
-  - `colsample_bytree`: [0.8, 1.0]
-- **CV:** 3-fold
+- **Search:** RandomizedSearchCV (n_iter=20, 3-fold, neg RMSE)
+- **Distributions (examples):**
+  - `n_estimators`: 400–1500
+  - `learning_rate`: 0.01–0.2
+  - `num_leaves`: 31–255
+  - `max_depth`: -1 or 4–12
+  - `subsample`: 0.6–1.0
+  - `colsample_bytree`: 0.6–1.0
 
 ##### Model 3: CatBoost
-- **Base Parameters:**
-  - `loss_function`: RMSE
-  - `eval_metric`: RMSE
-  - `verbose`: False
-- **Grid Search:**
-  - `depth`: [6, 8, 10]
-  - `learning_rate`: [0.03, 0.05]
-  - `iterations`: [1000, 2000]
+- **Search:** RandomizedSearchCV (n_iter=20, 3-fold, neg RMSE)
+- **Distributions (examples):**
+  - `depth`: 4–10
+  - `learning_rate`: 0.01–0.2
+  - `iterations`: 500–2000 (step 250)
 - **Categorical Features:** `crop_type_enc` (if present)
-- **CV:** 3-fold
 
 ##### Model 4: Random Forest
-- **Base Parameters:**
-  - `n_estimators`: 100
-  - `max_depth`: 10
-  - `min_samples_split`: 5
-  - `min_samples_leaf`: 2
-- **Grid Search:**
-  - `n_estimators`: [100, 200, 300]
-  - `max_depth`: [8, 10, 12, None]
-  - `min_samples_split`: [2, 5, 10]
-  - `min_samples_leaf`: [1, 2, 4]
-  - `max_features`: [`sqrt`, `log2`, 0.5]
-- **CV:** 3-fold
-- **Scoring:** Negative RMSE
+- **Search:** RandomizedSearchCV (n_iter=20, 3-fold, neg RMSE)
+- **Distributions (examples):**
+  - `n_estimators`: 100–600 (step 50)
+  - `max_depth`: 6–14 + None
+  - `min_samples_split`: 2–10
+  - `min_samples_leaf`: 1–5
+  - `max_features`: [`sqrt`, `log2`, 0.5, 0.7, None]
 
 ##### Model 5: Ensemble (VotingRegressor)
 - **Type:** VotingRegressor (equal weights)

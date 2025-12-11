@@ -21,7 +21,7 @@ import mlflow.xgboost
 import mlflow.lightgbm
 import mlflow.catboost
 
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.preprocessing import LabelEncoder
 from sklearn.neighbors import NearestNeighbors
@@ -476,7 +476,7 @@ with DAG(
 
     @task(multiple_outputs=True)
     def train_models(dataset_records: list) -> dict:
-        """Preprocess, split, run GridSearchCV for XGB, LGBM, CatBoost, RandomForest; create ensemble; log to MLflow and S3.
+        """Preprocess, split, run RandomizedSearchCV for XGB, LGBM, CatBoost, RandomForest; create ensemble; log to MLflow and S3.
         Accepts combined dataset records to ensure features include weather + indices.
         """
         # Set MLflow tracking
@@ -508,10 +508,10 @@ with DAG(
         trained_models = {}  # Store all trained models for ensemble
         all_predictions = {}  # Store predictions for comparison
 
-        # =====================
-        # XGBoost GridSearchCV
-        # =====================
-        logger.info("Starting XGBoost GridSearchCV...")
+        # =========================
+        # XGBoost RandomizedSearchCV
+        # =========================
+        logger.info("Starting XGBoost RandomizedSearchCV...")
         xgb_base = xgb.XGBRegressor(
             random_state=42,
             n_estimators=600,
@@ -520,27 +520,36 @@ with DAG(
             subsample=0.8,
             colsample_bytree=0.8,
         )
-        xgb_grid = {
-            "n_estimators": [600, 1200],
-            "learning_rate": [0.03, 0.05],
-            "max_depth": [6, 8, 10],
-            "subsample": [0.8, 1.0],
-            "colsample_bytree": [0.8, 1.0],
+        xgb_dist = {
+            "n_estimators": np.arange(400, 1501, 100),
+            "learning_rate": np.linspace(0.01, 0.2, 10),
+            "max_depth": np.arange(4, 13, 1),
+            "subsample": np.linspace(0.6, 1.0, 9),
+            "colsample_bytree": np.linspace(0.6, 1.0, 9),
         }
-        xgb_gs = GridSearchCV(xgb_base, xgb_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error", verbose=1)
-        xgb_gs.fit(X_train, y_train)
-        xgb_best = xgb_gs.best_estimator_
-        xgb_metrics = _eval_and_log("XGBoost_GridSearch", xgb_best, X_test, y_test, xgb_gs.best_params_)
+        xgb_rs = RandomizedSearchCV(
+            xgb_base,
+            xgb_dist,
+            n_iter=20,
+            cv=3,
+            n_jobs=-1,
+            scoring="neg_root_mean_squared_error",
+            random_state=42,
+            verbose=1,
+        )
+        xgb_rs.fit(X_train, y_train)
+        xgb_best = xgb_rs.best_estimator_
+        xgb_metrics = _eval_and_log("XGBoost_RandomSearch", xgb_best, X_test, y_test, xgb_rs.best_params_)
         mlflow.xgboost.log_model(xgb_best, name="xgb_model")
-        results["XGBoost"] = {**xgb_metrics, "best_params": xgb_gs.best_params_}
+        results["XGBoost"] = {**xgb_metrics, "best_params": xgb_rs.best_params_}
         trained_models["xgb"] = xgb_best
         all_predictions["XGBoost"] = xgb_best.predict(X_test)
         logger.success(f"XGBoost completed - RMSE: {xgb_metrics['RMSE']:.4f}, R2: {xgb_metrics['R2']:.4f}")
 
-        # =====================
-        # LightGBM GridSearchCV
-        # =====================
-        logger.info("Starting LightGBM GridSearchCV...")
+        # =========================
+        # LightGBM RandomizedSearchCV
+        # =========================
+        logger.info("Starting LightGBM RandomizedSearchCV...")
         lgb_base = lgb.LGBMRegressor(
             random_state=42,
             n_estimators=600,
@@ -548,58 +557,76 @@ with DAG(
             subsample=0.8,
             colsample_bytree=0.8,
         )
-        lgb_grid = {
-            "n_estimators": [600, 1200],
-            "learning_rate": [0.03, 0.05],
-            "num_leaves": [31, 63, 127],
-            "max_depth": [-1, 8, 12],
-            "subsample": [0.8, 1.0],
-            "colsample_bytree": [0.8, 1.0],
+        lgb_dist = {
+            "n_estimators": np.arange(400, 1501, 100),
+            "learning_rate": np.linspace(0.01, 0.2, 10),
+            "num_leaves": np.arange(31, 256, 16),
+            "max_depth": [-1] + list(np.arange(4, 13, 1)),
+            "subsample": np.linspace(0.6, 1.0, 9),
+            "colsample_bytree": np.linspace(0.6, 1.0, 9),
         }
-        lgb_gs = GridSearchCV(lgb_base, lgb_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error", verbose=1)
-        lgb_gs.fit(X_train, y_train)
-        lgb_best = lgb_gs.best_estimator_
-        lgb_metrics = _eval_and_log("LightGBM_GridSearch", lgb_best, X_test, y_test, lgb_gs.best_params_)
+        lgb_rs = RandomizedSearchCV(
+            lgb_base,
+            lgb_dist,
+            n_iter=20,
+            cv=3,
+            n_jobs=-1,
+            scoring="neg_root_mean_squared_error",
+            random_state=42,
+            verbose=1,
+        )
+        lgb_rs.fit(X_train, y_train)
+        lgb_best = lgb_rs.best_estimator_
+        lgb_metrics = _eval_and_log("LightGBM_RandomSearch", lgb_best, X_test, y_test, lgb_rs.best_params_)
         mlflow.lightgbm.log_model(lgb_best, name="lgb_model")
-        results["LightGBM"] = {**lgb_metrics, "best_params": lgb_gs.best_params_}
+        results["LightGBM"] = {**lgb_metrics, "best_params": lgb_rs.best_params_}
         trained_models["lgb"] = lgb_best
         all_predictions["LightGBM"] = lgb_best.predict(X_test)
         logger.success(f"LightGBM completed - RMSE: {lgb_metrics['RMSE']:.4f}, R2: {lgb_metrics['R2']:.4f}")
 
-        # =====================
-        # CatBoost GridSearchCV
-        # =====================
-        logger.info("Starting CatBoost GridSearchCV...")
+        # =========================
+        # CatBoost RandomizedSearchCV
+        # =========================
+        logger.info("Starting CatBoost RandomizedSearchCV...")
         cat_base = CatBoostRegressor(
             random_seed=42,
             verbose=False,
             loss_function="RMSE",
             eval_metric="RMSE",
         )
-        cat_grid = {
-            "depth": [6, 8, 10],
-            "learning_rate": [0.03, 0.05],
-            "iterations": [1000, 2000],
+        cat_dist = {
+            "depth": np.arange(4, 11, 1),
+            "learning_rate": np.linspace(0.01, 0.2, 10),
+            "iterations": np.arange(500, 2001, 250),
         }
-        cat_gs = GridSearchCV(cat_base, cat_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error", verbose=1)
+        cat_rs = RandomizedSearchCV(
+            cat_base,
+            cat_dist,
+            n_iter=20,
+            cv=3,
+            n_jobs=-1,
+            scoring="neg_root_mean_squared_error",
+            random_state=42,
+            verbose=1,
+        )
 
         # Determine categorical indices (prefer encoded column if present)
         cat_cols = [c for c in ["crop_type_enc"] if c in X_train.columns]
         cat_idx = [X_train.columns.get_loc(c) for c in cat_cols]
         # Fit with categorical feature indices
-        cat_gs.fit(X_train, y_train, **({"cat_features": cat_idx} if cat_idx else {}))
-        cat_best = cat_gs.best_estimator_
-        cat_metrics = _eval_and_log("CatBoost_GridSearch", cat_best, X_test, y_test, cat_gs.best_params_)
+        cat_rs.fit(X_train, y_train, **({"cat_features": cat_idx} if cat_idx else {}))
+        cat_best = cat_rs.best_estimator_
+        cat_metrics = _eval_and_log("CatBoost_RandomSearch", cat_best, X_test, y_test, cat_rs.best_params_)
         mlflow.catboost.log_model(cat_best, name="cat_model")
-        results["CatBoost"] = {**cat_metrics, "best_params": cat_gs.best_params_}
+        results["CatBoost"] = {**cat_metrics, "best_params": cat_rs.best_params_}
         trained_models["cat"] = cat_best
         all_predictions["CatBoost"] = cat_best.predict(X_test)
         logger.success(f"CatBoost completed - RMSE: {cat_metrics['RMSE']:.4f}, R2: {cat_metrics['R2']:.4f}")
 
-        # =====================
-        # Random Forest GridSearchCV
-        # =====================
-        logger.info("Starting Random Forest GridSearchCV...")
+        # ============================
+        # Random Forest RandomizedSearchCV
+        # ============================
+        logger.info("Starting Random Forest RandomizedSearchCV...")
         rf_base = RandomForestRegressor(
             random_state=42,
             n_estimators=100,
@@ -607,19 +634,28 @@ with DAG(
             min_samples_split=5,
             min_samples_leaf=2,
         )
-        rf_grid = {
-            "n_estimators": [100, 200, 300],
-            "max_depth": [8, 10, 12, None],
-            "min_samples_split": [2, 5, 10],
-            "min_samples_leaf": [1, 2, 4],
-            "max_features": ["sqrt", "log2", 0.5],
+        rf_dist = {
+            "n_estimators": np.arange(100, 601, 50),
+            "max_depth": list(np.arange(6, 15, 1)) + [None],
+            "min_samples_split": np.arange(2, 11, 1),
+            "min_samples_leaf": np.arange(1, 6, 1),
+            "max_features": ["sqrt", "log2", 0.5, 0.7, None],
         }
-        rf_gs = GridSearchCV(rf_base, rf_grid, cv=3, n_jobs=-1, scoring="neg_root_mean_squared_error", verbose=1)
-        rf_gs.fit(X_train, y_train)
-        rf_best = rf_gs.best_estimator_
-        rf_metrics = _eval_and_log("RandomForest_GridSearch", rf_best, X_test, y_test, rf_gs.best_params_)
+        rf_rs = RandomizedSearchCV(
+            rf_base,
+            rf_dist,
+            n_iter=20,
+            cv=3,
+            n_jobs=-1,
+            scoring="neg_root_mean_squared_error",
+            random_state=42,
+            verbose=1,
+        )
+        rf_rs.fit(X_train, y_train)
+        rf_best = rf_rs.best_estimator_
+        rf_metrics = _eval_and_log("RandomForest_RandomSearch", rf_best, X_test, y_test, rf_rs.best_params_)
         mlflow.sklearn.log_model(rf_best, name="rf_model")
-        results["RandomForest"] = {**rf_metrics, "best_params": rf_gs.best_params_}
+        results["RandomForest"] = {**rf_metrics, "best_params": rf_rs.best_params_}
         trained_models["rf"] = rf_best
         all_predictions["RandomForest"] = rf_best.predict(X_test)
         logger.success(f"Random Forest completed - RMSE: {rf_metrics['RMSE']:.4f}, R2: {rf_metrics['R2']:.4f}")
