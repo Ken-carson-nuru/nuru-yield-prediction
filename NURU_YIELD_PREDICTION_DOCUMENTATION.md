@@ -31,7 +31,7 @@ The **Nuru Yield Prediction System** is a comprehensive MLOps platform designed 
 - **Satellite Imagery** (Sentinel-2 via Google Earth Engine)
 - **Weather Data** (Visual Crossing API)
 - **Crop Metadata** (Plot locations, seasons, planting dates)
-- **Ensemble Machine Learning Models** (XGBoost, LightGBM, CatBoost)
+- **Ensemble Machine Learning Models** (XGBoost, LightGBM, CatBoost, RandomForest, Ensemble Voting)
 
 The system implements a complete end-to-end pipeline from raw data ingestion to model deployment, with automated feature engineering, model training, and production monitoring.
 
@@ -99,7 +99,7 @@ The system follows a **5-stage MLOps pipeline** orchestrated by Apache Airflow:
    - Feast feature store
 
 4. **ML Layer**
-   - Model training (XGBoost, LightGBM, CatBoost)
+   - Model training (XGBoost, LightGBM, CatBoost, RandomForest, Ensemble VotingRegressor)
    - MLflow tracking and registry
    - Hyperparameter tuning (GridSearchCV)
 
@@ -130,6 +130,8 @@ The system follows a **5-stage MLOps pipeline** orchestrated by Apache Airflow:
 - **XGBoost** - Gradient boosting regressor
 - **LightGBM** - Fast gradient boosting
 - **CatBoost** - Gradient boosting with categorical support
+- **RandomForest** (scikit-learn) - Bagging ensemble baseline
+- **VotingRegressor** (scikit-learn) - Ensemble over all four models
 - **scikit-learn** - Preprocessing, metrics, GridSearchCV
 - **pandas** - Data manipulation
 - **numpy** - Numerical computations
@@ -494,13 +496,34 @@ load_plot_features_path ──┐
 - **Categorical Features:** `crop_type_enc` (if present)
 - **CV:** 3-fold
 
+##### Model 4: Random Forest
+- **Base Parameters:**
+  - `n_estimators`: 100
+  - `max_depth`: 10
+  - `min_samples_split`: 5
+  - `min_samples_leaf`: 2
+- **Grid Search:**
+  - `n_estimators`: [100, 200, 300]
+  - `max_depth`: [8, 10, 12, None]
+  - `min_samples_split`: [2, 5, 10]
+  - `min_samples_leaf`: [1, 2, 4]
+  - `max_features`: [`sqrt`, `log2`, 0.5]
+- **CV:** 3-fold
+- **Scoring:** Negative RMSE
+
+##### Model 5: Ensemble (VotingRegressor)
+- **Type:** VotingRegressor (equal weights)
+- **Base Models:** XGBoost, LightGBM, CatBoost, RandomForest
+- **Logged Metrics:** RMSE, MAE, R2
+- **Artifacts:** Ensemble model logged to MLflow and saved to S3/MinIO
+
 ##### MLflow Logging
 - **Experiment:** `YieldPrediction_MultiModel`
 - **Logged:**
-  - Hyperparameters (best from GridSearch)
-  - Metrics: RMSE, MAE, R2
-  - Model artifacts (saved to S3/MinIO)
-- **Output:** Training metrics dictionary
+  - Hyperparameters (best from GridSearch) for all four base models
+  - Metrics: RMSE, MAE, R2 for each model and the ensemble
+  - Model artifacts (saved to S3/MinIO) for each model and the ensemble
+- **Output:** Training metrics dictionary + S3 paths for metrics, predictions, comparison reports
 
 ---
 
@@ -599,6 +622,13 @@ nuru-yield/
 ├── vt_stages/
 │   └── vt_stages_{YYYY-MM-DD}.parquet
 │
+├── models/
+│   └── {YYYY-MM-DD}/
+│       ├── training_metrics.json
+│       ├── predictions_comparison.parquet
+│       ├── model_comparison.csv
+│       └── training_summary.json
+│
 ├── metadata/
 │   └── plots/
 │       └── plots_{YYYY-MM-DD}.parquet
@@ -668,14 +698,14 @@ Each data file includes JSON metadata with:
 ### 4. Model Training
 
 - **Ensemble Approach:**
-  - XGBoost, LightGBM, CatBoost
-  - GridSearchCV for hyperparameter tuning
-  - 3-fold cross-validation
+  - XGBoost, LightGBM, CatBoost, RandomForest + VotingRegressor ensemble
+  - GridSearchCV for hyperparameter tuning (3-fold)
+  - Ensemble metrics logged; artifacts saved to MLflow and S3/MinIO
 
 - **MLflow Integration:**
   - Experiment tracking
   - Model versioning
-  - Artifact storage (S3/MinIO)
+  - Artifact storage (S3/MinIO) for all base models and ensemble
 
 ### 5. Monitoring
 
