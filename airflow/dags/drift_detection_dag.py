@@ -37,18 +37,31 @@ def _get_ds() -> str:
 
 
 def _get_tracking_uri() -> str:
-    uri = os.environ.get("MLFLOW_TRACKING_URI")
-    if uri:
+    """Resolve a usable MLflow tracking URI.
+
+    Order:
+    1) MLFLOW_TRACKING_URI env, if reachable
+    2) http://mlflow-server:5000 if resolvable (docker-compose default)
+    3) Local file fallback (/opt/airflow/dags/repo/mlruns)
+    """
+    def _is_reachable(uri: str) -> bool:
         try:
             from urllib.parse import urlparse
-
             p = urlparse(uri)
             host = p.hostname
-            if p.scheme in ("http", "https") and host:
-                socket.gethostbyname(host)
-                return uri
+            return p.scheme in ("http", "https") and host and socket.gethostbyname(host)
         except Exception:
-            logger.warning(f"Invalid or unreachable MLFLOW_TRACKING_URI '{uri}', falling back to local path")
+            return False
+
+    env_uri = os.environ.get("MLFLOW_TRACKING_URI")
+    if env_uri and _is_reachable(env_uri):
+        return env_uri
+
+    default_srv = "http://mlflow-server:5000"
+    if _is_reachable(default_srv):
+        return default_srv
+
+    logger.warning("MLFLOW_TRACKING_URI not reachable; using local mlruns path")
     return "/opt/airflow/dags/repo/mlruns"
 
 def _read_parquet(storage: DataStorage, bucket: str, key: str) -> pd.DataFrame:
