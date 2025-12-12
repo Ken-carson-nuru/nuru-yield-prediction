@@ -168,6 +168,38 @@ services:
         --cors-allowed-origins="*"
         --disable-security-middleware
 
+  inference-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.inference
+    depends_on:
+      - mlflow-server
+      - minio
+      - postgres
+    env_file:
+      - .env
+    environment:
+      MLFLOW_TRACKING_URI: "http://mlflow-server:5000"
+      MLFLOW_S3_ENDPOINT_URL: "http://minio:9000"
+      AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-minioadmin}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      S3_ENDPOINT_URL: "http://minio:9000"
+      S3_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      S3_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      S3_BUCKET_NAME: ${S3_BUCKET_NAME}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./config:/app/config
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
 
 volumes:
   postgres_data:
