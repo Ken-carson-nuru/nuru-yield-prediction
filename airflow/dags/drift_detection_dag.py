@@ -118,6 +118,42 @@ def _select_feature_cols(df: pd.DataFrame) -> list:
     ignore = set(["plot_id", "date", "planting_date", "latitude", "longitude"])
     return [c for c in df.columns if c not in ignore]
 
+def _log_to_mlflow(ds: str, ref_days: int, report_df: pd.DataFrame | None, summary: dict):
+    """Log drift summary (and optional report) to MLflow."""
+    tracking_uri = _get_tracking_uri()
+    mlflow.set_tracking_uri(tracking_uri)
+
+    os.environ["MLFLOW_S3_ENDPOINT_URL"] = os.environ.get(
+        "MLFLOW_S3_ENDPOINT_URL", os.environ.get("S3_ENDPOINT_URL", "http://minio:9000")
+    )
+    os.environ["AWS_ACCESS_KEY_ID"] = os.environ.get(
+        "S3_ACCESS_KEY", os.environ.get("MINIO_ROOT_USER", "minioadmin") or "minioadmin"
+    )
+    os.environ["AWS_SECRET_ACCESS_KEY"] = os.environ.get(
+        "S3_SECRET_KEY", os.environ.get("MINIO_ROOT_PASSWORD", "minioadmin") or "minioadmin"
+    )
+
+    mlflow.set_experiment("DriftMonitoring")
+    with mlflow.start_run(run_name=f"drift_{ds}"):
+        mlflow.log_params({"ds": ds, "reference_days": ref_days, "n_features": int(summary.get("n_features", 0))})
+        mlflow.log_metrics({
+            "n_high": int(summary.get("n_high", 0)),
+            "n_medium": int(summary.get("n_medium", 0)),
+        })
+        mlflow.log_params({"status": summary.get("status", "unknown")})
+
+        if report_df is not None and not report_df.empty:
+            top = report_df.sort_values("psi", ascending=False).head(20)
+            tmp_csv = f"/tmp/drift_report_{ds}.csv"
+            tmp_json = f"/tmp/drift_summary_{ds}.json"
+            top.to_csv(tmp_csv, index=False)
+            import json
+            with open(tmp_json, "w") as f:
+                json.dump(summary, f)
+            mlflow.log_artifact(tmp_csv, artifact_path="drift")
+            mlflow.log_artifact(tmp_json, artifact_path="drift")
+
+
 with DAG(
     dag_id="drift_detection_dag",
     default_args=default_args,
@@ -141,7 +177,9 @@ with DAG(
             dated = [(k, d) for k, d in dated if d is not None]
             if not dated:
                 logger.warning("No daily features available")
-                return {"status": "no_data"}
+                summary = {"ds": ds, "status": "no_data", "n_features": 0, "n_high": 0, "n_medium": 0}
+                _log_to_mlflow(ds, ref_days=0, report_df=None, summary=summary)
+                return summary
             dated.sort(key=lambda x: x[1], reverse=True)
             cur_key = dated[0][0]
             cur_df = _read_parquet(storage, BUCKET, cur_key)
@@ -155,7 +193,9 @@ with DAG(
         ref_keys = [k for k, d in hist[:30]]
         if not ref_keys:
             logger.warning("No reference days available")
-            return {"status": "no_reference"}
+            summary = {"ds": ds, "status": "no_reference", "n_features": 0, "n_high": 0, "n_medium": 0}
+            _log_to_mlflow(ds, ref_days=0, report_df=None, summary=summary)
+            return summary
 
         dfs = []
         for k in ref_keys:
@@ -200,34 +240,8 @@ with DAG(
             "status": "ok",
         }
 
-        # MLflow logging (ensure we always log somewhere, default local path if env not set)
-        tracking_uri = _get_tracking_uri()
-        mlflow.set_tracking_uri(tracking_uri)
-
-        # Ensure S3/MinIO artifact settings are present (mirrors training DAG defaults)
-        os.environ["MLFLOW_S3_ENDPOINT_URL"] = os.environ.get(
-            "MLFLOW_S3_ENDPOINT_URL", os.environ.get("S3_ENDPOINT_URL", "http://minio:9000")
-        )
-        os.environ["AWS_ACCESS_KEY_ID"] = os.environ.get(
-            "S3_ACCESS_KEY", os.environ.get("MINIO_ROOT_USER", "minioadmin") or "minioadmin"
-        )
-        os.environ["AWS_SECRET_ACCESS_KEY"] = os.environ.get(
-            "S3_SECRET_KEY", os.environ.get("MINIO_ROOT_PASSWORD", "minioadmin") or "minioadmin"
-        )
-
-        mlflow.set_experiment("DriftMonitoring")
-        with mlflow.start_run(run_name=f"drift_{ds}"):
-            mlflow.log_params({"ds": ds, "reference_days": len(ref_keys), "n_features": int(len(report_df))})
-            mlflow.log_metrics({"n_high": summary["n_high"], "n_medium": summary["n_medium"]})
-            top = report_df.sort_values("psi", ascending=False).head(20)
-            tmp_csv = f"/tmp/drift_report_{ds}.csv"
-            tmp_json = f"/tmp/drift_summary_{ds}.json"
-            top.to_csv(tmp_csv, index=False)
-            import json
-            with open(tmp_json, "w") as f:
-                json.dump(summary, f)
-            mlflow.log_artifact(tmp_csv, artifact_path="drift")
-            mlflow.log_artifact(tmp_json, artifact_path="drift")
+        # MLflow logging (always)
+        _log_to_mlflow(ds, ref_days=len(ref_keys), report_df=report_df, summary=summary)
 
         date_prefix = ds
         base = f"{settings.S3_BASE_PREFIX}/monitoring/drift/{date_prefix}"
