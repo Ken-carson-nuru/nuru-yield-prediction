@@ -6,6 +6,7 @@ Usage: python scripts/promote_model_to_production.py --run-id <run_id> --model-n
 import argparse
 import os
 import mlflow
+import mlflow.pyfunc
 from mlflow.tracking import MlflowClient
 from loguru import logger
 
@@ -22,11 +23,12 @@ def promote_model_to_production(
         model_name: Name for the model in registry
         stage: Target stage (Production, Staging, Archived)
     """
-    # Set tracking URI
+    # Set tracking URI to remote server
     tracking_uri = os.environ.get("MLFLOW_TRACKING_URI", "http://localhost:5000")
     mlflow.set_tracking_uri(tracking_uri)
+    logger.info(f"Using MLflow tracking URI: {tracking_uri}")
     
-    # Set S3/MinIO credentials
+    # CRITICAL: Set S3/MinIO credentials BEFORE any MLflow operations
     os.environ["MLFLOW_S3_ENDPOINT_URL"] = os.environ.get(
         "MLFLOW_S3_ENDPOINT_URL", 
         os.environ.get("S3_ENDPOINT_URL", "http://localhost:9000")
@@ -40,7 +42,20 @@ def promote_model_to_production(
         os.environ.get("MINIO_ROOT_PASSWORD", "minioadmin") or "minioadmin"
     )
     
+    # Warn if local mlruns directory exists (may cause conflicts)
+    if os.path.exists("./mlruns"):
+        logger.warning("Local ./mlruns directory exists. This may cause conflicts.")
+        logger.warning("Ensure MLFLOW_TRACKING_URI is set to remote server.")
+    
     client = MlflowClient()
+    
+    # Verify run exists
+    try:
+        run = client.get_run(run_id)
+        logger.info(f"Found run: {run.info.run_name} (ID: {run_id})")
+    except Exception as e:
+        logger.error(f"Run {run_id} not found: {e}")
+        raise
     
     # Determine model artifact path based on model name
     if "Ensemble" in model_name:
@@ -57,6 +72,23 @@ def promote_model_to_production(
         artifact_path = "model"
     
     model_uri = f"runs:/{run_id}/{artifact_path}"
+    logger.info(f"Model URI: {model_uri}")
+    
+    # Verify artifact exists before registration
+    try:
+        logger.info("Verifying model artifact exists...")
+        model = mlflow.pyfunc.load_model(model_uri)
+        logger.success(f"Model artifact verified at {model_uri}")
+    except Exception as e:
+        logger.error(f"Model artifact not found at {model_uri}: {e}")
+        logger.info("Available artifacts in run:")
+        try:
+            artifacts = client.list_artifacts(run_id)
+            for artifact in artifacts:
+                logger.info(f"  - {artifact.path}")
+        except Exception:
+            pass
+        raise
     
     try:
         # Register the model
@@ -96,6 +128,11 @@ def promote_model_to_production(
         
     except Exception as e:
         logger.error(f"Failed to promote model: {e}")
+        logger.error("Common issues:")
+        logger.error("  1. MLFLOW_TRACKING_URI not set to remote server")
+        logger.error("  2. S3/MinIO credentials not configured")
+        logger.error("  3. Model artifact path incorrect")
+        logger.error("  4. Permission issues with local mlruns directory")
         raise
 
 
