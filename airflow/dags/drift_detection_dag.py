@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.decorators import task
 from airflow.utils.dates import days_ago
 import os
+import socket
 import sys
 import pandas as pd
 import numpy as np
@@ -33,6 +34,22 @@ def _get_ds() -> str:
         except Exception:
             return d.split("T")[0]
     return datetime.utcnow().strftime("%Y-%m-%d")
+
+
+def _get_tracking_uri() -> str:
+    uri = os.environ.get("MLFLOW_TRACKING_URI")
+    if uri:
+        try:
+            from urllib.parse import urlparse
+
+            p = urlparse(uri)
+            host = p.hostname
+            if p.scheme in ("http", "https") and host:
+                socket.gethostbyname(host)
+                return uri
+        except Exception:
+            logger.warning(f"Invalid or unreachable MLFLOW_TRACKING_URI '{uri}', falling back to local path")
+    return "/opt/airflow/dags/repo/mlruns"
 
 def _read_parquet(storage: DataStorage, bucket: str, key: str) -> pd.DataFrame:
     r = storage.s3_client.get_object(Bucket=bucket, Key=key)
@@ -170,10 +187,21 @@ with DAG(
             "status": "ok",
         }
 
-        tracking_uri = os.environ.get("MLFLOW_TRACKING_URI")
-        if tracking_uri:
-            mlflow.set_tracking_uri(tracking_uri)
-        os.environ["MLFLOW_S3_ENDPOINT_URL"] = os.environ.get("MLFLOW_S3_ENDPOINT_URL", os.environ.get("S3_ENDPOINT_URL", "http://minio:9000"))
+        # MLflow logging (ensure we always log somewhere, default local path if env not set)
+        tracking_uri = _get_tracking_uri()
+        mlflow.set_tracking_uri(tracking_uri)
+
+        # Ensure S3/MinIO artifact settings are present (mirrors training DAG defaults)
+        os.environ["MLFLOW_S3_ENDPOINT_URL"] = os.environ.get(
+            "MLFLOW_S3_ENDPOINT_URL", os.environ.get("S3_ENDPOINT_URL", "http://minio:9000")
+        )
+        os.environ["AWS_ACCESS_KEY_ID"] = os.environ.get(
+            "S3_ACCESS_KEY", os.environ.get("MINIO_ROOT_USER", "minioadmin") or "minioadmin"
+        )
+        os.environ["AWS_SECRET_ACCESS_KEY"] = os.environ.get(
+            "S3_SECRET_KEY", os.environ.get("MINIO_ROOT_PASSWORD", "minioadmin") or "minioadmin"
+        )
+
         mlflow.set_experiment("DriftMonitoring")
         with mlflow.start_run(run_name=f"drift_{ds}"):
             mlflow.log_params({"ds": ds, "reference_days": len(ref_keys), "n_features": int(len(report_df))})
