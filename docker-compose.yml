@@ -92,6 +92,10 @@ services:
       GEE_SERVICE_ACCOUNT_JSON: "/opt/airflow/dags/repo/src/serene-bastion-406504-9c938287dece.json"
       AIRFLOW_UID: "50000"
       MLFLOW_TRACKING_URI: "http://mlflow-server:5000"
+      AIRFLOW__METRICS__STATSD_ON: "true"
+      AIRFLOW__METRICS__STATSD_HOST: "statsd-exporter"
+      AIRFLOW__METRICS__STATSD_PORT: "9125"
+      AIRFLOW__METRICS__STATSD_PREFIX: "nuru_airflow"
     ports:
       - "8083:8080"
     volumes:
@@ -125,6 +129,10 @@ services:
       GEE_SERVICE_ACCOUNT_JSON: "/opt/airflow/dags/repo/src/serene-bastion-406504-9c938287dece.json"
       AIRFLOW_UID: "50000"
       MLFLOW_TRACKING_URI: "http://mlflow-server:5000"
+      AIRFLOW__METRICS__STATSD_ON: "true"
+      AIRFLOW__METRICS__STATSD_HOST: "statsd-exporter"
+      AIRFLOW__METRICS__STATSD_PORT: "9125"
+      AIRFLOW__METRICS__STATSD_PREFIX: "nuru_airflow"
     volumes:
       - airflow_home:/opt/airflow
       - ./airflow_logs:/opt/airflow/logs
@@ -255,8 +263,5 @@ volumes:
   minio_data:
   airflow_home:
   mlflow_pg_data:
-      AIRFLOW__METRICS__STATSD_ON: "true"
-      AIRFLOW__METRICS__STATSD_HOST: "statsd-exporter"
-      AIRFLOW__METRICS__STATSD_PORT: "9125"
       AIRFLOW__METRICS__STATSD_PREFIX: "nuru_airflow"
      
