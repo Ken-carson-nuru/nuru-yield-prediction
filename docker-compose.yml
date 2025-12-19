@@ -17,6 +17,7 @@ services:
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
+      MINIO_PROMETHEUS_AUTH_TYPE: public
     ports:
       - "9004:9000"   # MinIO API
       - "9001:9001"   # MinIO WebUI
@@ -200,9 +201,62 @@ services:
       retries: 3
       start_period: 40s
 
+  statsd-exporter:
+    image: prom/statsd-exporter:latest
+    command: ["--statsd.listen-udp=:9125", "--web.listen-address=:9102"]
+    ports:
+      - "9125:9125/udp"
+      - "9102:9102"
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    ports:
+      - "8082:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+
+  postgres-exporter:
+    image: quay.io/prometheuscommunity/postgres-exporter:latest
+    environment:
+      DATA_SOURCE_NAME: "postgresql://airflow:airflow@postgres:5432/airflow?sslmode=disable"
+    ports:
+      - "9187:9187"
+    depends_on:
+      - postgres
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      - inference-api
+      - statsd-exporter
+      - cadvisor
+      - postgres-exporter
+      - minio
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./monitoring/grafana-provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus
+
 
 volumes:
   postgres_data:
   minio_data:
   airflow_home:
   mlflow_pg_data:
+      AIRFLOW__METRICS__STATSD_ON: "true"
+      AIRFLOW__METRICS__STATSD_HOST: "statsd-exporter"
+      AIRFLOW__METRICS__STATSD_PORT: "9125"
+      AIRFLOW__METRICS__STATSD_PREFIX: "nuru_airflow"
+     

@@ -39,3 +39,5 @@ pytest-mock
 psycopg2-binary
 asyncpg
 
+# Monitoring
+prometheus-client

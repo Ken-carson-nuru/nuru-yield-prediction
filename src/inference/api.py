@@ -12,6 +12,7 @@ import pandas as pd
 import numpy as np
 from loguru import logger
 import os
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 
 from src.inference.model_loader import ModelLoader
 from src.inference.feature_serving import FeatureServer
@@ -36,6 +37,28 @@ app.add_middleware(
 # Global model loader and feature server
 model_loader: Optional[ModelLoader] = None
 feature_server: Optional[FeatureServer] = None
+
+# Prometheus metrics
+REQUEST_COUNT = Counter(
+    "inference_requests_total",
+    "Total number of inference requests",
+    ["endpoint", "status"]
+)
+REQUEST_LATENCY = Histogram(
+    "inference_request_latency_seconds",
+    "Latency of inference requests in seconds",
+    buckets=(0.05, 0.1, 0.25, 0.5, 1, 2, 5)
+)
+
+@app.middleware("http")
+async def prometheus_middleware(request, call_next):
+    import time
+    start = time.time()
+    response = await call_next(request)
+    duration = time.time() - start
+    REQUEST_LATENCY.observe(duration)
+    REQUEST_COUNT.labels(endpoint=request.url.path, status=str(response.status_code)).inc()
+    return response
 
 
 # Request/Response Schemas
@@ -126,6 +149,10 @@ async def startup_event():
 async def shutdown_event():
     """Cleanup on shutdown."""
     logger.info("Shutting down inference service...")
+
+@app.get("/metrics")
+async def metrics():
+    return JSONResponse(content=generate_latest().decode("utf-8"), media_type=CONTENT_TYPE_LATEST)
 
 
 # API Endpoints
@@ -335,4 +362,8 @@ async def reload_models():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+
+
 
