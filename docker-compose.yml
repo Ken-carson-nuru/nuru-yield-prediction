@@ -263,5 +263,3 @@ volumes:
   minio_data:
   airflow_home:
   mlflow_pg_data:
-      AIRFLOW__METRICS__STATSD_PREFIX: "nuru_airflow"
-     
